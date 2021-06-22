@@ -17,12 +17,12 @@ class Client
 		$this->transport = $transport;
 	}
 
-	public function create(Payment $payment): Response
+	public function createPayment(Payment $payment): Response
 	{
 		return $this->transport->post('create', $payment->toArray());
 	}
 
-	public function status(PaymentStatus $status): Response
+	public function getStatus(PaymentStatus $status): Response
 	{
 		return $this->transport->post('status', $status->toArray());
 	}

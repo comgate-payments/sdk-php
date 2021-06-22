@@ -2,37 +2,80 @@
 
 namespace Comgate\SDK;
 
+use Comgate\SDK\Http\Transport;
+use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Utils;
+
 class Comgate
 {
 
-	public const URL = 'https://payments.comgate.cz/v1.0/';
+	public string $url;
 
 	private string $merchant;
 
 	private string $secret;
 
-	private bool $test;
+	private bool $test = false;
 
-	public function __construct(string $merchant, string $secret, bool $test = false)
+	final private function __construct()
+	{
+	}
+
+	public static function defaults(): self
+	{
+		$self = new Comgate();
+		$self->url = Config::URL;
+
+		return $self;
+	}
+
+	public static function testing(): self
+	{
+		$self = self::defaults();
+		$self->test = true;
+
+		return $self;
+	}
+
+	public function withUrl(string $url): self
+	{
+		$this->url = $url;
+
+		return $this;
+	}
+
+	public function withMerchant(string $merchant): self
 	{
 		$this->merchant = $merchant;
+
+		return $this;
+	}
+
+	public function withSecret(string $secret): self
+	{
 		$this->secret = $secret;
+
+		return $this;
+	}
+
+	public function withTest(bool $test = true): self
+	{
 		$this->test = $test;
+
+		return $this;
 	}
 
-	public function getMerchant(): string
+	public function create(): Client
 	{
-		return $this->merchant;
-	}
-
-	public function getSecret(): string
-	{
-		return $this->secret;
-	}
-
-	public function isTest(): bool
-	{
-		return $this->test;
+		return new Client(
+			new Transport(
+				new GuzzleClient([
+					'base_uri' => $this->url,
+					'headers' => ['User-Agent' => sprintf('ComgateSDK/%s', Utils::defaultUserAgent())],
+				]),
+				new Config($this->merchant, $this->secret, $this->test)
+			)
+		);
 	}
 
 }

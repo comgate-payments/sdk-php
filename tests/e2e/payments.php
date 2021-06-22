@@ -1,7 +1,7 @@
 <?php declare(strict_types = 1);
 
 use Comgate\SDK\Client;
-use Comgate\SDK\Comgate;
+use Comgate\SDK\Config;
 use Comgate\SDK\Entity\Codes\CurrencyCode;
 use Comgate\SDK\Entity\Codes\PaymentMethodCode;
 use Comgate\SDK\Entity\Money;
@@ -15,8 +15,8 @@ require __DIR__ . '/../../vendor/autoload.php';
 function createPayment(): void
 {
 	$transport = new Transport(
-		new GuzzleClient(['base_url' => Comgate::URL]),
-		new Comgate('foo', 'bar', true)
+		new GuzzleClient(['base_url' => Config::URL]),
+		new Config('foo', 'bar', true)
 	);
 
 	$client = new Client($transport);
@@ -29,18 +29,19 @@ function createPayment(): void
 		->withEmail('dev@comgate.cz')
 		->withMethod(PaymentMethodCode::ALL);
 
-	$res1 = $client->create($payment);
+	$res1 = $client->createPayment($payment);
 	assert($res1->isOk() === true);
 	// var_dump($res->getData());
 
 	$status = PaymentStatus::create()
 		->withTransactionId($res1->getData()['transId']);
 
-	$res2 = $client->status($status);
+	$res2 = $client->getStatus($status);
 	assert($res2->isOk() === true);
 	// var_dump($res2->getData());
 }
 
 (function (): void {
 	// createPayment();
+
 })();
