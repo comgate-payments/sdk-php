@@ -3,7 +3,6 @@
 namespace Comgate\SDK\Entity;
 
 use Comgate\SDK\Entity\Codes\CurrencyCode;
-use Comgate\SDK\Entity\Codes\PaymentMethodCode;
 use Comgate\SDK\Exception\LogicalException;
 
 class Payment extends Entity
@@ -19,7 +18,11 @@ class Payment extends Entity
 
 	protected string $email;
 
-	protected string $method = PaymentMethodCode::ALL;
+	/** @var string[] */
+	protected array $allowedMethods = [];
+
+	/** @var string[] */
+	protected array $excludedMethods = [];
 
 	protected bool $prepareOnly = true;
 
@@ -136,14 +139,32 @@ class Payment extends Entity
 		return $this;
 	}
 
-	public function getMethod(): string
+	/**
+	 * @return string[]
+	 */
+	public function getAllowedMethods(): array
 	{
-		return $this->method;
+		return $this->allowedMethods;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getExcludedMethods(): array
+	{
+		return $this->excludedMethods;
 	}
 
 	public function withMethod(string $method): self
 	{
-		$this->method = $method;
+		$this->allowedMethods[] = $method;
+
+		return $this;
+	}
+
+	public function withoutMethod(string $method): self
+	{
+		$this->excludedMethods[] = $method;
 
 		return $this;
 	}
@@ -310,10 +331,22 @@ class Payment extends Entity
 			'curr' => $this->currency,
 			'label' => $this->label,
 			'refId' => $this->referenceId,
-			'method' => $this->method,
 			'email' => $this->email,
 			'prepareOnly' => $this->prepareOnly ? 'true' : 'false',
+			'method' => null,
 		];
+
+		if ($this->allowedMethods === [] && $this->excludedMethods !== []) {
+			throw new LogicalException('There must be at least one allowed method');
+		}
+
+		if ($this->allowedMethods !== []) {
+			$output['method'] = implode('+', $this->allowedMethods);
+		}
+
+		if ($this->excludedMethods !== []) {
+			$output['method'] = ltrim($output['method'] . '-' . implode('-', $this->excludedMethods), '-');
+		}
 
 		// Optional
 

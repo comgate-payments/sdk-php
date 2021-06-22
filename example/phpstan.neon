@@ -1,0 +1,13 @@
+parameters:
+	scanDirectories:
+		- app
+
+	fileExtensions:
+		- php
+
+	ignoreErrors:
+includes:
+	- vendor/phpstan/phpstan-nette/extension.neon
+	- vendor/phpstan/phpstan-nette/rules.neon
+	- vendor/phpstan/phpstan-doctrine/extension.neon
+	- vendor/phpstan/phpstan-phpunit/rules.neon
