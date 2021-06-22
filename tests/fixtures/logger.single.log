@@ -1,0 +1,14 @@
+>>>>>>>>
+POST /v1.0/status HTTP/1.1
+Content-Length: 63
+User-Agent: ComgateSDK/v1/GuzzleHttp/7
+Content-Type: application/x-www-form-urlencoded
+Host: payments.comgate.cz
+
+merchant=123456&secret=foobarbaz&test=true&transId=foobar123456
+<<<<<<<<
+HTTP/1.1 200 OK
+
+hello=world
+--------
+NULL
