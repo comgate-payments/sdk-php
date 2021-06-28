@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "791bbb74ae7101b8b2109cd4c13a3523",
+    "content-hash": "2b598794c8b4977429f3d01c88342248",
     "packages": [
         {
             "name": "comgate/sdk",
@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "..",
-                "reference": "66572ee4dec679ff30e833f18f73a5816872bfa9"
+                "reference": "e119ad0a51d2bd2c6330a11505d740114c4eb7eb"
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.0",
@@ -2444,16 +2444,16 @@
         },
         {
             "name": "heroku/heroku-buildpack-php",
-            "version": "v192",
+            "version": "v194",
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "360fa3ee3caad234760048da8bc8fefd35609ea9"
+                "reference": "6232512eecda4ffe4bbbdffa5dbe36ddf0c55d8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/360fa3ee3caad234760048da8bc8fefd35609ea9",
-                "reference": "360fa3ee3caad234760048da8bc8fefd35609ea9",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/6232512eecda4ffe4bbbdffa5dbe36ddf0c55d8d",
+                "reference": "6232512eecda4ffe4bbbdffa5dbe36ddf0c55d8d",
                 "shasum": ""
             },
             "bin": [
@@ -2483,9 +2483,9 @@
             ],
             "support": {
                 "issues": "https://github.com/heroku/heroku-buildpack-php/issues",
-                "source": "https://github.com/heroku/heroku-buildpack-php/tree/v192"
+                "source": "https://github.com/heroku/heroku-buildpack-php/tree/v194"
             },
-            "time": "2021-05-06T16:53:55+00:00"
+            "time": "2021-06-25T16:30:14+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
