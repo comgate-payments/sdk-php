@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "..",
-                "reference": "66572ee4dec679ff30e833f18f73a5816872bfa9"
+                "reference": "ff3345d38f3e5d5fd75977b3b4a110a0909f44e8"
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.0",
@@ -25,7 +25,8 @@
                 "ninjify/qa": "^0.12.1",
                 "phpstan/phpstan": "^0.12.2",
                 "phpstan/phpstan-deprecation-rules": "^0.12.0",
-                "phpstan/phpstan-strict-rules": "^0.12.0"
+                "phpstan/phpstan-strict-rules": "^0.12.0",
+                "psr/log": "^1.1.4"
             },
             "type": "library",
             "extra": {
@@ -40,7 +41,8 @@
             },
             "autoload-dev": {
                 "psr-4": {
-                    "Tests\\Cases\\": "tests/cases"
+                    "Tests\\Cases\\": "tests/cases",
+                    "Tests\\Toolkit\\": "tests/toolkit"
                 }
             },
             "license": [
@@ -2539,16 +2541,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.88",
+            "version": "0.12.92",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "464d1a81af49409c41074aa6640ed0c4cbd9bb68"
+                "reference": "64d4c5dc8ea96972bc18432d137a330239a5d2b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/464d1a81af49409c41074aa6640ed0c4cbd9bb68",
-                "reference": "464d1a81af49409c41074aa6640ed0c4cbd9bb68",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/64d4c5dc8ea96972bc18432d137a330239a5d2b2",
+                "reference": "64d4c5dc8ea96972bc18432d137a330239a5d2b2",
                 "shasum": ""
             },
             "require": {
@@ -2579,11 +2581,15 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/0.12.88"
+                "source": "https://github.com/phpstan/phpstan/tree/0.12.92"
             },
             "funding": [
                 {
                     "url": "https://github.com/ondrejmirtes",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/phpstan",
                     "type": "github"
                 },
                 {
@@ -2595,7 +2601,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-17T12:24:49+00:00"
+            "time": "2021-07-10T13:53:49+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -2717,16 +2723,16 @@
         },
         {
             "name": "phpstan/phpstan-nette",
-            "version": "0.12.19",
+            "version": "0.12.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-nette.git",
-                "reference": "4be612eb635f69e8e7b8837a2b39b4c68a03e5a7"
+                "reference": "c24d2bb6292b81cf3878b2892c49f9277e8789d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-nette/zipball/4be612eb635f69e8e7b8837a2b39b4c68a03e5a7",
-                "reference": "4be612eb635f69e8e7b8837a2b39b4c68a03e5a7",
+                "url": "https://api.github.com/repos/phpstan/phpstan-nette/zipball/c24d2bb6292b81cf3878b2892c49f9277e8789d0",
+                "reference": "c24d2bb6292b81cf3878b2892c49f9277e8789d0",
                 "shasum": ""
             },
             "require": {
@@ -2774,9 +2780,9 @@
             "description": "Nette Framework class reflection extension for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-nette/issues",
-                "source": "https://github.com/phpstan/phpstan-nette/tree/0.12.19"
+                "source": "https://github.com/phpstan/phpstan-nette/tree/0.12.21"
             },
-            "time": "2021-05-19T15:45:34+00:00"
+            "time": "2021-06-09T08:47:54+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
