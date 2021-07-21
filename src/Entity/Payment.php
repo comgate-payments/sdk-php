@@ -26,6 +26,8 @@ class Payment extends Entity
 
 	protected bool $prepareOnly = true;
 
+	protected ?string $transactionId = null;
+
 	protected ?string $country = null;
 
 	protected ?string $account = null;
@@ -229,6 +231,18 @@ class Payment extends Entity
 		return $this;
 	}
 
+	public function getTransactionId(): ?string
+	{
+		return $this->transactionId;
+	}
+
+	public function withTransactionId(string $transactionId): self
+	{
+		$this->transactionId = $transactionId;
+
+		return $this;
+	}
+
 	public function isPrepareOnly(): bool
 	{
 		return $this->prepareOnly;
@@ -324,81 +338,6 @@ class Payment extends Entity
 	 */
 	public function toArray(): array
 	{
-		// Required
 
-		$output = [
-			'price' => $this->price->get(), // in cents 10.25 => 1025
-			'curr' => $this->currency,
-			'label' => $this->label,
-			'refId' => $this->referenceId,
-			'email' => $this->email,
-			'prepareOnly' => $this->prepareOnly ? 'true' : 'false',
-			'method' => null,
-		];
-
-		if ($this->allowedMethods === [] && $this->excludedMethods !== []) {
-			throw new LogicalException('There must be at least one allowed method');
-		}
-
-		if ($this->allowedMethods !== []) {
-			$output['method'] = implode('+', $this->allowedMethods);
-		}
-
-		if ($this->excludedMethods !== []) {
-			$output['method'] = ltrim($output['method'] . '-' . implode('-', $this->excludedMethods), '-');
-		}
-
-		// Optional
-
-		if ($this->phone !== null) {
-			$output['phone'] = $this->phone;
-		}
-
-		if ($this->name !== null) {
-			$output['name'] = $this->name;
-		}
-
-		if ($this->country !== null) {
-			$output['country'] = $this->country;
-		}
-
-		if ($this->account !== null) {
-			$output['account'] = $this->account;
-		}
-
-		if ($this->lang !== null) {
-			$output['lang'] = $this->lang;
-		}
-
-		if ($this->preauth !== null) {
-			$output['preauth'] = $this->preauth ? 'true' : 'false';
-		}
-
-		if ($this->initRecurring !== null) {
-			if ($this->prepareOnly !== true) {
-				throw new LogicalException('Field initRecurring requires prepareOnly=true');
-			}
-
-			$output['initRecurring'] = $this->initRecurring ? 'true' : 'false';
-		}
-
-		if ($this->verification !== null) {
-			$output['initRecurring'] = $this->verification ? 'true' : 'false';
-		}
-
-		if ($this->embedded !== null) {
-			$output['embedded'] = $this->embedded ? 'true' : 'false';
-		}
-
-		if ($this->eetReport !== null) {
-			$output['eetReport'] = $this->eetReport ? 'true' : 'false';
-		}
-
-		if ($this->eetData !== []) {
-			$output['eetData'] = $this->eetData;
-		}
-
-		return $output;
 	}
-
 }

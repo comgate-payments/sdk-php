@@ -85,4 +85,184 @@ class PaymentNotification extends Entity
 		];
 	}
 
+	/**
+	 * @return string|null
+	 */
+	public function getTransactionId(): ?string
+	{
+		return $this->transactionId;
+	}
+
+	/**
+	 * @param string|null $transactionId
+	 * @return PaymentNotification
+	 */
+	public function setTransactionId(?string $transactionId): PaymentNotification
+	{
+		$this->transactionId = $transactionId;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getMerchant(): ?string
+	{
+		return $this->merchant;
+	}
+
+	/**
+	 * @param string|null $merchant
+	 * @return PaymentNotification
+	 */
+	public function setMerchant(?string $merchant): PaymentNotification
+	{
+		$this->merchant = $merchant;
+		return $this;
+	}
+
+	/**
+	 * @return bool|null
+	 */
+	public function getTest(): ?bool
+	{
+		return $this->test;
+	}
+
+	/**
+	 * @param bool|null $test
+	 * @return PaymentNotification
+	 */
+	public function setTest(?bool $test): PaymentNotification
+	{
+		$this->test = $test;
+		return $this;
+	}
+
+	/**
+	 * @return Money|null
+	 */
+	public function getPrice(): ?Money
+	{
+		return $this->price;
+	}
+
+	/**
+	 * @param Money|null $price
+	 * @return PaymentNotification
+	 */
+	public function setPrice(?Money $price): PaymentNotification
+	{
+		$this->price = $price;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCurrency(): ?string
+	{
+		return $this->currency;
+	}
+
+	/**
+	 * @param string|null $currency
+	 * @return PaymentNotification
+	 */
+	public function setCurrency(?string $currency): PaymentNotification
+	{
+		$this->currency = $currency;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getLabel(): ?string
+	{
+		return $this->label;
+	}
+
+	/**
+	 * @param string|null $label
+	 * @return PaymentNotification
+	 */
+	public function setLabel(?string $label): PaymentNotification
+	{
+		$this->label = $label;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getReferenceId(): ?string
+	{
+		return $this->referenceId;
+	}
+
+	/**
+	 * @param string|null $referenceId
+	 * @return PaymentNotification
+	 */
+	public function setReferenceId(?string $referenceId): PaymentNotification
+	{
+		$this->referenceId = $referenceId;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getEmail(): ?string
+	{
+		return $this->email;
+	}
+
+	/**
+	 * @param string|null $email
+	 * @return PaymentNotification
+	 */
+	public function setEmail(?string $email): PaymentNotification
+	{
+		$this->email = $email;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getStatus(): ?string
+	{
+		return $this->status;
+	}
+
+	/**
+	 * @param string|null $status
+	 * @return PaymentNotification
+	 */
+	public function setStatus(?string $status): PaymentNotification
+	{
+		$this->status = $status;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getFee(): ?string
+	{
+		return $this->fee;
+	}
+
+	/**
+	 * @param string|null $fee
+	 * @return PaymentNotification
+	 */
+	public function setFee(?string $fee): PaymentNotification
+	{
+		$this->fee = $fee;
+		return $this;
+	}
+
 }

@@ -3,7 +3,7 @@
 namespace Comgate\SDK;
 
 use Comgate\SDK\Entity\Payment;
-use Comgate\SDK\Entity\PaymentStatus;
+use Comgate\SDK\Entity\Request\PaymentStatusRequest;
 use Comgate\SDK\Http\ITransport;
 use Comgate\SDK\Http\Response;
 
@@ -22,9 +22,9 @@ class Client
 		return $this->transport->post('create', $payment->toArray());
 	}
 
-	public function getStatus(PaymentStatus $status): Response
+	public function getStatus(Payment $payment): Response
 	{
-		return $this->transport->post('status', $status->toArray());
+		return $this->transport->post('status', (new PaymentStatusRequest($payment))->toArray());
 	}
 
 }
