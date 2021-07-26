@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>ComGate Payments Playground</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css"/>
+	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.js"></script>
+</head>
+<body class="font-sans">
+
+<header>
+	<div class="max-w-xl md:max-w-4xl mx-auto py-6 md:flex md:items-center md:justify-between border-b">
+		<div class="py-4">
+			<h1 class="font-bold text-3xl">
+				<a n:href="Home:" class="hover:underline">ComGate Payments Playground</a>
+			</h1>
+		</div>
+	</div>
+</header>
+
+<main class="bg-white">
+	<div class="max-w-xl md:max-w-4xl mx-auto py-6 md:flex md:items-center md:justify-between">
+		<div class="py-4">
+			<section n:if="count($flashes) > 0" n:inner-foreach="$flashes as $flash" class="mb-16">
+				<div class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+					<div n:class="$flash->type === 'error' ? 'bg-red-500' : 'bg-blue-500', 'p-4'">
+						<div class="flex items-center">
+							<div class="w-0 flex-1 flex justify-between">
+								<div n:class="$flash->type === 'error' ? 'text-white' : 'text-gray-900', 'w-0 flex-1 text-sm font-medium'">{$flash->message}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section>
+				{include #content}
+			</section>
+		</div>
+	</div>
+</main>
+
+<footer class="bg-white">
+	<div class="max-w-xl md:max-w-4xl mx-auto py-6 md:flex md:items-center md:justify-between border-t">
+		<div class="mt-4 md:mt-0 md:order-1">
+			<p class="text-center text-base text-gray-400">
+				&copy; 2007-{=date('Y')} ComGate Payments. All rights reserved.
+			</p>
+		</div>
+	</div>
+</footer>
+
+</body>
+</html>
+
