@@ -1,0 +1,11 @@
+# IDE
+.idea
+
+# Composer
+/vendor/*
+
+# Apache
+!.htaccess
+
+# Nette config
+/config/local.neon
