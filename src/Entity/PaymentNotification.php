@@ -2,7 +2,7 @@
 
 namespace Comgate\SDK\Entity;
 
-class PaymentNotification extends Entity
+class PaymentNotification
 {
 
 	protected ?string $merchant;
@@ -66,23 +66,54 @@ class PaymentNotification extends Entity
 		return $self;
 	}
 
-	/**
-	 * @return mixed[]
-	 */
-	public function toArray(): array
+	public function getTransactionId(): ?string
 	{
-		return [
-			'merchant' => $this->merchant,
-			'test' => $this->test,
-			'price' => $this->price !== null ? $this->price->get() : null,
-			'currency' => $this->currency,
-			'label' => $this->label,
-			'referenceId' => $this->referenceId,
-			'email' => $this->email,
-			'transactionId' => $this->transactionId,
-			'status' => $this->status,
-			'free' => $this->fee,
-		];
+		return $this->transactionId;
+	}
+
+	public function getMerchant(): ?string
+	{
+		return $this->merchant;
+	}
+
+	public function isTest(): ?bool
+	{
+		return $this->test;
+	}
+
+	public function getPrice(): ?Money
+	{
+		return $this->price;
+	}
+
+	public function getCurrency(): ?string
+	{
+		return $this->currency;
+	}
+
+	public function getLabel(): ?string
+	{
+		return $this->label;
+	}
+
+	public function getReferenceId(): ?string
+	{
+		return $this->referenceId;
+	}
+
+	public function getEmail(): ?string
+	{
+		return $this->email;
+	}
+
+	public function getStatus(): ?string
+	{
+		return $this->status;
+	}
+
+	public function getFee(): ?string
+	{
+		return $this->fee;
 	}
 
 }

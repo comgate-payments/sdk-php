@@ -2,7 +2,7 @@
 
 namespace Tests\Cases;
 
-use Comgate\SDK\Entity\PaymentStatus;
+use Comgate\SDK\Entity\Payment;
 use Comgate\SDK\Logging\FileLogger;
 use GuzzleHttp\Psr7\Response;
 use Ninjify\Nunjuck\Toolkit;
@@ -19,7 +19,7 @@ Toolkit::test(function (): void {
 		])
 		->createClient();
 
-	$res = $client->getStatus(PaymentStatus::create()->withTransactionId('foobar123456'));
+	$res = $client->getStatus(Payment::create()->withTransactionId('XXXX-YYYY-ZZZZ'));
 
 	Assert::equal(['hello' => 'world'], $res->getData());
 });
@@ -35,7 +35,7 @@ Toolkit::test(function (): void {
 		])
 		->createClient();
 
-	$client->getStatus(PaymentStatus::create()->withTransactionId('foobar123456'));
+	$client->getStatus(Payment::create()->withTransactionId('XXXX-YYYY-ZZZZ'));
 
 	Assert::true(file_exists($log));
 	Assert::matchFile(__DIR__ . '/../fixtures/logger.single.log', file_get_contents($log));
@@ -53,8 +53,8 @@ Toolkit::test(function (): void {
 		])
 		->createClient();
 
-	$client->getStatus(PaymentStatus::create()->withTransactionId('foobar123456'));
-	$client->getStatus(PaymentStatus::create()->withTransactionId('foobar123456'));
+	$client->getStatus(Payment::create()->withTransactionId('XXXX-YYYY-ZZZ1'));
+	$client->getStatus(Payment::create()->withTransactionId('XXXX-YYYY-ZZZ2'));
 
 	Assert::true(file_exists($log));
 	Assert::matchFile(__DIR__ . '/../fixtures/logger.multi.log', file_get_contents($log));

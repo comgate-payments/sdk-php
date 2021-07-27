@@ -1,4 +1,4 @@
-.PHONY: qa dev cs cfx phpstan publish
+.PHONY: qa dev cs cfx phpstan publish tests
 
 qa: cs phpstan
 
@@ -10,6 +10,12 @@ cfx:
 
 phpstan:
 	vendor/bin/phpstan analyse -l max -c phpstan.neon --memory-limit=512M app
+
+tests:
+	vendor/bin/tester -s -p php --colors 1 -C tests/cases
+
+tests-watch:
+	vendor/bin/tester -s -p php --colors 1 -C tests/cases -w src -w tests/cases
 
 #####################
 # LOCAL DEVELOPMENT #

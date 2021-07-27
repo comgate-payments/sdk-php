@@ -12,36 +12,32 @@ require_once __DIR__ . '/../../bootstrap.php';
 Toolkit::test(function (): void {
 	$notification = PaymentNotification::createFrom([]);
 
-	Assert::equal([
-		'merchant' => null,
-		'test' => false,
-		'price' => null,
-		'currency' => null,
-		'label' => null,
-		'referenceId' => null,
-		'email' => null,
-		'transactionId' => null,
-		'status' => null,
-		'free' => null,
-	], $notification->toArray());
+	Assert::equal(null, $notification->getMerchant());
+	Assert::equal(false, $notification->isTest());
+	Assert::equal(null, $notification->getPrice());
+	Assert::equal(null, $notification->getCurrency());
+	Assert::equal(null, $notification->getLabel());
+	Assert::equal(null, $notification->getReferenceId());
+	Assert::equal(null, $notification->getEmail());
+	Assert::equal(null, $notification->getTransactionId());
+	Assert::equal(null, $notification->getStatus());
+	Assert::equal(null, $notification->getFee());
 });
 
 // Globals (empty)
 Toolkit::test(function (): void {
 	$notification = PaymentNotification::createFromGlobals();
 
-	Assert::equal([
-		'merchant' => null,
-		'test' => false,
-		'price' => null,
-		'currency' => null,
-		'label' => null,
-		'referenceId' => null,
-		'email' => null,
-		'transactionId' => null,
-		'status' => null,
-		'free' => null,
-	], $notification->toArray());
+	Assert::equal(null, $notification->getMerchant());
+	Assert::equal(false, $notification->isTest());
+	Assert::equal(null, $notification->getPrice());
+	Assert::equal(null, $notification->getCurrency());
+	Assert::equal(null, $notification->getLabel());
+	Assert::equal(null, $notification->getReferenceId());
+	Assert::equal(null, $notification->getEmail());
+	Assert::equal(null, $notification->getTransactionId());
+	Assert::equal(null, $notification->getStatus());
+	Assert::equal(null, $notification->getFee());
 });
 
 // Globals
@@ -61,18 +57,16 @@ Toolkit::test(function (): void {
 
 	$notification = PaymentNotification::createFromGlobals();
 
-	Assert::equal([
-		'merchant' => 'comgate',
-		'test' => false,
-		'price' => 100,
-		'currency' => 'CZK',
-		'label' => 'test',
-		'referenceId' => 'foo',
-		'email' => 'dev@comgate.cz',
-		'transactionId' => 'bar',
-		'status' => 'OK',
-		'free' => '0',
-	], $notification->toArray());
+	Assert::equal('comgate', $notification->getMerchant());
+	Assert::equal(false, $notification->isTest());
+	Assert::equal(100, $notification->getPrice()->get());
+	Assert::equal('CZK', $notification->getCurrency());
+	Assert::equal('test', $notification->getLabel());
+	Assert::equal('foo', $notification->getReferenceId());
+	Assert::equal('dev@comgate.cz', $notification->getEmail());
+	Assert::equal('bar', $notification->getTransactionId());
+	Assert::equal('OK', $notification->getStatus());
+	Assert::equal('0', $notification->getFee());
 });
 
 // Data
@@ -90,16 +84,14 @@ Toolkit::test(function (): void {
 		'fee' => '0',
 	]);
 
-	Assert::equal([
-		'merchant' => 'comgate',
-		'test' => false,
-		'price' => 100,
-		'currency' => 'CZK',
-		'label' => 'test',
-		'referenceId' => 'foo',
-		'email' => 'dev@comgate.cz',
-		'transactionId' => 'bar',
-		'status' => 'OK',
-		'free' => '0',
-	], $notification->toArray());
+	Assert::equal('comgate', $notification->getMerchant());
+	Assert::equal(false, $notification->isTest());
+	Assert::equal(100, $notification->getPrice()->get());
+	Assert::equal('CZK', $notification->getCurrency());
+	Assert::equal('test', $notification->getLabel());
+	Assert::equal('foo', $notification->getReferenceId());
+	Assert::equal('dev@comgate.cz', $notification->getEmail());
+	Assert::equal('bar', $notification->getTransactionId());
+	Assert::equal('OK', $notification->getStatus());
+	Assert::equal('0', $notification->getFee());
 });

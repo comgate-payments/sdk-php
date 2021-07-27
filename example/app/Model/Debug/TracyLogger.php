@@ -18,7 +18,11 @@ class TracyLogger implements ILogger
 		$this->inner->email = Debugger::$email;
 	}
 
-	public function log(mixed $value, mixed $level = self::INFO): void
+	/**
+	 * @param mixed $value
+	 * @param mixed $level
+	 */
+	public function log($value, $level = self::INFO): void
 	{
 		$this->inner->log($value, $level);
 	}

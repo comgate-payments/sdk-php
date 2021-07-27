@@ -23,9 +23,14 @@ To install latest version of `comgate/sdk` use [Composer](https://getcomposer.co
 composer require comgate/sdk
 ```
 
+### Documentation
+
+- https://help.comgate.cz/docs/protocol-api-en (english version)
+- https://help.comgate.cz/docs/api-protokol (czech version)
+
 ### Registration
 
-1. At first register your account at our side [https://comgate.cz](comgate.cz).
+1. At first register your account at our side [comgate.cz](https://www.comgate.cz).
 2. You will get **merchant indentificator** and **secret**.
 
 ### Example
@@ -87,7 +92,7 @@ try {
     assert($res->isOk() === true);
     var_dump($res->getData());
 
-    // Redirect to ComGate (use proper method of your framework)
+    // Redirect the payer to ComGate payment gateway (use proper method of your framework)
     Helpers::redirect($res->getField('redirect'));
 } catch (ComgateException $e) {
     var_dump($e->getPrevious()->getMessage());
@@ -116,20 +121,40 @@ $data = [
 ];
 ```
 
-### Check payment status
+### Check payment
 
 ```php
-use Comgate\SDK\Entity\PaymentStatus;
+use Comgate\SDK\Entity\Payment;
+use Comgate\SDK\Entity\PaymentNotification;
+use Comgate\SDK\Entity\Codes\PaymentStatusCode;
 use Comgate\SDK\Exception\Runtime\ComgateException;
 
-$status = PaymentStatus::create()
-    ->withTransactionId('123456ABCDEFG');
+// Create from $_POST global variable
+// $notification = PaymentNotification::createFromGlobals();
+
+// Create from your framework
+$data = $framework->getHttpRequest()->getPostData();
+$notification = PaymentNotification::createFrom($data);
+
+// Create payment with transaction ID and check status
+$payment = Payment::create()
+    ->withTransactionId($notification->getTransactionId());
 
 try {
-    $res = $client->getStatus($status);
+    $res = $client->getStatus($payment);
+    $data = $res->getData();
 
-    assert($res->isOk() === true);
-    var_dump($res->getData());
+    switch ($data['status']){
+        case PaymentStatusCode::PAID:
+            // Your code (set order as paid)
+            break;
+        case PaymentStatusCode::CANCELLED:
+            // Your code (set order as cancelled)
+            break;
+        case PaymentStatusCode::AUTHORIZED:
+            // Your code (set order as authorized)
+            break;
+    }
 } catch (ComgateException $e) {
     var_dump($e->getPrevious()->getMessage());
 }
@@ -171,21 +196,6 @@ $data = [
     'code' => '1400',
     'message' => 'Payment not found'
 ];
-```
-
-### Handle notification
-
-Notification is being sent from ComGate servers as POST request.
-
-```php
-use Comgate\SDK\Entity\PaymentNotification;
-
-// Create from $_POST global variable
-$notification = PaymentNotification::createFromGlobals();
-
-// Create from your framework
-$data = $framework->getHttpRequest()->getPostData();
-$notification = PaymentNotification::createFrom($data);
 ```
 
 ### Debugging

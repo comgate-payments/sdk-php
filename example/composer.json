@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=7.4",
     "contributte/application": "^0.5.0",
     "contributte/bootstrap": "^0.5.0",
     "contributte/di": "^0.5.0",
@@ -24,6 +24,7 @@
     "comgate/sdk": "^0.1.0"
   },
   "require-dev": {
+    "ninjify/nunjuck": "^0.4.0",
     "contributte/qa": "^0.1",
     "contributte/dev": "^0.3",
     "phpstan/phpstan": "^0.12.0",

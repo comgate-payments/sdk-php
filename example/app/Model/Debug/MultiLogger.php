@@ -19,12 +19,16 @@ class MultiLogger implements ILogger
 		$this->loggers = $loggers;
 	}
 
-	public function log(mixed $value, mixed $level = self::INFO): void
+	/**
+	 * @param mixed $value
+	 * @param mixed $level
+	 */
+	public function log($value, $level = self::INFO): void
 	{
 		foreach ($this->loggers as $logger) {
 			try {
 				$logger->log($value, $level);
-			} catch (Throwable) {
+			} catch (Throwable $e) {
 				// Just nothing
 			}
 		}

@@ -7,7 +7,6 @@ use Comgate\SDK\Entity\Codes\CurrencyCode;
 use Comgate\SDK\Entity\Codes\PaymentMethodCode;
 use Comgate\SDK\Entity\Money;
 use Comgate\SDK\Entity\Payment;
-use Comgate\SDK\Entity\PaymentStatus;
 use Comgate\SDK\Exception\Runtime\ComgateException;
 use Tracy\Debugger;
 
@@ -94,7 +93,7 @@ class ComgatePresenter extends BasePresenter
 			$this->redirect('Home:');
 		}
 
-		$status = PaymentStatus::create()
+		$status = Payment::create()
 			->withTransactionId($data['id']);
 
 		try {

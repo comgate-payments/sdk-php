@@ -8,7 +8,11 @@ use Tracy\Logger;
 class StdoutLogger implements ILogger
 {
 
-	public function log(mixed $value, mixed $level = self::INFO): void
+	/**
+	 * @param mixed $value
+	 * @param mixed $level
+	 */
+	public function log($value, $level = self::INFO): void
 	{
 		$message = Logger::formatLogLine($value);
 		file_put_contents('php://stdout', sprintf('[%s] %s', $level, $message) . PHP_EOL);
