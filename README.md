@@ -32,6 +32,8 @@ composer require comgate/sdk
 
 1. At first register your account at our side [comgate.cz](https://www.comgate.cz).
 2. You will get **merchant indentificator** and **secret**.
+3. Allow your eshop server IPv4 address at [portal.comgate.cz](https://portal.comgate.cz).
+4. Set PAID, CANCELLED, PENDING and STATUS URL at  [portal.comgate.cz](https://portal.comgate.cz).
 
 ### Example
 
@@ -99,7 +101,7 @@ try {
 }
 ```
 
-Example of success response for `$client->createPayment`.
+Example of successfull response for `$client->createPayment`.
 
 ```php
 $data = $res->getData();
@@ -121,7 +123,63 @@ $data = [
 ];
 ```
 
-### Check payment
+### Finish the order and show payment status to returning payer
+Example URL: https://your-eshop.tld/order-finish.php?id=${id}&refId=${refId}
+
+(dynamic URL for PAID, CANCELLED, PENDING states)
+
+```php
+use Comgate\SDK\Entity\Payment;
+use Comgate\SDK\Entity\PaymentNotification;
+use Comgate\SDK\Entity\Codes\PaymentStatusCode;
+use Comgate\SDK\Exception\Runtime\ComgateException;
+
+// Create from $_POST global variable
+// $notification = PaymentNotification::createFromGlobals();
+
+// Create from your framework
+$data = $framework->getHttpRequest()->getPostData();
+$notification = PaymentNotification::createFrom($data);
+
+// Create payment with transaction ID and check status
+$payment = Payment::create()
+    ->withTransactionId($notification->getTransactionId());
+
+try {
+    $res = $client->getStatus($payment);
+    $data = $res->getData();
+
+    switch ($data['status']){
+        case PaymentStatusCode::PAID:
+            // Your code (set order as paid)
+            echo "Your payment was PAID successfully.";
+            break;
+
+        case PaymentStatusCode::CANCELLED:
+            // Your code (set order as cancelled)
+            echo "Your order was CANCELLED.";
+            break;
+
+        case PaymentStatusCode::PENDING:
+            // Your code (order is still pending)
+            echo "We are waiting for the payment.";
+            break;
+
+        case PaymentStatusCode::AUTHORIZED:
+            // Your code (set order as authorized)
+            echo "Payment was authorized successfully.";
+            break;
+    }
+
+    echo "OK"; // important response with HTTP code 200
+
+} catch (ComgateException $e) {
+    var_dump($e->getPrevious()->getMessage());
+}
+```
+
+### Receive payment notification (server-to-server)
+Example URL: https://your-eshop.tld/notify.php
 
 ```php
 use Comgate\SDK\Entity\Payment;
@@ -148,19 +206,26 @@ try {
         case PaymentStatusCode::PAID:
             // Your code (set order as paid)
             break;
+
         case PaymentStatusCode::CANCELLED:
             // Your code (set order as cancelled)
             break;
+
         case PaymentStatusCode::AUTHORIZED:
             // Your code (set order as authorized)
             break;
+
+        // PaymentStatusCode::PENDING - is NOT send via push notification
     }
+
+    echo "OK"; // important response with HTTP code 200
+
 } catch (ComgateException $e) {
     var_dump($e->getPrevious()->getMessage());
 }
 ```
 
-Example of success response for `$client->getStatus`.
+Example of successfull response for `$client->getStatus`.
 
 ```php
 $data = $res->getData();
@@ -188,17 +253,24 @@ $data = [
 ];
 ```
 
-Example of error response for `$client->getStatus`.
+### Debugging
+
+#### Logging
+
+> We are using [PSR-3](https://www.php-fig.org/psr/psr-3/) for logging.
 
 ```php
-$data = $res->getData();
-$data = [
-    'code' => '1400',
-    'message' => 'Payment not found'
-];
+use Comgate\SDK\Comgate;
+use Comgate\SDK\Logging\FileLogger;
+use Comgate\SDK\Logging\StdoutLogger;
+
+$client = Comgate::defaults()
+    ->withLogger(new FileLogger(__DIR__ . '/comgate.log'))
+    // ->withLogger(new StdoutLogger())
+    ->createClient();
 ```
 
-### Debugging
+Take a look at [our tests](https://github.com/comgate-payments/sdk-php/blob/master/tests/fixtures) to see the logger format.
 
 #### Custom middleware
 
@@ -224,23 +296,6 @@ $client = Comgate::defaults()
     )
     ->createClient();
 ```
-
-#### Logging
-
-> We are using [PSR-3](https://www.php-fig.org/psr/psr-3/) for logging.
-
-```php
-use Comgate\SDK\Comgate;
-use Comgate\SDK\Logging\FileLogger;
-use Comgate\SDK\Logging\StdoutLogger;
-
-$client = Comgate::defaults()
-    ->withLogger(new FileLogger(__DIR__ . '/comgate.log'))
-    // ->withLogger(new StdoutLogger())
-    ->createClient();
-```
-
-Take a look at [our tests](https://github.com/comgate-payments/sdk-php/blob/master/tests/fixtures) to see the logger format.
 
 ## Maintenance
 
