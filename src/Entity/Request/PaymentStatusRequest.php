@@ -7,7 +7,8 @@ use Comgate\SDK\Entity\Payment;
 class PaymentStatusRequest
 {
 
-	private Payment $payment;
+	/** @var Payment */
+	private $payment;
 
 	private function __construct(Payment $payment)
 	{

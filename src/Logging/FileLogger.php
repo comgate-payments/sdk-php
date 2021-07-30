@@ -7,7 +7,8 @@ use Psr\Log\AbstractLogger;
 class FileLogger extends AbstractLogger
 {
 
-	private string $file;
+	/** @var string */
+	private $file;
 
 	public function __construct(string $file)
 	{

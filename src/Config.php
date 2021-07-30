@@ -7,11 +7,14 @@ class Config
 
 	public const URL = 'https://payments.comgate.cz/v1.0/';
 
-	private string $merchant;
+	/** @var string */
+	private $merchant;
 
-	private string $secret;
+	/** @var string */
+	private $secret;
 
-	private bool $test;
+	/** @var bool */
+	private $test;
 
 	public function __construct(string $merchant, string $secret, bool $test = false)
 	{

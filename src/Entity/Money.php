@@ -7,7 +7,8 @@ use Comgate\SDK\Exception\LogicalException;
 class Money
 {
 
-	protected int $value;
+	/** @var int */
+	protected $value;
 
 	protected function __construct(int $value)
 	{

@@ -7,48 +7,65 @@ use Comgate\SDK\Entity\Codes\CurrencyCode;
 class Payment
 {
 
-	protected Money $price;
+	/** @var Money */
+	protected $price;
 
-	protected string $currency = CurrencyCode::CZK;
+	/** @var string */
+	protected $currency = CurrencyCode::CZK;
 
-	protected string $label;
+	/** @var string */
+	protected $label;
 
-	protected string $referenceId;
+	/** @var string */
+	protected $referenceId;
 
-	protected string $email;
+	/** @var string */
+	protected $email;
 
 	/** @var string[] */
-	protected array $allowedMethods = [];
+	protected $allowedMethods = [];
 
 	/** @var string[] */
-	protected array $excludedMethods = [];
+	protected $excludedMethods = [];
 
-	protected bool $prepareOnly = true;
+	/** @var bool */
+	protected $prepareOnly = true;
 
-	protected ?string $transactionId = null;
+	/** @var string|null */
+	protected $transactionId = null;
 
-	protected ?string $country = null;
+	/** @var string|null */
+	protected $country = null;
 
-	protected ?string $account = null;
+	/** @var string|null */
+	protected $account = null;
 
-	protected ?string $phone = null;
+	/** @var string|null */
+	protected $phone = null;
 
-	protected ?string $name = null;
+	/** @var string|null */
+	protected $name = null;
 
-	protected ?string $lang = null;
+	/** @var string|null */
+	protected $lang = null;
 
-	protected ?bool $preauth = null;
+	/** @var bool|null */
+	protected $preauth = null;
 
-	protected ?bool $initRecurring = null;
+	/** @var bool|null */
+	protected $initRecurring = null;
 
-	protected ?bool $verification = null;
+	/** @var bool|null */
+	protected $verification = null;
 
-	protected ?bool $embedded = null;
+	/** @var bool|null */
+	protected $embedded = null;
 
-	protected ?bool $eetReport = null;
+	/** @var bool|null */
+	protected $eetReport = null;
 
-	/** @var mixed[] */
-	protected ?array $eetData = [];
+	/** @var mixed[]|null */
+	protected $eetData = [];
 
 	final private function __construct()
 	{

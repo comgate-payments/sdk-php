@@ -5,25 +5,35 @@ namespace Comgate\SDK\Entity;
 class PaymentNotification
 {
 
-	protected ?string $merchant;
+	/** @var string|null */
+	protected $merchant;
 
-	protected ?bool $test;
+	/** @var bool|null */
+	protected $test;
 
-	protected ?Money $price;
+	/** @var Money|null */
+	protected $price;
 
-	protected ?string $currency;
+	/** @var string|null */
+	protected $currency;
 
-	protected ?string $label;
+	/** @var string|null */
+	protected $label;
 
-	protected ?string $referenceId;
+	/** @var string|null */
+	protected $referenceId;
 
-	protected ?string $email;
+	/** @var string|null */
+	protected $email;
 
-	protected ?string $transactionId;
+	/** @var string|null */
+	protected $transactionId;
 
-	protected ?string $status;
+	/** @var string|null */
+	protected $status;
 
-	protected ?string $fee;
+	/** @var string|null */
+	protected $fee;
 
 	final private function __construct()
 	{

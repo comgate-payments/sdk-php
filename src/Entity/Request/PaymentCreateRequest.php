@@ -8,7 +8,8 @@ use Comgate\SDK\Exception\LogicalException;
 class PaymentCreateRequest
 {
 
-	private Payment $payment;
+	/** @var Payment */
+	private $payment;
 
 	private function __construct(Payment $payment)
 	{

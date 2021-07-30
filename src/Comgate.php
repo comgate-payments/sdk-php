@@ -15,18 +15,23 @@ use Psr\Log\LoggerInterface;
 class Comgate
 {
 
-	public string $url;
+	/** @var string */
+	public $url;
 
-	private string $merchant;
+	/** @var string */
+	private $merchant;
 
-	private string $secret;
+	/** @var string */
+	private $secret;
 
-	private bool $test = false;
+	/** @var bool */
+	private $test = false;
 
 	/** @var callable[] */
-	private array $middlewares = [];
+	private $middlewares = [];
 
-	private ?LoggerInterface $logger = null;
+	/** @var LoggerInterface|null */
+	private $logger = null;
 
 	final private function __construct()
 	{

@@ -11,7 +11,8 @@ use Comgate\SDK\Http\Response;
 class Client
 {
 
-	protected ITransport $transport;
+	/** @var ITransport */
+	protected $transport;
 
 	public function __construct(ITransport $transport)
 	{
