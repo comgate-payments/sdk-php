@@ -10,6 +10,7 @@ use GuzzleHttp\Handler\MockHandler;
 final class FakeComgate extends Comgate
 {
 
+	/** @var MockHandler */
 	private $handler;
 
 	public static function tests(): FakeComgate
