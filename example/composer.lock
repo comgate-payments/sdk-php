@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b1d542fa76b6ac2fb55079f9f90d5ba",
+    "content-hash": "49c967a3e312dc77107e06cb5134eba5",
     "packages": [
         {
             "name": "comgate/sdk",
@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "..",
-                "reference": "b051b1ef0e57fef738bb3d092162cdb8bd77eeef"
+                "reference": "ff3345d38f3e5d5fd75977b3b4a110a0909f44e8"
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.0",
@@ -2446,16 +2446,16 @@
         },
         {
             "name": "heroku/heroku-buildpack-php",
-            "version": "v192",
+            "version": "v196",
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "360fa3ee3caad234760048da8bc8fefd35609ea9"
+                "reference": "0ade6e8c8bcdcfa7b193d5c2e341aa681fe4e2a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/360fa3ee3caad234760048da8bc8fefd35609ea9",
-                "reference": "360fa3ee3caad234760048da8bc8fefd35609ea9",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/0ade6e8c8bcdcfa7b193d5c2e341aa681fe4e2a1",
+                "reference": "0ade6e8c8bcdcfa7b193d5c2e341aa681fe4e2a1",
                 "shasum": ""
             },
             "bin": [
@@ -2485,9 +2485,9 @@
             ],
             "support": {
                 "issues": "https://github.com/heroku/heroku-buildpack-php/issues",
-                "source": "https://github.com/heroku/heroku-buildpack-php/tree/v192"
+                "source": "https://github.com/heroku/heroku-buildpack-php/tree/v196"
             },
-            "time": "2021-05-06T16:53:55+00:00"
+            "time": "2021-07-30T16:28:01+00:00"
         },
         {
             "name": "nette/tester",
