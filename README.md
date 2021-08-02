@@ -124,9 +124,9 @@ $data = [
 ```
 
 ### Finish the order and show payment status to returning payer
-Example URL: https://your-eshop.tld/order-finish.php?id=${id}&refId=${refId}
-
-(dynamic URL for PAID, CANCELLED, PENDING states)
+ - Example PAID URL: https://your-eshop.tld/order-finish.php?id=${id}&refId=${refId}&status=PAID
+ - Example PAID CANCELLED: https://your-eshop.tld/order-finish.php?id=${id}&refId=${refId}&status=CANCELLED
+ - Example PAID PENDING: https://your-eshop.tld/order-finish.php?id=${id}&refId=${refId}&status=PENDING
 
 ```php
 use Comgate\SDK\Entity\Payment;
@@ -134,16 +134,12 @@ use Comgate\SDK\Entity\PaymentNotification;
 use Comgate\SDK\Entity\Codes\PaymentStatusCode;
 use Comgate\SDK\Exception\Runtime\ComgateException;
 
-// Create from $_POST global variable
-// $notification = PaymentNotification::createFromGlobals();
-
-// Create from your framework
-$data = $framework->getHttpRequest()->getPostData();
-$notification = PaymentNotification::createFrom($data);
+$transactionId = $_GET['id']; // XXXX-YYYY-ZZZZ
+$refId = $_GET['refId']; // your order number
 
 // Create payment with transaction ID and check status
 $payment = Payment::create()
-    ->withTransactionId($notification->getTransactionId());
+    ->withTransactionId($transactionId);
 
 try {
     $res = $client->getStatus($payment);
