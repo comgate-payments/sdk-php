@@ -3,50 +3,71 @@
 namespace Comgate\SDK\Entity;
 
 use Comgate\SDK\Entity\Codes\CurrencyCode;
-use Comgate\SDK\Entity\Codes\PaymentMethodCode;
-use Comgate\SDK\Exception\LogicalException;
 
-class Payment extends Entity
+class Payment
 {
 
-	protected Money $price;
+	/** @var Money */
+	protected $price;
 
-	protected string $currency = CurrencyCode::CZK;
+	/** @var string */
+	protected $currency = CurrencyCode::CZK;
 
-	protected string $label;
+	/** @var string */
+	protected $label;
 
-	protected string $referenceId;
+	/** @var string */
+	protected $referenceId;
 
-	protected string $email;
+	/** @var string */
+	protected $email;
 
-	protected string $method = PaymentMethodCode::ALL;
+	/** @var string[] */
+	protected $allowedMethods = [];
 
-	protected bool $prepareOnly = true;
+	/** @var string[] */
+	protected $excludedMethods = [];
 
-	protected ?string $country = null;
+	/** @var bool */
+	protected $prepareOnly = true;
 
-	protected ?string $account = null;
+	/** @var string|null */
+	protected $transactionId = null;
 
-	protected ?string $phone = null;
+	/** @var string|null */
+	protected $country = null;
 
-	protected ?string $name = null;
+	/** @var string|null */
+	protected $account = null;
 
-	protected ?string $lang = null;
+	/** @var string|null */
+	protected $phone = null;
 
-	protected ?bool $preauth = null;
+	/** @var string|null */
+	protected $name = null;
 
-	protected ?bool $initRecurring = null;
+	/** @var string|null */
+	protected $lang = null;
 
-	protected ?bool $verification = null;
+	/** @var bool|null */
+	protected $preauth = null;
 
-	protected ?bool $embedded = null;
+	/** @var bool|null */
+	protected $initRecurring = null;
 
-	protected ?bool $eetReport = null;
+	/** @var bool|null */
+	protected $verification = null;
 
-	/** @var mixed[] */
-	protected ?array $eetData = [];
+	/** @var bool|null */
+	protected $embedded = null;
 
-	protected function __construct()
+	/** @var bool|null */
+	protected $eetReport = null;
+
+	/** @var mixed[]|null */
+	protected $eetData = [];
+
+	final private function __construct()
 	{
 	}
 
@@ -136,14 +157,32 @@ class Payment extends Entity
 		return $this;
 	}
 
-	public function getMethod(): string
+	/**
+	 * @return string[]
+	 */
+	public function getAllowedMethods(): array
 	{
-		return $this->method;
+		return $this->allowedMethods;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getExcludedMethods(): array
+	{
+		return $this->excludedMethods;
 	}
 
 	public function withMethod(string $method): self
 	{
-		$this->method = $method;
+		$this->allowedMethods[] = $method;
+
+		return $this;
+	}
+
+	public function withoutMethod(string $method): self
+	{
+		$this->excludedMethods[] = $method;
 
 		return $this;
 	}
@@ -204,6 +243,18 @@ class Payment extends Entity
 	public function withLang(string $lang): self
 	{
 		$this->lang = $lang;
+
+		return $this;
+	}
+
+	public function getTransactionId(): ?string
+	{
+		return $this->transactionId;
+	}
+
+	public function withTransactionId(string $transactionId): self
+	{
+		$this->transactionId = $transactionId;
 
 		return $this;
 	}
@@ -296,76 +347,6 @@ class Payment extends Entity
 		$this->eetData = $eetData;
 
 		return $this;
-	}
-
-	/**
-	 * @return mixed[]
-	 */
-	public function toArray(): array
-	{
-		// Required
-
-		$output = [
-			'price' => $this->price->get(), // in cents 10.25 => 1025
-			'curr' => $this->currency,
-			'label' => $this->label,
-			'refId' => $this->referenceId,
-			'method' => $this->method,
-			'email' => $this->email,
-			'prepareOnly' => $this->prepareOnly ? 'true' : 'false',
-		];
-
-		// Optional
-
-		if ($this->phone !== null) {
-			$output['phone'] = $this->phone;
-		}
-
-		if ($this->name !== null) {
-			$output['name'] = $this->name;
-		}
-
-		if ($this->country !== null) {
-			$output['country'] = $this->country;
-		}
-
-		if ($this->account !== null) {
-			$output['account'] = $this->account;
-		}
-
-		if ($this->lang !== null) {
-			$output['lang'] = $this->lang;
-		}
-
-		if ($this->preauth !== null) {
-			$output['preauth'] = $this->preauth ? 'true' : 'false';
-		}
-
-		if ($this->initRecurring !== null) {
-			if ($this->prepareOnly !== true) {
-				throw new LogicalException('Field initRecurring requires prepareOnly=true');
-			}
-
-			$output['initRecurring'] = $this->initRecurring ? 'true' : 'false';
-		}
-
-		if ($this->verification !== null) {
-			$output['initRecurring'] = $this->verification ? 'true' : 'false';
-		}
-
-		if ($this->embedded !== null) {
-			$output['embedded'] = $this->embedded ? 'true' : 'false';
-		}
-
-		if ($this->eetReport !== null) {
-			$output['eetReport'] = $this->eetReport ? 'true' : 'false';
-		}
-
-		if ($this->eetData !== []) {
-			$output['eetData'] = $this->eetData;
-		}
-
-		return $output;
 	}
 
 }

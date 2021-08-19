@@ -52,7 +52,11 @@ class Response
 		return $this->getParsedBody();
 	}
 
-	public function getField(string $key): mixed
+	/**
+	 * @param string $key
+	 * @return mixed
+	 */
+	public function getField(string $key)
 	{
 		return $this->getParsedBody()[$key] ?? null;
 	}

@@ -8,3 +8,5 @@
 # Tests
 /temp
 /coverage.xml
+/coverage.html
+/.php-cs-fixer.cache
