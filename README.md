@@ -17,7 +17,7 @@
 
 ### Installation
 
-To install latest version of `comgate/sdk` use [Composer](https://getcomposer.com).
+To install latest version of `comgate/sdk` use [Composer](https://getcomposer.org).
 
 ```bash
 composer require comgate/sdk
