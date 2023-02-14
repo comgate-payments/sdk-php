@@ -2,16 +2,15 @@
 
 namespace Comgate\SDK\Entity\Request;
 
+use Comgate\SDK\Entity\Money;
 use Comgate\SDK\Entity\Payment;
+use Comgate\SDK\Exception\LogicalException;
 
-class PaymentStatusRequest implements IRequest
+class PreauthCancelRequest implements IRequest
 {
+	private string $transId;
 
-	/** @var string */
-	private $transId;
-
-	public function __construct(string $transId)
-	{
+	public function __construct(string $transId){
 		$this->setTransId($transId);
 	}
 
@@ -20,7 +19,7 @@ class PaymentStatusRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'status';
+		return 'cancelPreauth';
 	}
 
 	/**
@@ -28,9 +27,12 @@ class PaymentStatusRequest implements IRequest
 	 */
 	public function toArray(): array
 	{
-		return [
+		// Required
+		$output = [
 			'transId' => $this->getTransId(),
 		];
+
+		return $output;
 	}
 
 	/**
@@ -43,9 +45,9 @@ class PaymentStatusRequest implements IRequest
 
 	/**
 	 * @param string $transId
-	 * @return PaymentStatusRequest
+	 * @return CapturePreauthRequest
 	 */
-	public function setTransId(string $transId): PaymentStatusRequest
+	public function setTransId(string $transId): self
 	{
 		$this->transId = $transId;
 		return $this;

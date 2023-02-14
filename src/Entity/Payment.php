@@ -2,157 +2,142 @@
 
 namespace Comgate\SDK\Entity;
 
-use Comgate\SDK\Entity\Codes\CurrencyCode;
+use Comgate\SDK\Exception\Logical\ParamIsNotSetException;
 
 class Payment
 {
-
-	/** @var Money */
-	protected $price;
-
-	/** @var string */
-	protected $currency = CurrencyCode::CZK;
-
-	/** @var string */
-	protected $label;
-
-	/** @var string */
-	protected $referenceId;
-
-	/** @var string */
-	protected $email;
-
-	/** @var string[] */
-	protected $allowedMethods = [];
-
-	/** @var string[] */
-	protected $excludedMethods = [];
-
-	/** @var bool */
-	protected $prepareOnly = true;
-
-	/** @var string|null */
-	protected $transactionId = null;
-
-	/** @var string|null */
-	protected $country = null;
-
-	/** @var string|null */
-	protected $account = null;
-
-	/** @var string|null */
-	protected $phone = null;
-
-	/** @var string|null */
-	protected $name = null;
-
-	/** @var string|null */
-	protected $lang = null;
-
-	/** @var bool|null */
-	protected $preauth = null;
-
-	/** @var bool|null */
-	protected $initRecurring = null;
-
-	/** @var bool|null */
-	protected $verification = null;
-
-	/** @var bool|null */
-	protected $embedded = null;
-
-	/** @var bool|null */
-	protected $eetReport = null;
-
-	/** @var mixed[]|null */
-	protected $eetData = [];
-
-	final private function __construct()
-	{
-	}
-
 	/**
-	 * @return static
+	 * Payment parameters.
+	 *
+	 * @var array
 	 */
-	public static function create(): self
-	{
-		return new static();
-	}
+	protected $params = [
+		'test' => false,
+		'prepareOnly' => true,
+		'initRecurring' => false,
+		'preauth' => false,
+		'verification' => false,
+		'embedded' => false,
+		'allowedMethods' => [],
+		'excludedMethods' => [],
+		'account' => '',
+		'name' => '',
+	];
 
-	public function withRedirect(): self
+	public function setParam($paramName, $value): self
 	{
-		$this->withPrepareOnly(true);
+		$this->params[$paramName] = $value;
 
 		return $this;
 	}
 
-	public function withIframe(): self
+	public function getParam($paramName): mixed
 	{
-		$this->withPrepareOnly(true);
-		$this->withEmbedded(true);
+		if (isset($this->params[$paramName])) {
+			return $this->params[$paramName];
+		}
+
+		throw new ParamIsNotSetException("Param {$paramName} is not set.");
+	}
+
+	public function getParams(): array
+	{
+		return $this->params;
+	}
+
+	public function setParams(array $params)
+	{
+		$this->params = $params;
+
+		return $this;
+	}
+
+	public function setRedirect(): self
+	{
+		$this->setPrepareOnly(true);
+
+		return $this;
+	}
+
+	public function setIframe(): self
+	{
+		$this->setPrepareOnly(true);
+		$this->setEmbedded(true);
 
 		return $this;
 	}
 
 	public function getPrice(): Money
 	{
-		return $this->price;
+		return $this->getParam('price');
 	}
 
 	/**
 	 * @param int|float|Money $price
 	 */
-	public function withPrice($price): self
+	public function setPrice($price): self
 	{
-		$this->price = Money::of($price);
+		$this->setParam('price', Money::of($price));
 
 		return $this;
 	}
 
 	public function getCurrency(): string
 	{
-		return $this->currency;
+		return $this->getParam('curr');
 	}
 
-	public function withCurrency(string $currency): self
+	public function setCurrency(string $currency): self
 	{
-		$this->currency = $currency;
+		$this->setParam('curr', $currency);
 
 		return $this;
 	}
 
 	public function getLabel(): string
 	{
-		return $this->label;
+		return $this->getParam('label');
 	}
 
-	public function withLabel(string $label): self
+	public function setLabel(string $label): self
 	{
-		$this->label = $label;
+		$this->setParam('label', $label);
 
 		return $this;
 	}
 
 	public function getReferenceId(): string
 	{
-		return $this->referenceId;
+		return $this->getParam('refId');
 	}
 
-	public function withReferenceId(string $referenceId): self
+	public function setReferenceId(string $referenceId): self
 	{
-		$this->referenceId = $referenceId;
+		$this->setParam('refId', $referenceId);
 
 		return $this;
 	}
 
 	public function getEmail(): string
 	{
-		return $this->email;
+		return $this->getParam('email');
 	}
 
-	public function withEmail(string $email): self
+	public function isTest(): bool
 	{
-		$this->email = $email;
+		return $this->getParam('test');
+	}
+
+	public function setTest(bool $test): self
+	{
+		$this->setParam('test', $test);
+
+		return $this;
+	}
+
+	public function setEmail(string $email): self
+	{
+		$this->setParam('email', $email);
 
 		return $this;
 	}
@@ -162,7 +147,7 @@ class Payment
 	 */
 	public function getAllowedMethods(): array
 	{
-		return $this->allowedMethods;
+		return $this->getParam('allowedMethods');
 	}
 
 	/**
@@ -170,183 +155,220 @@ class Payment
 	 */
 	public function getExcludedMethods(): array
 	{
-		return $this->excludedMethods;
+		return $this->getParam('excludedMethods');
 	}
 
-	public function withMethod(string $method): self
+	public function setMethods(array $methods): self
 	{
-		$this->allowedMethods[] = $method;
+		$this->params['allowedMethods'] = $methods;
 
 		return $this;
 	}
 
-	public function withoutMethod(string $method): self
+	public function addMethod(string $method): self
 	{
-		$this->excludedMethods[] = $method;
+		$this->params['allowedMethods'][] = $method;
+
+		return $this;
+	}
+
+	public function setoutMethod(string $method): self
+	{
+		$this->params['excludedMethods'][] = $method;
 
 		return $this;
 	}
 
 	public function getCountry(): ?string
 	{
-		return $this->country;
+		return $this->getParam('country');
 	}
 
-	public function withCountry(string $country): self
+	public function setCountry(string $country): self
 	{
-		$this->country = $country;
+		$this->setParam('country', $country);
 
 		return $this;
 	}
 
 	public function getAccount(): ?string
 	{
-		return $this->account;
+		return $this->getParam('account');
 	}
 
-	public function withAccount(string $account): self
+	public function setAccount(string $account): self
 	{
-		$this->account = $account;
-
-		return $this;
-	}
-
-	public function getPhone(): ?string
-	{
-		return $this->phone;
-	}
-
-	public function withPhone(string $phone): self
-	{
-		$this->phone = $phone;
+		$this->setParam('account', $account);
 
 		return $this;
 	}
 
 	public function getName(): ?string
 	{
-		return $this->name;
+		return $this->getParam('name');
 	}
 
-	public function withName(string $name): self
+	public function setName(string $name): self
 	{
-		$this->name = $name;
+		$this->setParam('name', $name);
 
 		return $this;
 	}
 
 	public function getLang(): ?string
 	{
-		return $this->lang;
+		return $this->getParam('lang');
 	}
 
-	public function withLang(string $lang): self
+	public function setLang(string $lang): self
 	{
-		$this->lang = $lang;
+		$this->setParam('lang', $lang);
 
 		return $this;
 	}
 
 	public function getTransactionId(): ?string
 	{
-		return $this->transactionId;
+		return $this->getParam('transactionId');
 	}
 
-	public function withTransactionId(string $transactionId): self
+	public function setTransactionId(string $transactionId): self
 	{
-		$this->transactionId = $transactionId;
+		$this->setParam('transactionId', $transactionId);
 
 		return $this;
 	}
 
 	public function isPrepareOnly(): bool
 	{
-		return $this->prepareOnly;
+		return $this->getParam('prepareOnly');
 	}
 
-	public function withPrepareOnly(bool $prepareOnly): self
+	public function setPrepareOnly(bool $prepareOnly): self
 	{
-		$this->prepareOnly = $prepareOnly;
+		$this->setParam('prepareOnly', $prepareOnly);
 
 		return $this;
 	}
 
 	public function isPreauth(): ?bool
 	{
-		return $this->preauth;
+		return $this->getParam('preauth');
 	}
 
-	public function withPreauth(bool $preauth): self
+	public function setPreauth(bool $preauth): self
 	{
-		$this->preauth = $preauth;
+		$this->setParam('preauth', $preauth);
 
 		return $this;
 	}
 
-	public function isInitRecurring(): ?bool
+	public function isInitRecurring(): bool
 	{
-		return $this->initRecurring;
+		return $this->getParam('initRecurring');
 	}
 
-	public function withInitRecurring(bool $initRecurring): self
+	public function setInitRecurring(bool $initRecurring): self
 	{
-		$this->initRecurring = $initRecurring;
+		$this->setParam('initRecurring', $initRecurring);
 
 		return $this;
 	}
 
-	public function isVerification(): ?bool
+	public function isVerification(): bool
 	{
-		return $this->verification;
+		return $this->getParam('verification');
 	}
 
-	public function withVerification(bool $verification): self
+	public function setVerification(bool $verification): self
 	{
-		$this->verification = $verification;
+		$this->setParam('verification', $verification);
 
 		return $this;
 	}
 
-	public function isEmbedded(): ?bool
+	public function isEmbedded(): bool
 	{
-		return $this->embedded;
+		return $this->getParam('embedded');
 	}
 
-	public function withEmbedded(bool $embedded): self
+	public function setEmbedded(bool $embedded): self
 	{
-		$this->embedded = $embedded;
-
-		return $this;
-	}
-
-	public function isEetReport(): ?bool
-	{
-		return $this->eetReport;
-	}
-
-	public function withEetReport(bool $eetReport): self
-	{
-		$this->eetReport = $eetReport;
+		$this->setParam('embedded', $embedded);
 
 		return $this;
 	}
 
 	/**
-	 * @return mixed[]
+	 * @return string|null
 	 */
-	public function getEetData(): ?array
+	public function getPayerId(): ?string
 	{
-		return $this->eetData;
+		return $this->getParam('payerId');
 	}
 
 	/**
-	 * @param mixed[] $eetData
+	 * @param string|null $payerId
+	 * @return Payment
 	 */
-	public function withEetData(array $eetData): self
+	public function setPayerId(?string $payerId): Payment
 	{
-		$this->eetData = $eetData;
-
+		$this->setParam('payerId', $payerId);
 		return $this;
 	}
 
+	/**
+	 * @return string|null
+	 */
+	public function getApplePayPayload(): ?string
+	{
+		return $this->getParam('applePayPayload');
+	}
+
+	/**
+	 * @param string|null $applePayPayload
+	 * @return Payment
+	 */
+	public function setApplePayPayload(?string $applePayPayload): Payment
+	{
+		$this->setParam('applePayPayload', $applePayPayload);
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getExpirationTime(): ?string
+	{
+		return $this->getParam('expirationTime');
+	}
+
+	/**
+	 * @param string|null $expirationTime
+	 * @return Payment
+	 */
+	public function setExpirationTime(?string $expirationTime): Payment
+	{
+		$this->setParam('expirationTime', $expirationTime);
+		return $this;
+	}
+
+
+	/**
+	 * @return string|null
+	 */
+	public function getInitRecurringId(): ?string
+	{
+		return $this->getParam('initRecurringId');
+	}
+
+	/**
+	 * @param string|null $initRecurringId
+	 * @return Payment
+	 */
+	public function setInitRecurringId(?string $initRecurringId): Payment
+	{
+		$this->setParam('initRecurringId', $initRecurringId);
+		return $this;
+	}
 }

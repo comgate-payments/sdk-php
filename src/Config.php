@@ -13,14 +13,10 @@ class Config
 	/** @var string */
 	private $secret;
 
-	/** @var bool */
-	private $test;
-
-	public function __construct(string $merchant, string $secret, bool $test = false)
+	public function __construct(string $merchant, string $secret)
 	{
 		$this->merchant = $merchant;
 		$this->secret = $secret;
-		$this->test = $test;
 	}
 
 	public function getMerchant(): string
@@ -31,11 +27,6 @@ class Config
 	public function getSecret(): string
 	{
 		return $this->secret;
-	}
-
-	public function isTest(): bool
-	{
-		return $this->test;
 	}
 
 }

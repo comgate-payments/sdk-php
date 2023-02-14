@@ -4,7 +4,7 @@ namespace Comgate\SDK\Entity\Request;
 
 use Comgate\SDK\Entity\Payment;
 
-class PaymentStatusRequest implements IRequest
+class PaymentCancelRequest implements IRequest
 {
 
 	/** @var string */
@@ -20,7 +20,7 @@ class PaymentStatusRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'status';
+		return 'cancel';
 	}
 
 	/**
@@ -43,9 +43,9 @@ class PaymentStatusRequest implements IRequest
 
 	/**
 	 * @param string $transId
-	 * @return PaymentStatusRequest
+	 * @return PaymentCancelRequest
 	 */
-	public function setTransId(string $transId): PaymentStatusRequest
+	public function setTransId(string $transId): PaymentCancelRequest
 	{
 		$this->transId = $transId;
 		return $this;
