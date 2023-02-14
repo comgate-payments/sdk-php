@@ -8,7 +8,5 @@ class Helpers
 	public static function redirect(string $url): void
 	{
 		header('Location: ' . $url);
-		die;
 	}
-
 }
