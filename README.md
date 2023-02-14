@@ -57,17 +57,11 @@ There is a prepared [example project](/example), where you can test (or play) wi
 ```php
 use Comgate\SDK\Comgate;
 
-// Production usage
 $client = Comgate::defaults()
-    ->withMerchant('123456') // get on portal.comgate.cz
-    ->withSecret('foobarbaz') // get on portal.comgate.cz
+    ->setMerchant('123456') // get on portal.comgate.cz
+    ->setSecret('foobarbaz') // get on portal.comgate.cz
     ->createClient();
 
-// For testing purpose
-$client = Comgate::testing()
-    ->withMerchant('123456') // get on portal.comgate.cz
-    ->withSecret('foobarbaz') // get on portal.comgate.cz
-    ->createClient();
 ```
 
 ### Create payment
@@ -81,18 +75,22 @@ use Comgate\SDK\Exception\Runtime\ComgateException;
 use Comgate\SDK\Utils\Helpers;
 
 $payment = Payment::create()
-    ->withRedirect()
-    //->withIframe()
+    ->setRedirect()
+    //->setIframe()
     // Price
-    ->withPrice(Money::ofInt(50)) // 50 CZK
-    ->withPrice(Money::ofFloat(50.25)) // 50,25 CZK
-    ->withPrice(Money::ofCents(5025)) // 50,25 CZK
+    ->setPrice(Money::ofInt(50)) // 50 CZK
+    ->setPrice(Money::ofFloat(50.25)) // 50,25 CZK
+    ->setPrice(Money::ofCents(5025)) // 50,25 CZK
     // -----
-    ->withCurrency(CurrencyCode::CZK)
-    ->withLabel('Test item')
-    ->withReferenceId('test001')
-    ->withEmail('foo@bar.tld')
-    ->withMethod(PaymentMethodCode::ALL);
+    ->setCurrency(CurrencyCode::CZK)
+    ->setTest(false)
+    ->setLabel('Test item')
+    // or ->setParam('label', 'Test item') // you can pass all params like this
+    ->setReferenceId('test001')
+    ->setEmail('foo@bar.tld')
+    ->setMethod(PaymentMethodCode::ALL);
+
+
 
 try {
     $res = $client->createPayment($payment);
@@ -128,6 +126,22 @@ $data = [
     'message' => 'Invalid payment method [fake]',
 ];
 ```
+
+### Get methods
+
+```php
+use Comgate\SDK\Exception\Runtime\ComgateException;
+
+try {
+    $methods = $client->getMethods();
+
+    assert($methods->isOk() === true);
+    var_dump($methods->getData());
+} catch (ComgateException $e) {
+    var_dump($e->getPrevious()->getMessage());
+}
+```
+
 
 ### Finish the order and show payment status to returning payer
  - Example PAID URL: https://your-eshop.tld/order-finish.php?id=${id}&refId=${refId}&status=PAID

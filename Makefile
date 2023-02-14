@@ -19,7 +19,10 @@ phpstan:
 	vendor/bin/phpstan analyse -l max -c phpstan.neon src
 
 tests:
-	vendor/bin/tester -s -p php --colors 1 -C tests/cases
+	vendor/bin/codecept run
+
+code-coverage:
+	vendor/bin/codecept run --coverage --coverage-xml --coverage-html
 
 tests-watch:
 	vendor/bin/tester -s -p php --colors 1 -C tests/cases -w src -w tests/cases

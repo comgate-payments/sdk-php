@@ -24,9 +24,6 @@ class Comgate
 	/** @var string */
 	private $secret;
 
-	/** @var bool */
-	private $test = false;
-
 	/** @var callable[] */
 	private $middlewares = [];
 
@@ -51,18 +48,7 @@ class Comgate
 	/**
 	 * @return static
 	 */
-	public static function testing(): self
-	{
-		$self = self::defaults();
-		$self->test = true;
-
-		return $self;
-	}
-
-	/**
-	 * @return static
-	 */
-	public function withUrl(string $url): self
+	public function setUrl(string $url): self
 	{
 		$this->url = $url;
 
@@ -72,7 +58,7 @@ class Comgate
 	/**
 	 * @return static
 	 */
-	public function withMerchant(string $merchant): self
+	public function setMerchant(string $merchant): self
 	{
 		$this->merchant = $merchant;
 
@@ -82,7 +68,7 @@ class Comgate
 	/**
 	 * @return static
 	 */
-	public function withSecret(string $secret): self
+	public function setSecret(string $secret): self
 	{
 		$this->secret = $secret;
 
@@ -92,17 +78,7 @@ class Comgate
 	/**
 	 * @return static
 	 */
-	public function withTest(bool $test = true): self
-	{
-		$this->test = $test;
-
-		return $this;
-	}
-
-	/**
-	 * @return static
-	 */
-	public function withMiddleware(callable $middleware): self
+	public function setMiddleware(callable $middleware): self
 	{
 		$this->middlewares[] = $middleware;
 
@@ -112,7 +88,7 @@ class Comgate
 	/**
 	 * @return static
 	 */
-	public function withLogger(LoggerInterface $logger): self
+	public function setLogger(LoggerInterface $logger): self
 	{
 		$this->logger = $logger;
 
@@ -126,7 +102,7 @@ class Comgate
 
 	protected function createConfig(): Config
 	{
-		return new Config($this->merchant, $this->secret, $this->test);
+		return new Config($this->merchant, $this->secret);
 	}
 
 	protected function createGuzzle(?callable $handler = null): ClientInterface

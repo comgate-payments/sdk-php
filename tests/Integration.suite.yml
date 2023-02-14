@@ -1,0 +1,6 @@
+actor: IntegrationTester
+suite_namespace: Tests\Integration
+modules:
+    enabled:
+        - Asserts
+        - Tests\Support\Helper\PaymentGenerator

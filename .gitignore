@@ -10,3 +10,6 @@
 /coverage.xml
 /coverage.html
 /.php-cs-fixer.cache
+/.env
+
+/sdk/tests-felix/

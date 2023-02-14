@@ -23,30 +23,6 @@ class Transport implements ITransport
 	}
 
 	/**
-	 * @param mixed[] $query
-	 * @param mixed[] $options
-	 */
-	public function get(string $uri, array $query, array $options = []): Response
-	{
-		$query = array_merge([
-			'merchant' => $this->config->getMerchant(),
-			'secret' => $this->config->getSecret(),
-			'test' => $this->config->isTest() ? 'true' : 'false',
-		], $query);
-
-		$options = array_merge($options, [
-			'query' => $query,
-		]);
-
-		try {
-			$res = $this->client->request('GET', $uri, $options);
-			return new Response($res);
-		} catch (GuzzleException $e) {
-			throw new ComgateException('Request failed', 0, $e);
-		}
-	}
-
-	/**
 	 * @param mixed[] $data
 	 * @param mixed[] $options
 	 */
@@ -55,7 +31,6 @@ class Transport implements ITransport
 		$data = array_merge([
 			'merchant' => $this->config->getMerchant(),
 			'secret' => $this->config->getSecret(),
-			'test' => $this->config->isTest() ? 'true' : 'false',
 		], $data);
 
 		$options = array_merge($options, [
