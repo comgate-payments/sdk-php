@@ -2,7 +2,9 @@
 
 namespace Comgate\SDK\Exception;
 
-class RuntimeException extends \RuntimeException
+use RuntimeException as RuntimeExceptionPHP;
+
+class RuntimeException extends RuntimeExceptionPHP
 {
 
 }
