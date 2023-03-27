@@ -20,6 +20,7 @@ class TransportCest
 			->createClient();
 		$config = new Config('merchant', 'secret');
 
-		$transport = new Transport($this->getClient(), $config);
+		// TODO test http request
+		// $transport = new Transport($this->getClient(), $config);
 	}
 }

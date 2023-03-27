@@ -46,6 +46,17 @@ class ClientCest
 		$I->assertNotEmpty($methodsResponse->getMethodsList(), 'Methods list should not be empty');
 	}
 
+	#[Group('methods')]
+    public function getMethodsFailTest(IntegrationTester $I)
+    {
+		$client = $this->getClient();
+		$config = $client->getTransport()->getConfig()->setMerchant(112233);
+
+		$I->expectThrowable(ApiException::class, function () use ($client){
+			$methodsResponse = $client->getMethods();
+		});
+	}
+
 	#[Group('status')]
 	#[Group('payment')]
 	#[DataProvider('getStatusScenarios')]

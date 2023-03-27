@@ -64,6 +64,7 @@ class Client
 	{
 		$methodsRequest = new MethodsRequest();
 		$methodsResponse = $this->transport->post($methodsRequest->getUrn(), $methodsRequest->toArray());
+
 		return new MethodsResponse($methodsResponse);
 	}
 
@@ -128,17 +129,35 @@ class Client
 		$singleTransferResponse = $this->transport->post($singleTransferRequest->getUrn(), $singleTransferRequest->toArray());
 		return new SingleTransferResponse($singleTransferResponse);
 	}
-	
+
 	public function csvSingleTransfer(string $transferId, bool $test){
 		$csvSingleTransferRequest = new CsvSingleTransferRequest($transferId, $test);
 		$csvSingleTransferResponse = $this->transport->post($csvSingleTransferRequest->getUrn(), $csvSingleTransferRequest->toArray());
 		return new CsvSingleTransferResponse($csvSingleTransferResponse);
 	}
-	
+
     public function aboSingleTransfer(string $transferId, bool $test, string $type, string $encoding){
 		$aboSingleTransferRequest = new AboSingleTransferRequest($transferId, $test, $type, $encoding);
 		$aboSingleTransferResponse = $this->transport->post($aboSingleTransferRequest->getUrn(), $aboSingleTransferRequest->toArray());
 		return new AboSingleTransferResponse($aboSingleTransferResponse);
+	}
+
+	/**
+	 * @return ITransport
+	 */
+	public function getTransport(): ITransport
+	{
+		return $this->transport;
+	}
+
+	/**
+	 * @param ITransport $transport
+	 * @return Client
+	 */
+	public function setTransport(ITransport $transport): Client
+	{
+		$this->transport = $transport;
+		return $this;
 	}
 }
 

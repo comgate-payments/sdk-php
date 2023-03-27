@@ -11,14 +11,14 @@ class Transport implements ITransport
 {
 
 	/** @var ClientInterface */
-	protected $client;
+	protected $httpClient;
 
 	/** @var Config */
 	protected $config;
 
-	public function __construct(ClientInterface $client, Config $config)
+	public function __construct(ClientInterface $httpClient, Config $config)
 	{
-		$this->client = $client;
+		$this->httpClient = $httpClient;
 		$this->config = $config;
 	}
 
@@ -38,11 +38,28 @@ class Transport implements ITransport
 		]);
 
 		try {
-			$res = $this->client->request('POST', $uri, $options);
+			$res = $this->httpClient->request('POST', $uri, $options);
 			return new Response($res);
 		} catch (GuzzleException $e) {
 			throw new ComgateException('Request failed', 0, $e);
 		}
 	}
 
+	/**
+	 * @return Config
+	 */
+	public function getConfig(): Config
+	{
+		return $this->config;
+	}
+
+	/**
+	 * @param Config $config
+	 * @return Transport
+	 */
+	public function setConfig(Config $config): Transport
+	{
+		$this->config = $config;
+		return $this;
+	}
 }

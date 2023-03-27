@@ -22,13 +22,6 @@ To install latest version of `comgate/sdk` use [Composer](https://getcomposer.or
 ```bash
 composer require comgate/sdk
 ```
-
-| State  | Version     | Branch   | PHP     |
-|--------|-------------|----------|---------|
-| dev    | `^0.2.0`    | `master` | `>=7.2` |
-| stable | `^0.1.0`    | `master` | `>=7.2` |
-
-
 ### Documentation
 
 - https://help.comgate.cz/docs/protocol-api-en (english version)
