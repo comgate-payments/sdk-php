@@ -29,4 +29,23 @@ class Config
 		return $this->secret;
 	}
 
+	/**
+	 * @param string $merchant
+	 * @return Config
+	 */
+	public function setMerchant(string $merchant): Config
+	{
+		$this->merchant = $merchant;
+		return $this;
+	}
+
+	/**
+	 * @param string $secret
+	 * @return Config
+	 */
+	public function setSecret(string $secret): Config
+	{
+		$this->secret = $secret;
+		return $this;
+	}
 }

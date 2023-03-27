@@ -8,6 +8,9 @@ use Tests\Support\UnitTester;
 
 class HelpersCest
 {
+	/**
+	 * Tests redirect by setting location header
+	 */
 	#[Group('helpers')]
 	public function testRedirectHelper(UnitTester $I){
 		ob_start();

@@ -3,6 +3,7 @@
 namespace Comgate\SDK\Entity\Response;
 
 use Comgate\SDK\Entity\Method;
+use Comgate\SDK\Exception\ApiException;
 use Comgate\SDK\Http\Response;
 
 class MethodsResponse
@@ -15,10 +16,19 @@ class MethodsResponse
 		$methodsJson = $methodsResponse->getContent();
 		$methodsArray = json_decode($methodsJson, true);
 
-		foreach ($methodsArray['methods'] as $methodData) {
-			$method = (new Method())->fromArray($methodData);
+		if (isset($methodsArray['methods'])) {
+			foreach ($methodsArray['methods'] as $methodData) {
+				$method = (new Method())->fromArray($methodData);
 
-			$this->methodsList[] = $method;
+				$this->methodsList[] = $method;
+			}
+		}
+
+		if (isset($methodsArray['error'])) {
+			$code = (int)$methodsArray['error']['code'];
+			$message = $methodsArray['error']['message'];
+
+			throw new ApiException($message, $code);
 		}
 	}
 
