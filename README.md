@@ -20,7 +20,7 @@
 To install latest version of `comgate/sdk` use [Composer](https://getcomposer.org).
 
 ```bash
-composer require comgate/sdk
+composer require comgate/sdk:"dev-master"
 ```
 ### Documentation
 
@@ -34,16 +34,12 @@ composer require comgate/sdk
 3. Allow your eshop server IPv4 address at [portal.comgate.cz](https://portal.comgate.cz).
 4. Set PAID, CANCELLED, PENDING and STATUS URL at  [portal.comgate.cz](https://portal.comgate.cz).
 
-### Example
-
-There is a prepared [example project](/example), where you can test (or play) with ComGate Payments.
-
 ## Usage
 
 - [Setup client](#setup-client)
 - [Create payment](#create-payment)
-- [Check payment status](#check-payment-status)
-- [Handle notification](#handle-notification)
+- [Check payment status](#finish-the-order-and-show-payment-status-to-returning-payer)
+- [Handle notification](#receive-payment-notification-server-to-server)
 
 ### Setup client
 
@@ -64,74 +60,73 @@ use Comgate\SDK\Entity\Codes\CurrencyCode;
 use Comgate\SDK\Entity\Codes\PaymentMethodCode;
 use Comgate\SDK\Entity\Money;
 use Comgate\SDK\Entity\Payment;
-use Comgate\SDK\Exception\Runtime\ComgateException;
 use Comgate\SDK\Utils\Helpers;
+use Comgate\SDK\Entity\Codes\RequestCode;
+use Comgate\SDK\Exception\ApiException;
 
-$payment = Payment::create()
-    ->setRedirect()
-    //->setIframe()
-    // Price
+$payment = new Payment();
+$payment
     ->setPrice(Money::ofInt(50)) // 50 CZK
     ->setPrice(Money::ofFloat(50.25)) // 50,25 CZK
     ->setPrice(Money::ofCents(5025)) // 50,25 CZK
     // -----
     ->setCurrency(CurrencyCode::CZK)
-    ->setTest(false)
     ->setLabel('Test item')
     // or ->setParam('label', 'Test item') // you can pass all params like this
     ->setReferenceId('test001')
     ->setEmail('foo@bar.tld')
-    ->setMethod(PaymentMethodCode::ALL);
-
+    ->addMethod(PaymentMethodCode::ALL)
+    //->setRedirect()
+    //->setIframe()
+    ->setTest(false);
 
 
 try {
-    $res = $client->createPayment($payment);
-
-    assert($res->isOk() === true);
-    var_dump($res->getData());
-
-    // Redirect the payer to ComGate payment gateway (use proper method of your framework)
-    Helpers::redirect($res->getField('redirect'));
-} catch (ComgateException $e) {
-    var_dump($e->getPrevious()->getMessage());
+    $createPaymentResponse = $client->createPayment($payment);
+    if ($createPaymentResponse->getCode() === RequestCode::OK) {
+        // Redirect the payer to ComGate payment gateway (use proper method of your framework)
+        Helpers::redirect($createPaymentResponse->getRedirect());
+    } else {
+        var_dump($createPaymentResponse->getMessage());
+    }
+} catch (ApiException $e) {
+    var_dump($e->getMessage());
 }
 ```
 
 Example of successfull response for `$client->createPayment`.
 
 ```php
-$data = $res->getData();
-$data = [
-    'code' => '0',
-    'message' => 'OK',
-    'transId' => 'XXXX-YYYY-ZZZZ',
-    'redirect' => 'https://payments.comgate.cz/client/instructions/index?id=XXXX-YYYY-ZZZZ',
-];
+$transactionId = $createPaymentResponse->getTransId(); // XXXX-YYYY-ZZZZ
+$code = $createPaymentResponse->getCode(); // 0
+$message = $createPaymentResponse->getMessage(); // OK
+$redirect = $createPaymentResponse->getRedirect(); // https://payments.comgate.cz/client/instructions/index?id=XXXX-YYYY-ZZZZ
 ```
 
 Example of error response for `$client->createPayment`.
 
 ```php
-$data = $res->getData();
-$data = [
-    'code' => '1109',
-    'message' => 'Invalid payment method [fake]',
-];
+$code = $e->getCode(); // 1109
+$message = $e->getMessage(); // Invalid payment method [fake]
 ```
 
 ### Get methods
 
 ```php
-use Comgate\SDK\Exception\Runtime\ComgateException;
+use Comgate\SDK\Exception\ApiException;
 
 try {
-    $methods = $client->getMethods();
-
-    assert($methods->isOk() === true);
-    var_dump($methods->getData());
-} catch (ComgateException $e) {
-    var_dump($e->getPrevious()->getMessage());
+    $methodsResponse = $client->getMethods();
+    foreach ($methodsResponse->getMethodsList() as $method) {
+        var_dump([
+            $method->getId(),
+            $method->getName(),
+            $method->getDescription(),
+            $method->getLogo(),
+        ]);
+    }
+} catch (ApiException $e) {
+    var_dump($e->getMessage());
 }
 ```
 
@@ -145,20 +140,14 @@ try {
 use Comgate\SDK\Entity\Payment;
 use Comgate\SDK\Entity\PaymentNotification;
 use Comgate\SDK\Entity\Codes\PaymentStatusCode;
-use Comgate\SDK\Exception\Runtime\ComgateException;
 
 $transactionId = $_GET['id']; // XXXX-YYYY-ZZZZ
 $refId = $_GET['refId']; // your order number
 
-// Create payment with transaction ID and check status
-$payment = Payment::create()
-    ->withTransactionId($transactionId);
-
 try {
-    $res = $client->getStatus($payment);
-    $data = $res->getData();
+    $paymentStatusResponse = $client->getStatus($transactionId);
 
-    switch ($data['status']){
+    switch ($paymentStatusResponse->getStatus()){
         case PaymentStatusCode::PAID:
             // Your code (set order as paid)
             echo "Your payment was PAID successfully.";
@@ -179,11 +168,8 @@ try {
             echo "Payment was authorized successfully.";
             break;
     }
-
-    echo "OK"; // important response with HTTP code 200
-
-} catch (ComgateException $e) {
-    var_dump($e->getPrevious()->getMessage());
+} catch (ApiException $e) {
+    var_dump($e->getMessage());
 }
 ```
 
@@ -192,9 +178,7 @@ Example URL: https://your-eshop.tld/notify.php
 
 ```php
 use Comgate\SDK\Entity\Payment;
-use Comgate\SDK\Entity\PaymentNotification;
 use Comgate\SDK\Entity\Codes\PaymentStatusCode;
-use Comgate\SDK\Exception\Runtime\ComgateException;
 
 // Create from $_POST global variable
 // $notification = PaymentNotification::createFromGlobals();
@@ -202,16 +186,13 @@ use Comgate\SDK\Exception\Runtime\ComgateException;
 // Create from your framework
 $data = $framework->getHttpRequest()->getPostData();
 $notification = PaymentNotification::createFrom($data);
-
-// Create payment with transaction ID and check status
-$payment = Payment::create()
-    ->withTransactionId($notification->getTransactionId());
+$transactionId = $notification->getTransactionId();
 
 try {
-    $res = $client->getStatus($payment);
-    $data = $res->getData();
+    // it's important to check the status from API
+    $paymentStatusResponse = $client->getStatus($transactionId);
 
-    switch ($data['status']){
+    switch ($paymentStatusResponse->getStatus()){
         case PaymentStatusCode::PAID:
             // Your code (set order as paid)
             break;
@@ -229,38 +210,33 @@ try {
 
     echo "OK"; // important response with HTTP code 200
 
-} catch (ComgateException $e) {
-    var_dump($e->getPrevious()->getMessage());
+} catch (ApiException $e) {
+    var_dump($e->getMessage());
 }
 ```
 
-Example of successfull response for `$client->getStatus`.
-
+### Create a refund
 ```php
-$data = $res->getData();
-$data = [
-    'code' => '0',
-    'message' => 'OK',
-    'merchant' => '123456',
-    'test' => 'true',
-    'price' => '500',
-    'curr' => 'CZK',
-    'label' => 'Test item',
-    'refId' => 'test001',
-    'method' => 'CARD_CZ_BS',
-    'email' => 'dev@comgate.cz',
-    'name' => '',
-    'transId' => 'XXXX-YYYY-ZZZZ',
-    'secret' => 'foobarbaz',
-    'status' => 'PAID',
-    'fee' => 'unknown',
-    'vs' => '123456789',
-    'payer_acc' => '',
-    'payerAcc' => '',
-    'payer_name' => '',
-    'payerName' => '',
-];
+use Comgate\SDK\Entity\Refund;
+use Comgate\SDK\Exception\ApiException;
+use Comgate\SDK\Entity\Money;
+use Comgate\SDK\Entity\Codes\RequestCode;
+
+$refund = new Refund();
+$refund->setTransId('XXXX-YYYY-ZZZZ')
+    ->setAmount(Money::ofCents(100))
+    ->setRefId('11bb22');
+
+try{
+    $refundResult = $client->refundPayment($refund);
+    if($refundResult->getCode() == RequestCode::OK) {
+        // refund created successfully
+    }
+} catch (ApiException $e){
+    var_dump($e->getMessage());
+}
 ```
+
 
 ### Debugging
 
@@ -273,38 +249,13 @@ use Comgate\SDK\Comgate;
 use Comgate\SDK\Logging\FileLogger;
 use Comgate\SDK\Logging\StdoutLogger;
 
+
 $client = Comgate::defaults()
-    ->withLogger(new FileLogger(__DIR__ . '/comgate.log'))
-    // ->withLogger(new StdoutLogger())
+    ->setLogger(new FileLogger(__DIR__ . '/comgate.log'))
     ->createClient();
 ```
 
 Take a look at [our tests](https://github.com/comgate-payments/sdk-php/blob/master/tests/fixtures) to see the logger format.
-
-#### Custom middleware
-
-> We are using Guzzle under the hood. Take a look at [documentation](https://docs.guzzlephp.org/en/stable/handlers-and-middleware.html).
-
-```php
-use Comgate\SDK\Comgate;
-use Psr\Http\Message\RequestInterface;
-
-$client = Comgate::defaults()
-    ->withMiddleware(
-        function (callable $handler) {
-            return function (RequestInterface $request, array $options) use ($handler) {
-                // Your code
-
-                $ret = $handler($request, $options);
-
-                // Your code
-
-                return $ret;
-            };
-        }
-    )
-    ->createClient();
-```
 
 ## Maintenance
 

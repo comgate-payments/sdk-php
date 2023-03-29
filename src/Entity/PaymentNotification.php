@@ -35,6 +35,15 @@ class PaymentNotification
 	/** @var string|null */
 	protected $fee;
 
+	/** @var string|null */
+	protected $vs;
+
+	/** @var string|null */
+	protected $method;
+
+	/** @var string|null */
+	protected $secret;
+
 	final private function __construct()
 	{
 	}
@@ -72,6 +81,9 @@ class PaymentNotification
 		$self->transactionId = $data['transId'] ?? null;
 		$self->status = $data['status'] ?? null;
 		$self->fee = $data['fee'] ?? null;
+		$self->vs = $data['vs'] ?? null;
+		$self->method = $data['method'] ?? null;
+		$self->secret = $data['secret'] ?? null;
 
 		return $self;
 	}
@@ -126,4 +138,53 @@ class PaymentNotification
 		return $this->fee;
 	}
 
+	/**
+	 * @return string|null
+	 */
+	public function getVs(): ?string
+	{
+		return $this->vs;
+	}
+
+	/**
+	 * @param string|null $vs
+	 */
+	public function setVs(?string $vs): void
+	{
+		$this->vs = $vs;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getMethod(): ?string
+	{
+		return $this->method;
+	}
+
+	/**
+	 * @param string|null $method
+	 */
+	public function setMethod(?string $method): void
+	{
+		$this->method = $method;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getSecret(): ?string
+	{
+		return $this->secret;
+	}
+
+	/**
+	 * @param string|null $secret
+	 * @return PaymentNotification
+	 */
+	public function setSecret(?string $secret): PaymentNotification
+	{
+		$this->secret = $secret;
+		return $this;
+	}
 }
