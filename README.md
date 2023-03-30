@@ -20,7 +20,7 @@
 To install latest version of `comgate/sdk` use [Composer](https://getcomposer.org).
 
 ```bash
-composer require comgate/sdk:"dev-master"
+composer require comgate/sdk
 ```
 ### Documentation
 

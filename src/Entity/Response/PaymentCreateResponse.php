@@ -18,10 +18,6 @@ class PaymentCreateResponse
 
 	protected string $redirect = '';
 
-	protected string $applepay = '';
-
-	protected string $applepayMessage = '';
-
 	public function __construct(Response $paymentsCreateResponse)
 	{
 		$parsedResponse = Query::parse($paymentsCreateResponse->getContent());
@@ -35,14 +31,6 @@ class PaymentCreateResponse
 					->setMessage($message)
 					->setTransId($parsedResponse['transId'])
 					->setRedirect($parsedResponse['redirect']);
-
-				if(isset($parsedResponse['applepay'])){
-					$this->setApplepay($parsedResponse['applepay']);
-				}
-
-				if(isset($parsedResponse['applepayMessage'])){
-					$this->setApplepayMessage($parsedResponse['applepayMessage']);
-				}
 
 				break;
 
@@ -65,8 +53,6 @@ class PaymentCreateResponse
 			'message' => $this->getMessage(),
 			'transId' => $this->getTransId(),
 			'redirect' => $this->getRedirect(),
-			'applepay' => $this->getApplepay(),
-			'applepayMessage' => $this->getApplepayMessage(),
 		];
 	}
 
@@ -139,42 +125,6 @@ class PaymentCreateResponse
 	public function setRedirect(string $redirect): PaymentCreateResponse
 	{
 		$this->redirect = $redirect;
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getApplepay(): string
-	{
-		return $this->applepay;
-	}
-
-	/**
-	 * @param string $applepay
-	 * @return PaymentCreateResponse
-	 */
-	public function setApplepay(string $applepay): PaymentCreateResponse
-	{
-		$this->applepay = $applepay;
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getApplepayMessage(): string
-	{
-		return $this->applepayMessage;
-	}
-
-	/**
-	 * @param string $applepayMessage
-	 * @return PaymentCreateResponse
-	 */
-	public function setApplepayMessage(string $applepayMessage): PaymentCreateResponse
-	{
-		$this->applepayMessage = $applepayMessage;
 		return $this;
 	}
 }
