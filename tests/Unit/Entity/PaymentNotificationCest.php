@@ -27,7 +27,7 @@ class PaymentNotificationCest
 
 		$notification = PaymentNotification::createFrom($data);
 		$I->assertEquals($data['merchant'], $notification->getMerchant());
-		$I->assertEquals($data['test'], $notification->isTest());
+		$I->assertEquals($data['test'] === 'true' ? true : false, $notification->isTest());
 		$I->assertEquals($data['curr'], $notification->getCurrency());
 		$I->assertEquals($data['label'], $notification->getLabel());
 		$I->assertEquals($data['refId'], $notification->getReferenceId());
