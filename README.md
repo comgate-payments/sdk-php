@@ -177,8 +177,9 @@ try {
 Example URL: https://your-eshop.tld/notify.php
 
 ```php
-use Comgate\SDK\Entity\Payment;
+use Comgate\SDK\Entity\PaymentNotification;
 use Comgate\SDK\Entity\Codes\PaymentStatusCode;
+use Comgate\SDK\Exception\ApiException;
 
 // Create from $_POST global variable
 // $notification = PaymentNotification::createFromGlobals();
