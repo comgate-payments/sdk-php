@@ -32,15 +32,11 @@ final class PaymentMethodCode
 	public const BANK_UNICREDIT_BUTTON = 'BANK_CZ_UC';
 
 	// SK
-	public const BANK_PRIMA_SK_TRANSFER = 'BANK_SK_DEXIA';
-	public const BANK_FIO_SK_TRANSFER = 'BANK_SK_FB';
 	public const BANK_OTHER_SK_TRANSFER = 'BANK_SK_OTHER';
-
-	public const BANK_SLOVENSKASPORITELNA_SK_BUTTON = 'BANK_SK_SP';
 	public const BANK_VUB_SK_BUTTON = 'BANK_SK_VUB';
 	public const BANK_TATRA_SK_BUTTON = 'BANK_SK_TB';
 	public const BANK_CSOB_SK_BUTTON = 'BANK_SK_CSOB';
-	public const BANK_POSTOVNA_SK_BUTTON = 'BANK_SK_PB';
+	public const BANK_SLOVENSKASPORITELNA_SK_BUTTON = 'BANK_SK_SLSP';
 
 	// TODO doplnit další banky
 
@@ -50,7 +46,6 @@ final class PaymentMethodCode
 		self::ALL_BANKS,
 		self::BANK_AIRBANK_TRANSFER,
 		self::BANK_CSOB_TRANSFER,
-		self::BANK_EQUA_TRANSFER,
 		self::BANK_OTHER_TRANSFER,
 		self::BANK_RB_BUTTON,
 		self::BANK_KB_BUTTON,
@@ -59,16 +54,12 @@ final class PaymentMethodCode
 		self::BANK_CESKASPORITELNA_BUTTON,
 		self::BANK_MBANK_BUTTON,
 		self::BANK_CSOB_BUTTON,
-		self::BANK_ERA_BUTTON,
 		self::BANK_UNICREDIT_BUTTON,
-		self::BANK_PRIMA_SK_TRANSFER,
-		self::BANK_FIO_SK_TRANSFER,
 		self::BANK_OTHER_SK_TRANSFER,
 		self::BANK_SLOVENSKASPORITELNA_SK_BUTTON,
 		self::BANK_VUB_SK_BUTTON,
 		self::BANK_TATRA_SK_BUTTON,
 		self::BANK_CSOB_SK_BUTTON,
-		self::BANK_POSTOVNA_SK_BUTTON,
 	];
 
 }

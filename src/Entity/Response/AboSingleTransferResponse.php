@@ -7,6 +7,10 @@ use Comgate\SDK\Http\Response;
 
 class AboSingleTransferResponse extends FileResponse
 {
+	/**
+	 * @param Response $aboSingleTransferResponse
+	 * @throws ApiException
+	 */
 	public function __construct(Response $aboSingleTransferResponse)
 	{
 		$aboJson = $aboSingleTransferResponse->getContent();
@@ -17,6 +21,6 @@ class AboSingleTransferResponse extends FileResponse
 		}
 
 		$this->setFilename($aboData['nazev'])
-			->setFileContent(base64_decode($aboData['abo']));
+			->setFileContent(base64_decode($aboData['abo'], true));
 	}
 }

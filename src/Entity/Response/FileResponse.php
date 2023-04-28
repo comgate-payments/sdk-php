@@ -10,9 +10,14 @@ class FileResponse
 
 	protected string $fileContent;
 
+    /**
+     * @param $directory
+     * @param $fileName
+     * @return void
+     */
 	public function saveToFile($directory, $fileName = '')
 	{
-		if (empty($fileName)) {
+		if (strlen($fileName) === 0) {
 			$fileName = $this->getFilename();
 		}
 

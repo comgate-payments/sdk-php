@@ -29,6 +29,10 @@ class PaymentStatusResponse
 	protected string $payerName;
 	protected string $fee;
 
+	/**
+	 * @param Response $paymentStatusResponse
+	 * @return PaymentStatusResponse
+	 */
 	public function __construct(Response $paymentStatusResponse)
 	{
 		$parsedResponse = Query::parse($paymentStatusResponse->getContent());

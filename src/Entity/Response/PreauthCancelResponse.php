@@ -15,6 +15,12 @@ class PreauthCancelResponse
 
 	protected string $message;
 
+	/**
+	 * @param Response $cancelPreauthResponse
+	 * @throws ApiException
+	 * @throws MissingParamException
+	 * @throws PreauthException
+	 */
 	public function __construct(Response $cancelPreauthResponse)
 	{
 		$parsedResponse = Query::parse($cancelPreauthResponse->getContent());
@@ -31,18 +37,13 @@ class PreauthCancelResponse
 
 			case 1400:
 				throw new MissingParamException($message, $code);
-				break;
 
 			case 1401:
 				throw new PreauthException($message, $code);
-				break;
 
 			default:
 				throw new ApiException($message, $code);
-				break;
 		}
-
-		return $this;
 	}
 
 	/**

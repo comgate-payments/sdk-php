@@ -6,11 +6,13 @@ use DateTimeInterface;
 
 class TransferListRequest implements IRequest
 {
-	const DATE_FORMAT = 'Y-m-d'; 
-	
-	/** @var string */
+	const DATE_FORMAT = 'Y-m-d';
+
+	/**
+	 * @var DateTimeInterface 
+	 */
 	protected DateTimeInterface $date;
-	
+
 	protected bool $test;
 
 	public function __construct(DateTimeInterface $date, bool $test = false)

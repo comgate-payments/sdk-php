@@ -45,7 +45,7 @@ class PreauthCancelRequest implements IRequest
 
 	/**
 	 * @param string $transId
-	 * @return CapturePreauthRequest
+	 * @return PreauthCancelRequest
 	 */
 	public function setTransId(string $transId): self
 	{

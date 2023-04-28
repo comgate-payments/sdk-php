@@ -10,14 +10,22 @@ class Response
 	/** @var mixed[] */
 	protected $parsed;
 
-	/** @var mixed[] */
+	/** @var mixed */
 	protected $content;
+
+	/**
+	 * @var ResponseInterface
+	 */
+	protected $origin;
 
 	public function __construct(ResponseInterface $origin)
 	{
 		$this->origin = $origin;
 	}
 
+	/**
+	 * @return mixed|string
+	 */
 	public function getContent()
 	{
 		if ($this->content === null) {

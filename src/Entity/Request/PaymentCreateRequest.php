@@ -37,7 +37,7 @@ class PaymentCreateRequest implements IRequest
 		$output['method'] = implode('+', $this->payment->getAllowedMethods());
 		unset($output['allowedMethods']);
 
-		if (!empty($this->payment->getExcludedMethods())) {
+		if (count($this->payment->getExcludedMethods()) > 0) {
 			$output['method'] = ltrim($output['method'] . '-' . implode('-', $this->payment->getExcludedMethods()), '-');
 		}
 		unset($output['excludedMethods']);

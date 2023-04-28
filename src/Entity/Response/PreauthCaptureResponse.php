@@ -15,6 +15,12 @@ class PreauthCaptureResponse
 
 	protected string $message;
 
+	/**
+	 * @param Response $capturePreauthResponse
+	 * @throws ApiException
+	 * @throws MissingParamException
+	 * @throws PreauthException
+	 */
 	public function __construct(Response $capturePreauthResponse)
 	{
 		$parsedResponse = Query::parse($capturePreauthResponse->getContent());
@@ -31,18 +37,13 @@ class PreauthCaptureResponse
 
 			case 1400:
 				throw new MissingParamException($message, $code);
-				break;
 
 			case 1401:
 				throw new PreauthException($message, $code);
-				break;
 
 			default:
 				throw new ApiException($message, $code);
-				break;
 		}
-
-		return $this;
 	}
 
 	public function toArray()
