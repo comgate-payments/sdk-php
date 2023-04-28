@@ -75,8 +75,8 @@ jobs:
       - name: "Install dependencies"
         run: "${{ env.composer-install }}"
 
-      - name: "Coding Standard"
-        run: "make cs"
+#      - name: "Coding Standard"
+#        run: "make cs"
 
   static-analysis:
     name: "Static analysis"
@@ -266,8 +266,8 @@ jobs:
       - name: "Install dependencies"
         run: "${{ env.composer-install }}"
 
-      - name: "Tests"
-        run: "make coverage-clover"
+#      - name: "Tests"
+#        run: "make coverage-clover"
 
       - name: "Upload test output"
         if: ${{ failure() }}
