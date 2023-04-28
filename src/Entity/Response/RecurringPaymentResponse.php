@@ -16,6 +16,11 @@ class RecurringPaymentResponse
 
 	protected string $transId;
 
+	/**
+	 * @param Response $recurringPaymentResponse
+	 * @throws ApiException
+	 * @throws MissingParamException
+	 */
 	public function __construct(Response $recurringPaymentResponse)
 	{
 		$parsedResponse = Query::parse($recurringPaymentResponse->getContent());
@@ -33,14 +38,10 @@ class RecurringPaymentResponse
 
 			case 1400:
 				throw new MissingParamException($message, $code);
-				break;
 
 			default:
 				throw new ApiException($message, $code);
-				break;
 		}
-
-		return $this;
 	}
 
 	public function toArray()
@@ -62,7 +63,7 @@ class RecurringPaymentResponse
 
 	/**
 	 * @param int $code
-	 * @return PreauthCaptureResponse
+	 * @return RecurringPaymentResponse
 	 */
 	public function setCode(int $code): self
 	{
@@ -80,7 +81,7 @@ class RecurringPaymentResponse
 
 	/**
 	 * @param string $message
-	 * @return PreauthCaptureResponse
+	 * @return RecurringPaymentResponse
 	 */
 	public function setMessage(string $message): self
 	{

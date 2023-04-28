@@ -7,6 +7,11 @@ use Comgate\SDK\Http\Response;
 
 class CsvSingleTransferResponse extends FileResponse
 {
+	/**
+	 * @param Response $csvSingleTransferResponse
+	 * @throws ApiException
+	 * @return CsvSingleTransferResponse
+	 */
 	public function __construct(Response $csvSingleTransferResponse)
 	{
 		$csvJson = $csvSingleTransferResponse->getContent();
@@ -17,6 +22,6 @@ class CsvSingleTransferResponse extends FileResponse
 		}
 
 		$this->setFilename($csvData['nazev'])
-			->setFileContent(base64_decode($csvData['csv']));
+			->setFileContent(base64_decode($csvData['csv'], true));
 	}
 }

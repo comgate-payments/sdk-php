@@ -15,6 +15,10 @@ class SimulationResponse
 
 	protected string $message;
 
+	/**
+	 * @param Response $simulationResponse
+	 * @throws ApiException
+	 */
 	public function __construct(Response $simulationResponse)
 	{
 		$parsedResponse = Query::parse($simulationResponse->getContent());
@@ -31,10 +35,7 @@ class SimulationResponse
 
 			default:
 				throw new ApiException($message, $code);
-				break;
 		}
-
-		return $this;
 	}
 
 	public function toArray()

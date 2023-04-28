@@ -8,7 +8,9 @@ use Comgate\SDK\Entity\Refund;
 class PaymentRefundRequest implements IRequest
 {
 
-	/** @var $refund */
+	/**
+	 * @var Refund 
+	 */
 	private Refund $refund;
 
 	public function __construct(Refund $refund)

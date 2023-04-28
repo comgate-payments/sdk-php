@@ -18,6 +18,11 @@ class PaymentCreateResponse
 
 	protected string $redirect = '';
 
+	/**
+	 * @param Response $paymentsCreateResponse
+	 * @throws ApiException
+	 * @throws MissingParamException
+	 */
 	public function __construct(Response $paymentsCreateResponse)
 	{
 		$parsedResponse = Query::parse($paymentsCreateResponse->getContent());
@@ -36,14 +41,10 @@ class PaymentCreateResponse
 
 			case 1400:
 				throw new MissingParamException($message, $code);
-				break;
 
 			default:
 				throw new ApiException($message, $code);
-				break;
 		}
-
-		return $this;
 	}
 
 	public function toArray()

@@ -49,7 +49,7 @@ class PreauthCaptureRequest implements IRequest
 
 	/**
 	 * @param string $transId
-	 * @return CapturePreauthRequest
+	 * @return PreauthCaptureRequest
 	 */
 	public function setTransId(string $transId): self
 	{
@@ -67,7 +67,7 @@ class PreauthCaptureRequest implements IRequest
 
 	/**
 	 * @param Money $amount
-	 * @return CapturePreauthRequest
+	 * @return PreauthCaptureRequest
 	 */
 	public function setAmount(Money $amount): self
 	{

@@ -12,6 +12,9 @@ class TransferListResponse
 {
 	protected array $transferList = [];
 
+	/**
+	 * @param Response $transferListResponse
+	 */
 	public function __construct(Response $transferListResponse)
 	{
 		$transferListJson = $transferListResponse->getContent();
@@ -21,8 +24,6 @@ class TransferListResponse
 			$transfer = (new Transfer())->fromArray($transferData);
 			$this->addTransfer($transfer);
 		}
-
-		return $this;
 	}
 
 	/**

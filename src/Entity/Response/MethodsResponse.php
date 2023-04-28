@@ -11,6 +11,11 @@ class MethodsResponse
 
 	private array $methodsList = [];
 
+	/**
+	 * @param Response $methodsResponse
+	 * @throws ApiException
+	 * @return MethodsResponse
+	 */
 	public function __construct(Response $methodsResponse)
 	{
 		$methodsJson = $methodsResponse->getContent();

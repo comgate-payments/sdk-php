@@ -14,6 +14,11 @@ class PaymentCancelResponse
 
 	protected string $message;
 
+	/**
+	 * @param Response $cancelPreauthResponse
+	 * @throws ApiException
+	 * @throws MissingParamException
+	 */
 	public function __construct(Response $cancelPreauthResponse)
 	{
 		$parsedResponse = Query::parse($cancelPreauthResponse->getContent());
@@ -30,14 +35,10 @@ class PaymentCancelResponse
 
 			case 1400:
 				throw new MissingParamException($message, $code);
-				break;
 
 			default:
 				throw new ApiException($message, $code);
-				break;
 		}
-
-		return $this;
 	}
 
 	public function toArray()
@@ -58,7 +59,7 @@ class PaymentCancelResponse
 
 	/**
 	 * @param int $code
-	 * @return PaymentCreateResponse
+	 * @return PaymentCancelResponse
 	 */
 	public function setCode(int $code): self
 	{
@@ -76,7 +77,7 @@ class PaymentCancelResponse
 
 	/**
 	 * @param string $message
-	 * @return PaymentCreateResponse
+	 * @return PaymentCancelResponse
 	 */
 	public function setMessage(string $message): self
 	{

@@ -13,6 +13,9 @@ class SingleTransferResponse
 {
 	protected array $paymentsList = [];
 
+	/**
+	 * @param Response $singleTransferResponse
+	 */
 	public function __construct(Response $singleTransferResponse)
 	{
 		$paymentsListJson = $singleTransferResponse->getContent();
@@ -23,8 +26,6 @@ class SingleTransferResponse
 			$paymentInfo = (new PaymentInfo())->fromArray($paymentData);
 			$this->addPaymentInfo($paymentInfo);
 		}
-
-		return $this;
 	}
 
 	/**

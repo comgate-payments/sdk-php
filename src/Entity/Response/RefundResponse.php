@@ -15,6 +15,11 @@ class RefundResponse
 
 	protected string $message;
 
+	/**
+	 * @param Response $refundResponse
+	 * @throws ApiException
+	 * @throws MissingParamException
+	 */
 	public function __construct(Response $refundResponse)
 	{
 		$parsedResponse = Query::parse($refundResponse->getContent());
@@ -31,14 +36,10 @@ class RefundResponse
 
 			case 1400:
 				throw new MissingParamException($message, $code);
-				break;
 
 			default:
 				throw new ApiException($message, $code);
-				break;
 		}
-
-		return $this;
 	}
 
 	public function toArray()
