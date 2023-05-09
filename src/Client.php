@@ -49,7 +49,8 @@ class Client
 	public function createPayment(Payment $payment): PaymentCreateResponse
 	{
 		$paymentCreateRequest = new PaymentCreateRequest($payment);
-		$paymentCreateResponse = $this->transport->post($paymentCreateRequest->getUrn(), $paymentCreateRequest->toArray());
+		$paymentCreateResponse = $this->transport->post($paymentCreateRequest->getUrn(),
+			$paymentCreateRequest->toArray());
 		return new PaymentCreateResponse($paymentCreateResponse);
 	}
 
@@ -60,9 +61,12 @@ class Client
 		return new PaymentStatusResponse($statusResponse);
 	}
 
-	public function getMethods(): MethodsResponse
+	public function getMethods(MethodsRequest $methodsRequest = null): MethodsResponse
 	{
-		$methodsRequest = new MethodsRequest();
+		if (($methodsRequest instanceof MethodsRequest) === false) {
+			$methodsRequest = new MethodsRequest();
+		}
+
 		$methodsResponse = $this->transport->post($methodsRequest->getUrn(), $methodsRequest->toArray());
 
 		return new MethodsResponse($methodsResponse);
@@ -126,19 +130,24 @@ class Client
 	public function singleTransfer(int $transferId, bool $test): SingleTransferResponse
 	{
 		$singleTransferRequest = new SingleTransferRequest(1, true);
-		$singleTransferResponse = $this->transport->post($singleTransferRequest->getUrn(), $singleTransferRequest->toArray());
+		$singleTransferResponse = $this->transport->post($singleTransferRequest->getUrn(),
+			$singleTransferRequest->toArray());
 		return new SingleTransferResponse($singleTransferResponse);
 	}
 
-	public function csvSingleTransfer(string $transferId, bool $test){
+	public function csvSingleTransfer(string $transferId, bool $test)
+	{
 		$csvSingleTransferRequest = new CsvSingleTransferRequest($transferId, $test);
-		$csvSingleTransferResponse = $this->transport->post($csvSingleTransferRequest->getUrn(), $csvSingleTransferRequest->toArray());
+		$csvSingleTransferResponse = $this->transport->post($csvSingleTransferRequest->getUrn(),
+			$csvSingleTransferRequest->toArray());
 		return new CsvSingleTransferResponse($csvSingleTransferResponse);
 	}
 
-    public function aboSingleTransfer(string $transferId, bool $test, string $type, string $encoding){
+	public function aboSingleTransfer(string $transferId, bool $test, string $type, string $encoding)
+	{
 		$aboSingleTransferRequest = new AboSingleTransferRequest($transferId, $test, $type, $encoding);
-		$aboSingleTransferResponse = $this->transport->post($aboSingleTransferRequest->getUrn(), $aboSingleTransferRequest->toArray());
+		$aboSingleTransferResponse = $this->transport->post($aboSingleTransferRequest->getUrn(),
+			$aboSingleTransferRequest->toArray());
 		return new AboSingleTransferResponse($aboSingleTransferResponse);
 	}
 
