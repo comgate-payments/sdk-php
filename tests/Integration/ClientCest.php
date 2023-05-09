@@ -3,16 +3,19 @@
 
 namespace Tests\Integration;
 
-use _PHPStan_b8e553790\Nette\Utils\DateTime;
 use Codeception\Attribute\DataProvider;
 use Codeception\Attribute\Group;
 use Codeception\Example;
 use Comgate\SDK\Client;
 use Comgate\SDK\Comgate;
+use Comgate\SDK\Entity\Codes\CountryCode;
 use Comgate\SDK\Entity\Codes\CurrencyCode;
+use Comgate\SDK\Entity\Codes\LangCode;
 use Comgate\SDK\Entity\Codes\PaymentMethodCode;
 use Comgate\SDK\Entity\Codes\PaymentStatusCode;
 use Comgate\SDK\Entity\Codes\RequestCode;
+use Comgate\SDK\Entity\Codes\TypeCode;
+use Comgate\SDK\Entity\Method;
 use Comgate\SDK\Entity\Money;
 use Comgate\SDK\Entity\Payment;
 use Comgate\SDK\Entity\Refund;
@@ -32,12 +35,13 @@ use Comgate\SDK\Entity\Transfer;
 use Comgate\SDK\Exception\Api\PreauthException;
 use Comgate\SDK\Exception\ApiException;
 use Tests\Support\IntegrationTester;
+use DateTime;
 
 class ClientCest
 {
 	#[Group('methods')]
-    public function getMethodsTest(IntegrationTester $I)
-    {
+	public function getMethodsTest(IntegrationTester $I)
+	{
 		$client = $this->getClient();
 
 		$methodsResponse = $client->getMethods();
@@ -47,12 +51,38 @@ class ClientCest
 	}
 
 	#[Group('methods')]
-    public function getMethodsFailTest(IntegrationTester $I)
-    {
+	public function getMethodsWithParamsTest(IntegrationTester $I)
+	{
+		$client = $this->getClient();
+
+		$methodsRequest = new MethodsRequest();
+		$methodsRequest->setType(TypeCode::TYPE_JSON)
+			->setLang(LangCode::CS)
+			->setCurrency(CurrencyCode::CZK)
+			->setCountry(CountryCode::CZ);
+		$methodsResponse = $client->getMethods($methodsRequest);
+
+		$I->assertInstanceOf(MethodsResponse::class, $methodsResponse);
+		$I->assertNotEmpty($methodsResponse->getMethodsList(), 'Methods list should not be empty');
+
+		$foundMethod = false;
+		foreach ($methodsResponse->getMethodsList() as $method) {
+			if ($method instanceof Method && $method->getId() === PaymentMethodCode::CARD_CARD_CZ_CSOB_2) {
+				$I->assertEquals('Platební karta', $method->getName());
+				$foundMethod = true;
+			}
+		}
+
+		$I->assertTrue($foundMethod, 'Method ' . PaymentMethodCode::CARD_CARD_CZ_CSOB_2 . ' not found');
+	}
+
+	#[Group('methods')]
+	public function getMethodsFailTest(IntegrationTester $I)
+	{
 		$client = $this->getClient();
 		$config = $client->getTransport()->getConfig()->setMerchant(112233);
 
-		$I->expectThrowable(ApiException::class, function () use ($client){
+		$I->expectThrowable(ApiException::class, function () use ($client) {
 			$methodsResponse = $client->getMethods();
 		});
 	}
@@ -60,13 +90,13 @@ class ClientCest
 	#[Group('status')]
 	#[Group('payment')]
 	#[DataProvider('getStatusScenarios')]
-    public function getStatusTest(IntegrationTester $I, Example $statusParams)
-    {
+	public function getStatusTest(IntegrationTester $I, Example $statusParams)
+	{
 		$client = $this->getClient();
 
 		//create a payment
 		$payment = $I->createPayment();
-		foreach ($statusParams['params'] as $paramKey => $paramValue){
+		foreach ($statusParams['params'] as $paramKey => $paramValue) {
 			$payment->setParam($paramKey, $paramValue);
 		}
 		$paymentResponse = $client->createPayment($payment);
@@ -80,7 +110,8 @@ class ClientCest
 		$I->assertEquals($statusParams['response']['email'], $statusResponse->getEmail());
 	}
 
-	protected function getStatusScenarios(){
+	protected function getStatusScenarios()
+	{
 		return [
 			[
 				'params' => [
@@ -111,8 +142,8 @@ class ClientCest
 
 
 	#[Group('payment')]
-    public function createPaymentTest(IntegrationTester $I)
-    {
+	public function createPaymentTest(IntegrationTester $I)
+	{
 		$client = $this->getClient();
 
 		// create a payment
@@ -126,8 +157,8 @@ class ClientCest
 	}
 
 	#[Group('payment')]
-    public function cancelPaymentTest(IntegrationTester $I)
-    {
+	public function cancelPaymentTest(IntegrationTester $I)
+	{
 		$client = $this->getClient();
 
 		// create a payment
@@ -331,7 +362,8 @@ class ClientCest
 	}
 
 	#[Group('transfer')]
-	public function transferListTest(IntegrationTester $I){
+	public function transferListTest(IntegrationTester $I)
+	{
 		$client = $this->getClient();
 		$date = new DateTime('2023-02-01');
 
@@ -352,7 +384,8 @@ class ClientCest
 	}
 
 	#[Group('transfer')]
-	public function singleTransferTest(IntegrationTester $I){
+	public function singleTransferTest(IntegrationTester $I)
+	{
 		$client = $this->getClient();
 
 		$transferId = 112233;
@@ -363,7 +396,8 @@ class ClientCest
 	}
 
 	#[Group('transfer')]
-	public function csvSingleTransferTest(IntegrationTester $I){
+	public function csvSingleTransferTest(IntegrationTester $I)
+	{
 		$client = $this->getClient();
 
 		$transferId = 112233;
@@ -376,7 +410,8 @@ class ClientCest
 	}
 
 	#[Group('transfer')]
-	public function csvSingleTransferErrotTest(IntegrationTester $I){
+	public function csvSingleTransferErrotTest(IntegrationTester $I)
+	{
 		$client = $this->getClient();
 
 		$transferId = 112233;
@@ -388,7 +423,8 @@ class ClientCest
 
 	#[Group('transfer')]
 	#[DataProvider('getAboSingleTransferParams')]
-	public function aboSingleTransferTest(IntegrationTester $I, Example $example){
+	public function aboSingleTransferTest(IntegrationTester $I, Example $example)
+	{
 		$client = $this->getClient();
 
 		$transferId = 112233;
@@ -411,7 +447,8 @@ class ClientCest
 		$I->assertFileDoesNotExist($fullFilePath);
 	}
 
-	protected function getAboSingleTransferParams(){
+	protected function getAboSingleTransferParams()
+	{
 		return [
 			'v1 utf8' => [
 				'type' => AboSingleTransferRequest::ABO_TYPE_V1,
@@ -433,7 +470,8 @@ class ClientCest
 	}
 
 	#[Group('transfer')]
-	public function aboSingleTransferErrotTest(IntegrationTester $I){
+	public function aboSingleTransferErrotTest(IntegrationTester $I)
+	{
 		$client = $this->getClient();
 
 		$transferId = 112233;
