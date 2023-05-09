@@ -19,7 +19,7 @@ class FileLogger implements LoggerInterface
 
 	/**
 	 * @param mixed $level
-	 * @param string $message
+	 * @param string|Stringable $message
 	 * @param mixed[] $context
 	 */
 	public function log($level, $message, array $context = []): void
