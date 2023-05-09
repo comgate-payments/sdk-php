@@ -25,15 +25,15 @@ class MethodsRequest implements IRequest
 			'type' => $this->getType(),
 		];
 
-		if(!empty($this->getLang())){
+		if(!is_null($this->getLang())){
 			$requestArray['lang'] = $this->getLang();
 		}
 
-		if(!empty($this->getCurrency())){
+		if(!is_null($this->getCurrency())){
 			$requestArray['curr'] = $this->getCurrency();
 		}
 
-		if(!empty($this->getCountry())){
+		if(!is_null($this->getCountry())){
 			$requestArray['country'] = $this->getCountry();
 		}
 
