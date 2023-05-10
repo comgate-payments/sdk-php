@@ -48,6 +48,7 @@ class PaymentCreateRequest implements IRequest
 		$output['verification'] = $this->payment->isVerification() ? 'true' : 'false';
 		$output['embedded'] = $this->payment->isEmbedded() ? 'true' : 'false';
 		$output['initRecurring'] = $this->payment->isInitRecurring() ? 'true' : 'false';
+		$output['dynamicExpiration'] = $this->payment->isDynamicExpiration() ? 'true' : 'false';
 
 		return $output;
 	}

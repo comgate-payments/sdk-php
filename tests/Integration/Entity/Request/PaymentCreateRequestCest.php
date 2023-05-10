@@ -37,6 +37,7 @@ class PaymentCreateRequestCest
 					'account' => '',
 					'name' => '',
 					'price' => 12300,
+					'dynamicExpiration' => 'false',
 				],
 			],
 			'custom params' => [
@@ -63,6 +64,7 @@ class PaymentCreateRequestCest
 					'account' => '123456',
 					'name' => 'product name',
 					'price' => 456,
+					'dynamicExpiration' => 'false',
 				],
 			],
 		];

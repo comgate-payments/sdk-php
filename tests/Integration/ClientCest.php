@@ -3,7 +3,7 @@
 
 namespace Tests\Integration;
 
-use _PHPStan_b8e553790\Nette\Utils\DateTime;
+use DateTime;
 use Codeception\Attribute\DataProvider;
 use Codeception\Attribute\Group;
 use Codeception\Example;
