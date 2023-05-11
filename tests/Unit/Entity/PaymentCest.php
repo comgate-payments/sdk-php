@@ -29,6 +29,7 @@ class PaymentCest
 			->setInitRecurring(false)
 			->setVerification(false)
 			->setEmbedded(false)
+			->setDynamicExpiration(true)
 			->setPayerId('aaafoo');
 
 		$paymentParams = $payment->getParams();
@@ -51,6 +52,7 @@ class PaymentCest
 			'lang' => 'cs',
 			'refId' => '123foo',
 			'payerId' => 'aaafoo',
+			'dynamicExpiration' => true,
 		], $paymentParams);
     }
 }

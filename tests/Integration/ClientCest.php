@@ -3,6 +3,7 @@
 
 namespace Tests\Integration;
 
+use DateTime;
 use Codeception\Attribute\DataProvider;
 use Codeception\Attribute\Group;
 use Codeception\Example;
@@ -35,7 +36,6 @@ use Comgate\SDK\Entity\Transfer;
 use Comgate\SDK\Exception\Api\PreauthException;
 use Comgate\SDK\Exception\ApiException;
 use Tests\Support\IntegrationTester;
-use DateTime;
 
 class ClientCest
 {

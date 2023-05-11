@@ -18,10 +18,12 @@ class Payment
 		'preauth' => false,
 		'verification' => false,
 		'embedded' => false,
+		'dynamicExpiration' => false,
 		'allowedMethods' => [],
 		'excludedMethods' => [],
 		'account' => '',
 		'name' => '',
+		// ... other params whithout default value
 	];
 
 	public function setParam($paramName, $value): self
@@ -371,4 +373,17 @@ class Payment
 		$this->setParam('initRecurringId', $initRecurringId);
 		return $this;
 	}
+
+	public function isDynamicExpiration(): bool
+	{
+		return $this->getParam('dynamicExpiration');
+	}
+
+	public function setDynamicExpiration(bool $dynamicExpiration): self
+	{
+		$this->setParam('dynamicExpiration', $dynamicExpiration);
+
+		return $this;
+	}
+
 }
