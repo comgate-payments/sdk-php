@@ -22,6 +22,8 @@ To install latest version of `comgate/sdk` use [Composer](https://getcomposer.or
 ```bash
 composer require comgate/sdk
 ```
+You have to install php-xml extension on your PHP server (e.g.: Ubuntu: apt-get install php-xml).
+
 ### Documentation
 
 - https://help.comgate.cz/docs/protocol-api-en (english version)
