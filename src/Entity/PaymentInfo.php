@@ -4,15 +4,25 @@ namespace Comgate\SDK\Entity;
 
 class PaymentInfo
 {
+        /**
+         * 
+         * @var array<string, int|string>
+         */
 	protected array $data = [];
 
-	public function fromArray(array $data){
+        /**
+         * 
+         * @param array<string, int|string> $data
+         * @return self
+         */
+	public function fromArray(array $data): self
+        {
 		$this->setData($data);
 		return $this;
 	}
 
 	/**
-	 * @return array
+	 * @return array<string, int|string>
 	 */
 	public function getData(): array
 	{
@@ -20,7 +30,7 @@ class PaymentInfo
 	}
 
 	/**
-	 * @param array $data
+	 * @param array<string, int|string> $data
 	 * @return PaymentInfo
 	 */
 	public function setData(array $data): PaymentInfo

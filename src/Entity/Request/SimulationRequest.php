@@ -4,8 +4,16 @@ namespace Comgate\SDK\Entity\Request;
 
 class SimulationRequest implements IRequest
 {
+        /**
+         * 
+         * @var array<string, int|string>
+         */
 	protected array $params = [];
 
+        /**
+         * 
+         * @param array<string, int|string> $params
+         */
 	public function __construct(array $params)
 	{
 		$this->setParams($params);
@@ -16,13 +24,17 @@ class SimulationRequest implements IRequest
 		return 'simulation';
 	}
 
+        /**
+         * 
+         * @return array<string, int|string>
+         */
 	public function toArray(): array
 	{
 		return $this->getParams();
 	}
 
 	/**
-	 * @return array
+	 * @return array<string, int|string>
 	 */
 	public function getParams(): array
 	{
@@ -30,7 +42,7 @@ class SimulationRequest implements IRequest
 	}
 
 	/**
-	 * @param array $params
+	 * @param array<string, int|string> $params
 	 * @return SimulationRequest
 	 */
 	public function setParams(array $params): SimulationRequest

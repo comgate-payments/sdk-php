@@ -12,9 +12,15 @@ class Transfer
 	protected string $accountCounterparty; // string(6) "0/0000"
 	protected string $accountOutgoing; // string(6) "1/0000"
 	protected string $variableSymbol; // string(10) "0123456789"
-
-	public function fromArray(array $transferData){
-		$this->setTransferId($transferData['transferId'])
+        
+        /**
+         * 
+         * @param array<string> $transferData
+         * @return Transfer
+         */
+	public function fromArray(array $transferData): Transfer
+        {
+		$this   ->setTransferId((int) $transferData['transferId'])
 			->setTransferDate(new DateTime($transferData['transferDate']))
 			->setAccountCounterparty($transferData['accountCounterparty'])
 			->setAccountOutgoing($transferData['accountOutgoing'])

@@ -9,7 +9,7 @@ class Payment
 	/**
 	 * Payment parameters.
 	 *
-	 * @var array
+	 * @var array<string, int|string>
 	 */
 	protected $params = [
 		'test' => false,
@@ -26,6 +26,12 @@ class Payment
 		// ... other params whithout default value
 	];
 
+        /**
+         *
+         * @param string $paramName
+         * @param mixed $value
+         * @return self
+         */
 	public function setParam($paramName, $value): self
 	{
 		$this->params[$paramName] = $value;
@@ -33,7 +39,13 @@ class Payment
 		return $this;
 	}
 
-	public function getParam($paramName): mixed
+        /**
+         *
+         * @param string $paramName
+         * @return string | Money
+         * @throws ParamIsNotSetException
+         */
+	public function getParam($paramName)
 	{
 		if (isset($this->params[$paramName])) {
 			return $this->params[$paramName];
@@ -42,12 +54,21 @@ class Payment
 		throw new ParamIsNotSetException("Param {$paramName} is not set.");
 	}
 
+        /**
+         *
+         * @return array<string, int|string>
+         */
 	public function getParams(): array
 	{
 		return $this->params;
 	}
 
-	public function setParams(array $params)
+        /**
+         *
+         * @param array<string, int|string> $params
+         * @return self
+         */
+	public function setParams(array $params): self
 	{
 		$this->params = $params;
 
@@ -69,6 +90,10 @@ class Payment
 		return $this;
 	}
 
+        /**
+         *
+         * @return Money
+         */
 	public function getPrice(): Money
 	{
 		return $this->getParam('price');
@@ -127,7 +152,7 @@ class Payment
 
 	public function isTest(): bool
 	{
-		return $this->getParam('test');
+		return(bool) $this->getParam('test');
 	}
 
 	public function setTest(bool $test): self
@@ -145,21 +170,26 @@ class Payment
 	}
 
 	/**
-	 * @return string[]
+	 * @return array<string>
 	 */
 	public function getAllowedMethods(): array
 	{
-		return $this->getParam('allowedMethods');
+		return(array) $this->getParam('allowedMethods');
 	}
 
 	/**
-	 * @return string[]
+	 * @return array<string>
 	 */
 	public function getExcludedMethods(): array
 	{
-		return $this->getParam('excludedMethods');
+		return(array) $this->getParam('excludedMethods');
 	}
 
+        /**
+         *
+         * @param array<string, int|string> $methods
+         * @return self
+         */
 	public function setMethods(array $methods): self
 	{
 		$this->params['allowedMethods'] = $methods;
@@ -167,6 +197,11 @@ class Payment
 		return $this;
 	}
 
+        /**
+         *
+         * @param string $method
+         * @return self
+         */
 	public function addMethod(string $method): self
 	{
 		$this->params['allowedMethods'][] = $method;
@@ -243,7 +278,7 @@ class Payment
 
 	public function isPrepareOnly(): bool
 	{
-		return $this->getParam('prepareOnly');
+		return(bool) $this->getParam('prepareOnly');
 	}
 
 	public function setPrepareOnly(bool $prepareOnly): self
@@ -255,7 +290,7 @@ class Payment
 
 	public function isPreauth(): ?bool
 	{
-		return $this->getParam('preauth');
+		return (bool)$this->getParam('preauth');
 	}
 
 	public function setPreauth(bool $preauth): self
@@ -267,7 +302,7 @@ class Payment
 
 	public function isInitRecurring(): bool
 	{
-		return $this->getParam('initRecurring');
+		return(bool) $this->getParam('initRecurring');
 	}
 
 	public function setInitRecurring(bool $initRecurring): self
@@ -279,7 +314,7 @@ class Payment
 
 	public function isVerification(): bool
 	{
-		return $this->getParam('verification');
+		return(bool) $this->getParam('verification');
 	}
 
 	public function setVerification(bool $verification): self
@@ -291,7 +326,7 @@ class Payment
 
 	public function isEmbedded(): bool
 	{
-		return $this->getParam('embedded');
+		return(bool) $this->getParam('embedded');
 	}
 
 	public function setEmbedded(bool $embedded): self
@@ -376,7 +411,7 @@ class Payment
 
 	public function isDynamicExpiration(): bool
 	{
-		return $this->getParam('dynamicExpiration');
+		return(bool) $this->getParam('dynamicExpiration');
 	}
 
 	public function setDynamicExpiration(bool $dynamicExpiration): self

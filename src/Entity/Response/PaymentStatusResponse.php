@@ -7,6 +7,8 @@ use Comgate\SDK\Entity\Method;
 use Comgate\SDK\Entity\Money;
 use Comgate\SDK\Http\Response;
 use GuzzleHttp\Psr7\Query;
+use Comgate\SDK\Exception\Api\PaymentNotFoundException;
+use Comgate\SDK\Exception\ApiException;
 
 class PaymentStatusResponse
 {
@@ -40,27 +42,42 @@ class PaymentStatusResponse
 		$code = (int) $parsedResponse['code'];
 		$message = $parsedResponse['message'];
 
-		$this->setCode($code)
-			->setMessage($message)
-			->setMerchant($parsedResponse['merchant'])
-			->setTest($parsedResponse['test'] === 'true')
-			->setPrice(Money::ofCents((int) $parsedResponse['price']))
-			->setCurrency($parsedResponse['curr'])
-			->setLabel($parsedResponse['label'])
-			->setRefId($parsedResponse['refId'])
-			->setPayerId($parsedResponse['payerId'] ?? '')
-			->setMethod($parsedResponse['method'])
-			->setAccount($parsedResponse['account'] ?? '')
-			->setEmail($parsedResponse['email'])
-			->setName($parsedResponse['name'])
-			->setTransId($parsedResponse['transId'])
-			->setSecret($parsedResponse['secret'])
-			->setStatus($parsedResponse['status'])
-			->setPayerName($parsedResponse['payerName'])
-			->setFee($parsedResponse['fee']);
+                switch ($code) {
+                    case 0:
+                        $this->setCode($code)
+                            ->setMessage($message)
+                            ->setMerchant($parsedResponse['merchant'])
+                            ->setTest($parsedResponse['test'] === 'true')
+                            ->setPrice(Money::ofCents((int) $parsedResponse['price']))
+                            ->setCurrency($parsedResponse['curr'])
+                            ->setLabel($parsedResponse['label'])
+                            ->setRefId($parsedResponse['refId'])
+                            ->setPayerId($parsedResponse['payerId'] ?? '')
+                            ->setMethod($parsedResponse['method'])
+                            ->setAccount($parsedResponse['account'] ?? '')
+                            ->setEmail($parsedResponse['email'])
+                            ->setName($parsedResponse['name'])
+                            ->setTransId($parsedResponse['transId'])
+                            ->setSecret($parsedResponse['secret'])
+                            ->setStatus($parsedResponse['status'])
+                            ->setPayerName($parsedResponse['payerName'])
+                            ->setFee($parsedResponse['fee']);
+
+                        break;
+
+                    case 1400:
+                            throw new PaymentNotFoundException($message, $code);
+
+                    default:
+                            throw new ApiException($message, $code);
+		}
 	}
 
-	public function toArray()
+         /**
+         *
+         * @return array<string, bool|int|string>
+         */
+	public function toArray(): array
 	{
 		$output = [
 			'code' => $this->getCode(),

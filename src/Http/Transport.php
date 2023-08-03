@@ -34,6 +34,7 @@ class Transport implements ITransport
 		], $data);
 
 		$options = array_merge($options, [
+			'curl' => [CURLOPT_SSL_VERIFYPEER => false],
 			'form_params' => $data,
 		]);
 

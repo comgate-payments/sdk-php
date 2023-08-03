@@ -8,7 +8,10 @@ use Comgate\SDK\Http\Response;
 
 class MethodsResponse
 {
-
+        /**
+         *
+         * @var array<Method>
+         */
 	private array $methodsList = [];
 
 	/**
@@ -22,8 +25,8 @@ class MethodsResponse
 		$methodsArray = json_decode($methodsJson, true);
 
 		if (isset($methodsArray['methods'])) {
-			foreach ($methodsArray['methods'] as $methodData) {
-				$method = (new Method())->fromArray($methodData);
+			foreach ((array)$methodsArray['methods'] as $methodData) {
+				$method = (new Method())->fromArray((array)$methodData);
 
 				$this->methodsList[] = $method;
 			}
@@ -33,12 +36,12 @@ class MethodsResponse
 			$code = (int)$methodsArray['error']['code'];
 			$message = $methodsArray['error']['message'];
 
-			throw new ApiException($message, $code);
+			throw new ApiException((string)$message, $code);
 		}
 	}
 
 	/**
-	 * @return array
+	 * @return array<Method>
 	 */
 	public function getMethodsList(): array
 	{
@@ -46,7 +49,7 @@ class MethodsResponse
 	}
 
 	/**
-	 * @param array $methodsList
+	 * @param array<Method> $methodsList
 	 * @return MethodsResponse
 	 */
 	public function setMethodsList(array $methodsList): MethodsResponse
@@ -55,7 +58,11 @@ class MethodsResponse
 		return $this;
 	}
 
-	public function toArray()
+        /**
+         *
+         * @return array<int<0, max>, array<string, mixed>>.
+         */
+	public function toArray(): array
 	{
 		$methodsArray = [];
 

@@ -37,8 +37,12 @@ class SimulationResponse
 				throw new ApiException($message, $code);
 		}
 	}
-
-	public function toArray()
+        
+        /**
+         * 
+         * @return array<string, int|string>
+         */                
+	public function toArray(): array
 	{
 		return [
 			'code' => $this->getCode(),
