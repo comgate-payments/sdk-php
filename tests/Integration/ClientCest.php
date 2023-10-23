@@ -113,7 +113,7 @@ class ClientCest
 	protected function getStatusScenarios()
 	{
 		return [
-			[
+			'CZK' => [
 				'params' => [
 					'method' => PaymentMethodCode::CARD_CARD_CZ_CSOB_2,
 					'curr' => CurrencyCode::CZK,
@@ -125,7 +125,7 @@ class ClientCest
 					'email' => 'sdk@comgate.cz',
 				],
 			],
-			[
+			'EUR' => [
 				'params' => [
 					'method' => PaymentMethodCode::CARD_CARD_CZ_CSOB_2,
 					'curr' => CurrencyCode::EUR,
@@ -135,6 +135,18 @@ class ClientCest
 					'method' => PaymentMethodCode::CARD_CARD_CZ_CSOB_2,
 					'curr' => CurrencyCode::EUR,
 					'email' => 'sdk@comgate.cz',
+				],
+			],
+			'empty email' => [
+				'params' => [
+					'method' => PaymentMethodCode::CARD_CARD_CZ_CSOB_2,
+					'curr' => CurrencyCode::CZK,
+					'email' => '',
+				],
+				'response' => [
+					'method' => PaymentMethodCode::CARD_CARD_CZ_CSOB_2,
+					'curr' => CurrencyCode::CZK,
+					'email' => '',
 				],
 			],
 		];
