@@ -11,6 +11,10 @@ use GuzzleHttp\Psr7\Query;
 
 class SingleTransferResponse
 {
+    /**
+     * 
+     * @var array<string, int|string>
+     */
 	protected array $paymentsList = [];
 
 	/**
@@ -29,17 +33,18 @@ class SingleTransferResponse
 	}
 
 	/**
-	 * @return array
+	 * @return array<string, int|string>
 	 */
 	public function getPaymentsList(): array
 	{
 		return $this->paymentsList;
 	}
 
-	/**
-	 * @param array $paymentsList
-	 * @return SingleTransferResponse
-	 */
+        /**
+         * 
+         * @param array<string, int|string> $paymentsList
+         * @return self
+         */
 	public function setPaymentsList(array $paymentsList): self
 	{
 		$this->paymentsList = $paymentsList;

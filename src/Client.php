@@ -86,7 +86,7 @@ class Client
 		return new PreauthCaptureResponse($captureResponse);
 	}
 
-	public function cancelPreauth($transId): PreauthCancelResponse
+	public function cancelPreauth(string $transId): PreauthCancelResponse
 	{
 		$cancelPreauthRequest = new PreauthCancelRequest($transId);
 		$cancelResponse = $this->transport->post($cancelPreauthRequest->getUrn(), $cancelPreauthRequest->toArray());
@@ -107,6 +107,11 @@ class Client
 		return new RecurringPaymentResponse($recurringResponse);
 	}
 
+        /**
+         * 
+         * @param array<string, int|string> $params
+         * @return SimulationResponse
+         */
 	public function simulation(array $params): SimulationResponse
 	{
 		$simulationRequest = new SimulationRequest($params);
@@ -135,7 +140,7 @@ class Client
 		return new SingleTransferResponse($singleTransferResponse);
 	}
 
-	public function csvSingleTransfer(string $transferId, bool $test)
+	public function csvSingleTransfer(string $transferId, bool $test): CsvSingleTransferResponse
 	{
 		$csvSingleTransferRequest = new CsvSingleTransferRequest($transferId, $test);
 		$csvSingleTransferResponse = $this->transport->post($csvSingleTransferRequest->getUrn(),
@@ -143,7 +148,7 @@ class Client
 		return new CsvSingleTransferResponse($csvSingleTransferResponse);
 	}
 
-	public function aboSingleTransfer(string $transferId, bool $test, string $type, string $encoding)
+	public function aboSingleTransfer(string $transferId, bool $test, string $type, string $encoding): AboSingleTransferResponse
 	{
 		$aboSingleTransferRequest = new AboSingleTransferRequest($transferId, $test, $type, $encoding);
 		$aboSingleTransferResponse = $this->transport->post($aboSingleTransferRequest->getUrn(),

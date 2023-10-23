@@ -10,19 +10,21 @@ class StdoutLogger implements LoggerInterface
 {
 
 	/**
-	 * @param $level
+	 * @param mixed $level
 	 * @param $message
-	 * @param array $context
+	 * @param array<mixed> $context
 	 * @return void
 	 */
 	public function log($level, $message, array $context = []): void
 	{
-		echo "[{$level}]: {$message}";
+            $level = (string) $level;
+            echo "[{$level}]: {$message}";
 	}
 
 	/**
+         * mixed nahradit
 	 * @param $message
-	 * @param array $context
+	 * @param array<mixed> $context
 	 * @return void
 	 */
 	public function emergency($message, array $context = []): void
@@ -31,8 +33,9 @@ class StdoutLogger implements LoggerInterface
 	}
 
 	/**
+         * mixed nahradit
 	 * @param $message
-	 * @param array $context
+	 * @param array<mixed> $context
 	 * @return void
 	 */
 	public function alert($message, array $context = []): void
@@ -41,8 +44,9 @@ class StdoutLogger implements LoggerInterface
 	}
 
 	/**
+         * mixed nahradit
 	 * @param $message
-	 * @param array $context
+	 * @param array<mixed> $context
 	 * @return void
 	 */
 	public function critical($message, array $context = []): void
@@ -51,8 +55,9 @@ class StdoutLogger implements LoggerInterface
 	}
 
 	/**
+         * mixed nahradit
 	 * @param $message
-	 * @param array $context
+	 * @param array<mixed> $context
 	 * @return void
 	 */
 	public function error($message, array $context = []): void
@@ -61,8 +66,9 @@ class StdoutLogger implements LoggerInterface
 	}
 
 	/**
+         * mixed nahradit
 	 * @param $message
-	 * @param array $context
+	 * @param array<mixed> $context
 	 * @return void
 	 */
 	public function warning($message, array $context = []): void
@@ -71,8 +77,9 @@ class StdoutLogger implements LoggerInterface
 	}
 
 	/**
+         * mixed nahradit
 	 * @param $message
-	 * @param array $context
+	 * @param array<mixed> $context
 	 * @return void
 	 */
 	public function notice($message, array $context = []): void
@@ -81,8 +88,9 @@ class StdoutLogger implements LoggerInterface
 	}
 
 	/**
+         * mixed nahradit
 	 * @param $message
-	 * @param array $context
+	 * @param array<mixed> $context
 	 * @return void
 	 */
 	public function info($message, array $context = []): void
@@ -91,8 +99,9 @@ class StdoutLogger implements LoggerInterface
 	}
 
 	/**
+         * mixed nahradit
 	 * @param $message
-	 * @param array $context
+	 * @param array<mixed> $context
 	 * @return void
 	 */
 	public function debug($message, array $context = []): void

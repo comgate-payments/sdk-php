@@ -42,7 +42,11 @@ class RefundResponse
 		}
 	}
 
-	public function toArray()
+        /**
+         * 
+         * @return array<string, int|string>
+         */
+	public function toArray(): array
 	{
 		return [
 			'code' => $this->getCode(),

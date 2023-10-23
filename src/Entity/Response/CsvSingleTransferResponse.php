@@ -15,13 +15,13 @@ class CsvSingleTransferResponse extends FileResponse
 	public function __construct(Response $csvSingleTransferResponse)
 	{
 		$csvJson = $csvSingleTransferResponse->getContent();
-		$csvData = json_decode($csvJson, true);
+		$csvData = (array)json_decode($csvJson, true);
 
 		if (isset($csvData['code']) && isset($csvData['message'])) {
-			throw new ApiException($csvData['message'], $csvData['code']);
+                    throw new ApiException($csvData['message'], $csvData['code']);
 		}
 
 		$this->setFilename($csvData['nazev'])
-			->setFileContent(base64_decode($csvData['csv'], true));
+			->setFileContent((string)base64_decode($csvData['csv'], true));
 	}
 }

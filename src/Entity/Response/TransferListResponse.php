@@ -10,6 +10,9 @@ use GuzzleHttp\Psr7\Query;
 
 class TransferListResponse
 {
+       /**
+        * @var array<string, int|string>
+        */
 	protected array $transferList = [];
 
 	/**
@@ -18,7 +21,7 @@ class TransferListResponse
 	public function __construct(Response $transferListResponse)
 	{
 		$transferListJson = $transferListResponse->getContent();
-		$transferList = json_decode($transferListResponse->getContent(), true);
+		$transferList = (array) json_decode($transferListResponse->getContent(), true);
 
 		foreach ($transferList as $transferData) {
 			$transfer = (new Transfer())->fromArray($transferData);
@@ -27,7 +30,7 @@ class TransferListResponse
 	}
 
 	/**
-	 * @return array
+	 * @return array<string, int|string>
 	 */
 	public function getTransferList(): array
 	{
@@ -35,7 +38,7 @@ class TransferListResponse
 	}
 
 	/**
-	 * @param array $transferList
+	 * @param array<string, int|string> $transferList
 	 * @return TransferListResponse
 	 */
 	public function setTransferList(array $transferList): self

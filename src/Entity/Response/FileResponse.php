@@ -11,8 +11,8 @@ class FileResponse
 	protected string $fileContent;
 
     /**
-     * @param $directory
-     * @param $fileName
+     * @param string $directory
+     * @param string $fileName
      * @return void
      */
 	public function saveToFile($directory, $fileName = '')
