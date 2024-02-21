@@ -2,7 +2,7 @@
 
 namespace Comgate\SDK\Http;
 
-use GuzzleHttp\Psr7\Query;
+use Comgate\SDK\Http\Query;
 use Psr\Http\Message\ResponseInterface;
 
 class Response
