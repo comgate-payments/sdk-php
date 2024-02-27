@@ -2,8 +2,7 @@
 
 namespace Comgate\SDK\Http;
 
-use Comgate\SDK\Http\Query;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\MessageInterface;
 
 class Response
 {
@@ -14,11 +13,11 @@ class Response
 	protected $content;
 
 	/**
-	 * @var ResponseInterface
+	 * @var MessageInterface
 	 */
 	protected $origin;
 
-	public function __construct(ResponseInterface $origin)
+	public function __construct(MessageInterface $origin)
 	{
 		$this->origin = $origin;
 	}

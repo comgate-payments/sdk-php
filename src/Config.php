@@ -13,10 +13,14 @@ class Config
 	/** @var string */
 	private $secret;
 
-	public function __construct(string $merchant, string $secret)
+	/** @var string */
+	private $url;
+
+	public function __construct(string $merchant, string $secret, string $url = self::URL)
 	{
 		$this->merchant = $merchant;
 		$this->secret = $secret;
+		$this->setUrl($url);
 	}
 
 	public function getMerchant(): string
@@ -27,6 +31,14 @@ class Config
 	public function getSecret(): string
 	{
 		return $this->secret;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getUrl(): string
+	{
+		return $this->url;
 	}
 
 	/**
@@ -47,5 +59,13 @@ class Config
 	{
 		$this->secret = $secret;
 		return $this;
+	}
+
+	/**
+	 * @param string $url
+	 */
+	public function setUrl(string $url): void
+	{
+		$this->url = rtrim($url, "/") . "/";
 	}
 }
