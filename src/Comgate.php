@@ -98,7 +98,7 @@ class Comgate
 
 	protected function createTransport(): ITransport
 	{
-		return new Transport($this->createConfig());
+		return new Transport($this->createConfig(), $this->logger);
 	}
 
 }

@@ -5,6 +5,8 @@ namespace Comgate\SDK\Http;
 use Comgate\SDK\Config;
 use Comgate\SDK\Exception\Runtime\ComgateException;
 use Psr\Http\Message\MessageInterface;
+use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 
 class Transport implements ITransport
 {
@@ -12,9 +14,13 @@ class Transport implements ITransport
 	/** @var Config */
 	protected $config;
 
-	public function __construct(Config $config)
+	/** @var LoggerInterface */
+	private $logger;
+
+	public function __construct(Config $config, LoggerInterface $logger = null)
 	{
 		$this->config = $config;
+		$this->logger = $logger;
 	}
 
 	/**
@@ -37,7 +43,23 @@ class Transport implements ITransport
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
 		$response = curl_exec($curl);
+		$httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		$e = curl_error($curl);
+
+		if ($this->logger !== null) {
+			$this->logger->log(LogLevel::INFO, 'Request to "'.$this->config->getUrl() . $urn .'" sent');
+			$this->logger->log(LogLevel::DEBUG, 'Response: ' . $response);
+			$this->logger->log(LogLevel::DEBUG, 'cURL info: ' . json_encode(curl_getinfo($curl)));
+
+			// => [level, message]
+			$log = match (true) {
+				($response === false) => [LogLevel::ERROR, 'cURL request failed: ' . $e],
+				($httpCode >= 500) => [LogLevel::CRITICAL, 'Server error: HTTP code ' . $httpCode],
+				($httpCode >= 400) => [LogLevel::ERROR, 'Client error: HTTP code ' . $httpCode],
+				default => [LogLevel::INFO, 'cURL request completed successfully.'],
+			};
+			$this->logger->log(...$log);
+		}
 
 		curl_close($curl);
 
