@@ -1,6 +1,6 @@
 {
     "name": "comgate/sdk",
-    "description": "ComGate Payments PHP SDK",
+    "description": "Comgate PHP SDK",
     "keywords": [
         "comgate",
         "payment",
