@@ -1,7 +1,7 @@
-<h1 align=center>ComGate Payments / PHP SDK</h1>
+<h1 align=center>Comgate / PHP SDK</h1>
 
 <p align=center>
-   💰 PHP library for communication with ComGate Payments.
+   💰 PHP library for communication with Comgate.
 </p>
 
 <p align=center>
@@ -86,7 +86,7 @@ $payment
 try {
     $createPaymentResponse = $client->createPayment($payment);
     if ($createPaymentResponse->getCode() === RequestCode::OK) {
-        // Redirect the payer to ComGate payment gateway (use proper method of your framework)
+        // Redirect the payer to Comgate payment gateway (use proper method of your framework)
         Helpers::redirect($createPaymentResponse->getRedirect());
     } else {
         var_dump($createPaymentResponse->getMessage());
@@ -268,8 +268,8 @@ Take a look at [our tests](https://github.com/comgate-payments/sdk-php/blob/mast
 
 If you find a bug, please submit the issue in [Github](https://github.com/comgate-payments/sdk-php/issues) directly.
 
-Thank you for using our ComGate Payments.
+Thank you for using our Comgate payment.
 
 ## License
 
-Copyright (c) 2021 ComGate Payments. [MIT Licensed](LICENSE).
+Copyright (c) 2021 Comgatea a.s. [MIT Licensed](LICENSE).
