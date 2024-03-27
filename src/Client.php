@@ -108,7 +108,7 @@ class Client
 	}
 
         /**
-         * 
+         *
          * @param array<string, int|string> $params
          * @return SimulationResponse
          */
@@ -134,7 +134,7 @@ class Client
 
 	public function singleTransfer(int $transferId, bool $test): SingleTransferResponse
 	{
-		$singleTransferRequest = new SingleTransferRequest(1, true);
+		$singleTransferRequest = new SingleTransferRequest($transferId, $test);
 		$singleTransferResponse = $this->transport->post($singleTransferRequest->getUrn(),
 			$singleTransferRequest->toArray());
 		return new SingleTransferResponse($singleTransferResponse);
