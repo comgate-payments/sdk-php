@@ -46,6 +46,8 @@ class Transport implements ITransport
 		$httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		$e = curl_error($curl);
 
+//		var_dump($response);
+
 		if ($this->logger !== null) {
 			$this->logger->log(LogLevel::INFO, 'Request to "'.$this->config->getUrl() . $urn .'" sent');
 			$this->logger->log(LogLevel::DEBUG, 'Response: ' . $response);
@@ -63,7 +65,7 @@ class Transport implements ITransport
 
 		curl_close($curl);
 
-		if ($e) {
+		if ($e != '') {
 			throw new ComgateException("Request failed: {$e}", 0);
 		}
 
@@ -88,7 +90,11 @@ class Transport implements ITransport
 		return $this;
 	}
 
-	private function createResponse($curlResponse): MessageInterface
+	/**
+	 * @param $curlResponse bool|string
+	 * @return MessageInterface
+	 */
+	private function createResponse(bool|string $curlResponse): MessageInterface
 	{
 		$response = new PsrResponse();
 

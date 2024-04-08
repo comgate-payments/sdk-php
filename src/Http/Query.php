@@ -4,12 +4,17 @@ namespace Comgate\SDK\Http;
 
 class Query
 {
-	public static function parse($string): array
+	/**
+	 * @param string $string
+	 * @return array<string, string>
+	 */
+	public static function parse(string $string): array
 	{
+		/** @var array<string, string> */
 		$result = [];
 
 		foreach (explode("&", $string) as $kv) {
-			$exploded = explode("=", rawurldecode($kv ?? ""), 2);
+			$exploded = explode("=", rawurldecode($kv), 2);
 			$key = $exploded[0];
 			$value = $exploded[1] ?? "";
 			if (array_key_exists($key, $result)) {

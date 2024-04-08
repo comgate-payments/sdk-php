@@ -2,14 +2,18 @@
 
 namespace Comgate\SDK\Http;
 
+use PHPStan\Type\ResourceType;
 use Psr\Http\Message\StreamInterface;
 
 class PsrStream implements StreamInterface
 {
+	/** @var null|resource */
 	protected $stream;
 
-	public function __construct($content) {
-		$this->stream = fopen('php://temp', 'r+');
+	public function __construct(string $content) {
+		if (!$this->stream = fopen('php://temp', 'r+')) {
+			$this->stream = null;
+		}
 		fwrite($this->stream, $content);
 		rewind($this->stream);
 	}
@@ -25,9 +29,14 @@ class PsrStream implements StreamInterface
 		fclose($this->stream);
 	}
 
-	public function detach(): void
+	public function detach(): null
 	{
-		$this->close();
+		if (isset($this->stream)) {
+			$detached = is_resource($this->stream) ? $this->stream : null;
+			$this->stream = null;
+			return $detached;
+		}
+		 return null;
 	}
 
 	public function getSize(): ?int
@@ -88,6 +97,6 @@ class PsrStream implements StreamInterface
 
 	public function getMetadata($key = null)
 	{
-		return $key ? stream_get_meta_data($this->stream)[$key] ?? null : stream_get_meta_data($this->stream);
+		return $key != false ? stream_get_meta_data($this->stream)[$key] ?? null : stream_get_meta_data($this->stream);
 	}
 }

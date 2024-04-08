@@ -69,16 +69,6 @@ class Comgate
 	/**
 	 * @return static
 	 */
-	public function setMiddleware(callable $middleware): self
-	{
-		$this->middlewares[] = $middleware;
-
-		return $this;
-	}
-
-	/**
-	 * @return static
-	 */
 	public function setLogger(LoggerInterface $logger): self
 	{
 		$this->logger = $logger;
