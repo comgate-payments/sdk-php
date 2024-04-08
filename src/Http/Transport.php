@@ -46,8 +46,6 @@ class Transport implements ITransport
 		$httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		$e = curl_error($curl);
 
-//		var_dump($response);
-
 		if ($this->logger !== null) {
 			$this->logger->log(LogLevel::INFO, 'Request to "'.$this->config->getUrl() . $urn .'" sent');
 			$this->logger->log(LogLevel::DEBUG, 'Response: ' . $response);
