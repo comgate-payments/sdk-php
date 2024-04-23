@@ -58,7 +58,9 @@ $client = Comgate::defaults()
 ### Create payment
 
 ```php
+use Comgate\SDK\Entity\Codes\CategoryCode;
 use Comgate\SDK\Entity\Codes\CurrencyCode;
+use Comgate\SDK\Entity\Codes\DeliveryCode;
 use Comgate\SDK\Entity\Codes\PaymentMethodCode;
 use Comgate\SDK\Entity\Money;
 use Comgate\SDK\Entity\Payment;
@@ -80,7 +82,10 @@ $payment
     ->addMethod(PaymentMethodCode::ALL)
     //->setRedirect()
     //->setIframe()
-    ->setTest(false);
+    ->setTest(false)
+    ->setFullName('Jan Novák')
+    ->setCategory(CategoryCode::PHYSICAL_GOODS_ONLY)
+    ->setDelivery(DeliveryCode::HOME_DELIVERY);
 
 
 try {
