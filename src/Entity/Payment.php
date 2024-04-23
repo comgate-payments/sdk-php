@@ -23,6 +23,17 @@ class Payment
 		'excludedMethods' => [],
 		'account' => '',
 		'name' => '',
+        'fullName' => '',
+		'billingAddrCity' => '',
+		'billingAddrStreet' => '',
+		'billingAddrPostalCode' => '',
+		'billingAddrCountry' => '',
+		'delivery' => '',
+		'homeDeliveryCity' => '',
+		'homeDeliveryStreet' => '',
+		'homeDeliveryPostalCode' => '',
+		'homeDeliveryCountry' => '',
+		'category' => '',
 		// ... other params whithout default value
 	];
 
@@ -421,4 +432,135 @@ class Payment
 		return $this;
 	}
 
+	public function getFullName(): ?string
+	{
+		return $this->getParam('fullName');
+	}
+
+	public function setFullName(string $fullName): self
+	{
+		$this->setParam('fullName', $fullName);
+
+		return $this;
+	}
+
+	public function getBillingAddrCity(): ?string
+	{
+		return $this->getParam('billingAddrCity');
+	}
+
+	public function setBillingAddrCity(string $billingAddrCity): self
+	{
+		$this->setParam('billingAddrCity', $billingAddrCity);
+
+		return $this;
+	}
+
+	public function getBillingAddrStreet(): ?string
+	{
+		return $this->getParam('billingAddrStreet');
+	}
+
+	public function setBillingAddrStreet(string $billingAddrStreet): self
+	{
+		$this->setParam('billingAddrStreet', $billingAddrStreet);
+
+		return $this;
+	}
+
+	public function getBillingAddrPostalCode(): ?string
+	{
+		return $this->getParam('billingAddrPostalCode');
+	}
+
+	public function setBillingAddrPostalCode(string $billingAddrPostalCode): self
+	{
+		$this->setParam('billingAddrPostalCode', $billingAddrPostalCode);
+
+		return $this;
+	}
+
+	public function getBillingAddrCountry(): ?string
+	{
+		return $this->getParam('billingAddrCountry');
+	}
+
+	public function setBillingAddrCountry(string $billingAddrCountry): self
+	{
+		$this->setParam('billingAddrCountry', $billingAddrCountry);
+
+		return $this;
+	}
+
+	public function getDelivery(): ?string
+	{
+		return $this->getParam('delivery');
+	}
+
+	public function setDelivery(string $delivery): self
+	{
+		$this->setParam('delivery', $delivery);
+
+		return $this;
+	}
+
+	public function getHomeDeliveryCity(): ?string
+	{
+		return $this->getParam('homeDeliveryCity');
+	}
+
+	public function setHomeDeliveryCity(string $homeDeliveryCity): self
+	{
+		$this->setParam('homeDeliveryCity', $homeDeliveryCity);
+
+		return $this;
+	}
+
+	public function getHomeDeliveryStreet(): ?string
+	{
+		return $this->getParam('homeDeliveryStreet');
+	}
+
+	public function setHomeDeliveryStreet(string $homeDeliveryStreet): self
+	{
+		$this->setParam('homeDeliveryStreet', $homeDeliveryStreet);
+
+		return $this;
+	}
+
+	public function getHomeDeliveryPostalCode(): ?string
+	{
+		return $this->getParam('homeDeliveryPostalCode');
+	}
+
+	public function setHomeDeliveryPostalCode(string $homeDeliveryPostalCode): self
+	{
+		$this->setParam('homeDeliveryPostalCode', $homeDeliveryPostalCode);
+
+		return $this;
+	}
+
+	public function getHomeDeliveryCountry(): ?string
+	{
+		return $this->getParam('homeDeliveryCountry');
+	}
+
+	public function setHomeDeliveryCountry(string $homeDeliveryCountry): self
+	{
+		$this->setParam('homeDeliveryCountry', $homeDeliveryCountry);
+
+		return $this;
+	}
+
+	public function getCategory(): ?string
+	{
+		return $this->getParam('category');
+	}
+
+	public function setCategory(string $category): self
+	{
+		$this->setParam('category', $category);
+
+		return $this;
+	}
 }
