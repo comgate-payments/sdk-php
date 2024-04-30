@@ -8,7 +8,6 @@ use Comgate\SDK\Exception\ApiException;
 use Comgate\SDK\Http\Response;
 use Comgate\SDK\Http\Query;
 
-
 class SimulationResponse
 {
 

@@ -55,7 +55,7 @@ class PaymentStatusResponse
                             ->setPayerId($parsedResponse['payerId'] ?? '')
                             ->setMethod($parsedResponse['method'])
                             ->setAccount($parsedResponse['account'] ?? '')
-                            ->setEmail($parsedResponse['email'])
+                            ->setEmail($parsedResponse['email'] ?? '')
                             ->setName($parsedResponse['name'])
                             ->setTransId($parsedResponse['transId'])
                             ->setSecret($parsedResponse['secret'])
