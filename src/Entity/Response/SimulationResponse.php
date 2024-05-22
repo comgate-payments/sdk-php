@@ -6,7 +6,7 @@ use Comgate\SDK\Exception\Api\MissingParamException;
 use Comgate\SDK\Exception\Api\PreauthException;
 use Comgate\SDK\Exception\ApiException;
 use Comgate\SDK\Http\Response;
-use GuzzleHttp\Psr7\Query;
+use Comgate\SDK\Http\Query;
 
 class SimulationResponse
 {
@@ -37,11 +37,11 @@ class SimulationResponse
 				throw new ApiException($message, $code);
 		}
 	}
-        
+
         /**
-         * 
+         *
          * @return array<string, int|string>
-         */                
+         */
 	public function toArray(): array
 	{
 		return [

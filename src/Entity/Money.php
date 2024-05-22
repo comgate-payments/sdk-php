@@ -53,7 +53,7 @@ class Money
 			throw new LogicalException('The price must be a maximum of two valid decimal numbers.');
 		}
 
-		return new static((int) ($money * 100));
+		return new static((int) round($money * 100));
 	}
 
 	/**

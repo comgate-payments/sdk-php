@@ -6,7 +6,7 @@ use Comgate\SDK\Entity\Transfer;
 use Comgate\SDK\Exception\Api\MissingParamException;
 use Comgate\SDK\Exception\ApiException;
 use Comgate\SDK\Http\Response;
-use GuzzleHttp\Psr7\Query;
+use Comgate\SDK\Http\Query;
 
 class TransferListResponse
 {

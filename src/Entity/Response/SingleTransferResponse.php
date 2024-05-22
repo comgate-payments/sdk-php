@@ -7,12 +7,12 @@ use Comgate\SDK\Entity\Transfer;
 use Comgate\SDK\Exception\Api\MissingParamException;
 use Comgate\SDK\Exception\ApiException;
 use Comgate\SDK\Http\Response;
-use GuzzleHttp\Psr7\Query;
+use Comgate\SDK\Http\Query;
 
 class SingleTransferResponse
 {
     /**
-     * 
+     *
      * @var array<string, int|string>
      */
 	protected array $paymentsList = [];
@@ -41,7 +41,7 @@ class SingleTransferResponse
 	}
 
         /**
-         * 
+         *
          * @param array<string, int|string> $paymentsList
          * @return self
          */

@@ -6,7 +6,7 @@ namespace Comgate\SDK\Entity\Response;
 use Comgate\SDK\Entity\Method;
 use Comgate\SDK\Entity\Money;
 use Comgate\SDK\Http\Response;
-use GuzzleHttp\Psr7\Query;
+use Comgate\SDK\Http\Query;
 use Comgate\SDK\Exception\Api\PaymentNotFoundException;
 use Comgate\SDK\Exception\ApiException;
 
