@@ -29,7 +29,7 @@ class PsrStream implements StreamInterface
 		fclose($this->stream);
 	}
 
-	public function detach(): null
+	public function detach()
 	{
 		if (isset($this->stream)) {
 			$detached = is_resource($this->stream) ? $this->stream : null;
