@@ -101,10 +101,10 @@ class Payment
 		return $this;
 	}
 
-        /**
-         *
-         * @return Money
-         */
+	/**
+	 *
+	 * @return Money
+	 */
 	public function getPrice(): Money
 	{
 		return $this->getParam('price');

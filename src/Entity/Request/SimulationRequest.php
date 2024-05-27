@@ -2,6 +2,9 @@
 
 namespace Comgate\SDK\Entity\Request;
 
+/**
+ * The class allows switching the state of a test payment on the payment gateway.
+ */
 class SimulationRequest implements IRequest
 {
         /**
