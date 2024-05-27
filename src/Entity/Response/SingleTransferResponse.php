@@ -11,10 +11,9 @@ use Comgate\SDK\Http\Query;
 
 class SingleTransferResponse
 {
-    /**
-     *
-     * @var array<string, int|string>
-     */
+	/**
+	 * @var array<int, PaymentInfo>
+	 */
 	protected array $paymentsList = [];
 
 	/**
@@ -33,18 +32,17 @@ class SingleTransferResponse
 	}
 
 	/**
-	 * @return array<string, int|string>
+	 * @return array<int, PaymentInfo>
 	 */
 	public function getPaymentsList(): array
 	{
 		return $this->paymentsList;
 	}
 
-        /**
-         *
-         * @param array<string, int|string> $paymentsList
-         * @return self
-         */
+	/**
+	 * @param array<int, PaymentInfo> $paymentsList
+	 * @return SingleTransferResponse
+	 */
 	public function setPaymentsList(array $paymentsList): self
 	{
 		$this->paymentsList = $paymentsList;

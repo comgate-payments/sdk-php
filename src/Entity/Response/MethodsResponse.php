@@ -8,9 +8,9 @@ use Comgate\SDK\Http\Response;
 
 class MethodsResponse
 {
+
 	/**
-	 *
-	 * @var array<Method>
+	 * @var array<int, Method>
 	 */
 	private array $methodsList = [];
 
@@ -41,7 +41,7 @@ class MethodsResponse
 	}
 
 	/**
-	 * @return array<Method>
+	 * @return array<int, Method>
 	 */
 	public function getMethodsList(): array
 	{
@@ -49,7 +49,7 @@ class MethodsResponse
 	}
 
 	/**
-	 * @param array<Method> $methodsList
+	 * @param array<int, Method> $methodsList
 	 * @return MethodsResponse
 	 */
 	public function setMethodsList(array $methodsList): MethodsResponse
@@ -59,7 +59,7 @@ class MethodsResponse
 	}
 
 	/**
-	 * @return array<string, string|int>
+	 * @return array<int, array<string, string>>
 	 */
 	public function toArray(): array
 	{
