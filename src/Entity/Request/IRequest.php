@@ -15,7 +15,7 @@ interface IRequest
 	/**
 	 * Converts the request to array params.
 	 *
-	 * @return mixed[]
+	 * @return array<string, string|int>
 	 */
 	public function toArray(): array;
 
