@@ -37,13 +37,12 @@ class Payment
 		// ... other params whithout default value
 	];
 
-        /**
-         *
-         * @param string $paramName
-         * @param mixed $value
-         * @return self
-         */
-	public function setParam($paramName, $value): self
+	/**
+	 * @param string $paramName
+	 * @param mixed $value
+	 * @return $this
+	 */
+	public function setParam(string $paramName, $value): self
 	{
 		$this->params[$paramName] = $value;
 

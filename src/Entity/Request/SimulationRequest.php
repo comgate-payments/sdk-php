@@ -37,7 +37,7 @@ class SimulationRequest implements IRequest
 	}
 
 	/**
-	 * @return array<string, int|string>
+	 * @return array<string, string>
 	 */
 	public function getParams(): array
 	{
@@ -45,7 +45,7 @@ class SimulationRequest implements IRequest
 	}
 
 	/**
-	 * @param array<string, int|string> $params
+	 * @param array<string, string> $params
 	 * @return SimulationRequest
 	 */
 	public function setParams(array $params): SimulationRequest
