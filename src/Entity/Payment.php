@@ -9,7 +9,7 @@ class Payment
 	/**
 	 * Payment parameters.
 	 *
-	 * @var array
+	 * @var array<string, mixed>
 	 */
 	protected $params = [
 		'test' => false,
@@ -24,14 +24,19 @@ class Payment
 		'name' => '',
 	];
 
-	public function setParam($paramName, $value): self
+	/**
+	 * @param string $paramName
+	 * @param mixed $value
+	 * @return $this
+	 */
+	public function setParam(string $paramName, $value): self
 	{
 		$this->params[$paramName] = $value;
 
 		return $this;
 	}
 
-	public function getParam($paramName): mixed
+	public function getParam(string $paramName): mixed
 	{
 		if (isset($this->params[$paramName])) {
 			return $this->params[$paramName];
@@ -40,11 +45,18 @@ class Payment
 		throw new ParamIsNotSetException("Param {$paramName} is not set.");
 	}
 
+	/**
+	 * @return array<string, mixed>
+	 */
 	public function getParams(): array
 	{
 		return $this->params;
 	}
 
+	/**
+	 * @param array<string, mixed> $params
+	 * @return $this
+	 */
 	public function setParams(array $params)
 	{
 		$this->params = $params;
@@ -158,6 +170,10 @@ class Payment
 		return $this->getParam('excludedMethods');
 	}
 
+	/**
+	 * @param array<int, string> $methods
+	 * @return $this
+	 */
 	public function setMethods(array $methods): self
 	{
 		$this->params['allowedMethods'] = $methods;

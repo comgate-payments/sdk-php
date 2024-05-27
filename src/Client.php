@@ -105,7 +105,7 @@ class Client
 	}
 
 	/**
-	 * @param array<int, string> $params
+	 * @param array<string, string> $params
 	 * @return SimulationResponse
 	 * @throws Exception\ApiException
 	 */
