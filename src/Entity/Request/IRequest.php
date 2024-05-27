@@ -15,7 +15,7 @@ interface IRequest
 	/**
 	 * Converts the request to array params.
 	 *
-	 * @return array<string, string|int>
+	 * @return array<string, bool|int|string|null>
 	 */
 	public function toArray(): array;
 
