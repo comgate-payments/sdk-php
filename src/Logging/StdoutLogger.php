@@ -22,7 +22,6 @@ class StdoutLogger implements LoggerInterface
 	}
 
 	/**
-         * mixed nahradit
 	 * @param $message
 	 * @param array<mixed> $context
 	 * @return void
@@ -33,7 +32,6 @@ class StdoutLogger implements LoggerInterface
 	}
 
 	/**
-         * mixed nahradit
 	 * @param $message
 	 * @param array<mixed> $context
 	 * @return void
@@ -44,7 +42,6 @@ class StdoutLogger implements LoggerInterface
 	}
 
 	/**
-         * mixed nahradit
 	 * @param $message
 	 * @param array<mixed> $context
 	 * @return void
@@ -55,7 +52,6 @@ class StdoutLogger implements LoggerInterface
 	}
 
 	/**
-         * mixed nahradit
 	 * @param $message
 	 * @param array<mixed> $context
 	 * @return void
@@ -66,7 +62,6 @@ class StdoutLogger implements LoggerInterface
 	}
 
 	/**
-         * mixed nahradit
 	 * @param $message
 	 * @param array<mixed> $context
 	 * @return void
@@ -77,7 +72,6 @@ class StdoutLogger implements LoggerInterface
 	}
 
 	/**
-         * mixed nahradit
 	 * @param $message
 	 * @param array<mixed> $context
 	 * @return void
@@ -88,7 +82,6 @@ class StdoutLogger implements LoggerInterface
 	}
 
 	/**
-         * mixed nahradit
 	 * @param $message
 	 * @param array<mixed> $context
 	 * @return void
@@ -99,7 +92,6 @@ class StdoutLogger implements LoggerInterface
 	}
 
 	/**
-         * mixed nahradit
 	 * @param $message
 	 * @param array<mixed> $context
 	 * @return void

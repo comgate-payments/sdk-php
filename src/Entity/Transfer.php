@@ -20,7 +20,7 @@ class Transfer
          */
 	public function fromArray(array $transferData): Transfer
         {
-		$this   ->setTransferId((int) $transferData['transferId'])
+		$this->setTransferId((int) $transferData['transferId'])
 			->setTransferDate(new DateTime($transferData['transferDate']))
 			->setAccountCounterparty($transferData['accountCounterparty'])
 			->setAccountOutgoing($transferData['accountOutgoing'])

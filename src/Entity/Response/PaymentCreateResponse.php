@@ -47,10 +47,9 @@ class PaymentCreateResponse
 		}
 	}
 
-        /**
-         *
-         * @return array<string, int|string>
-         */
+	/**
+	 * @return array<string, string|int>
+	 */
 	public function toArray(): array
 	{
 		return [

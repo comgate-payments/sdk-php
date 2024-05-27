@@ -8,10 +8,10 @@ use Comgate\SDK\Http\Response;
 
 class MethodsResponse
 {
-        /**
-         *
-         * @var array<Method>
-         */
+	/**
+	 *
+	 * @var array<Method>
+	 */
 	private array $methodsList = [];
 
 	/**
@@ -58,10 +58,9 @@ class MethodsResponse
 		return $this;
 	}
 
-        /**
-         *
-         * @return array<int<0, max>, array<string, mixed>>.
-         */
+	/**
+	 * @return array<string, string|int>
+	 */
 	public function toArray(): array
 	{
 		$methodsArray = [];
