@@ -20,7 +20,8 @@ class AboSingleTransferResponse extends FileResponse
 			throw new ApiException($aboData['message'], $aboData['code']);
 		}
 
+		$decodedContent = base64_decode($aboData['abo'], true);
 		$this->setFilename($aboData['nazev'])
-			->setFileContent(base64_decode($aboData['abo'], true));
+			->setFileContent($decodedContent !== false ? $decodedContent : '');
 	}
 }

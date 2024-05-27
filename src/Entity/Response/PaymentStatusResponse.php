@@ -61,7 +61,7 @@ class PaymentStatusResponse
 	}
 
 	/**
-	 * @return array<string, string|int>
+	 * @return array<string, bool|string|int|null>
 	 */
 	public function toArray(): array
 	{

@@ -21,7 +21,8 @@ class CsvSingleTransferResponse extends FileResponse
 			throw new ApiException($csvData['message'], $csvData['code']);
 		}
 
+		$decodedContent = base64_decode($csvData['csv'], true);
 		$this->setFilename($csvData['nazev'])
-			->setFileContent(base64_decode($csvData['csv'], true));
+			->setFileContent($decodedContent !== false ? $decodedContent : '');
 	}
 }

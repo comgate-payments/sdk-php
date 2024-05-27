@@ -267,7 +267,7 @@ class Payment
 		return $this;
 	}
 
-	public function isPreauth(): ?bool
+	public function isPreauth(): bool
 	{
 		return $this->getParam('preauth');
 	}

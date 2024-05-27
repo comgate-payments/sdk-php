@@ -11,7 +11,7 @@ use GuzzleHttp\Psr7\Query;
 class TransferListResponse
 {
 	/**
-	 * @var array<string, string|int>
+	 * @var array<int, Transfer>
 	 */
 	protected array $transferList = [];
 
@@ -30,7 +30,7 @@ class TransferListResponse
 	}
 
 	/**
-	 * @return array<string, string|int>
+	 * @return array<int, Transfer>
 	 */
 	public function getTransferList(): array
 	{
@@ -38,7 +38,7 @@ class TransferListResponse
 	}
 
 	/**
-	 * @param array<string, string|int> $transferList
+	 * @param array<int, Transfer> $transferList
 	 * @return TransferListResponse
 	 */
 	public function setTransferList(array $transferList): self

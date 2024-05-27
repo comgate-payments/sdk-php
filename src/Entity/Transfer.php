@@ -19,11 +19,11 @@ class Transfer
 	 * @throws \Exception
 	 */
 	public function fromArray(array $transferData){
-		$this->setTransferId($transferData['transferId'])
-			->setTransferDate(new DateTime($transferData['transferDate']))
-			->setAccountCounterparty($transferData['accountCounterparty'])
-			->setAccountOutgoing($transferData['accountOutgoing'])
-			->setVariableSymbol($transferData['variableSymbol']);
+		$this->setTransferId((int) $transferData['transferId'])
+			->setTransferDate(new DateTime((string) $transferData['transferDate']))
+			->setAccountCounterparty((string) $transferData['accountCounterparty'])
+			->setAccountOutgoing((string) $transferData['accountOutgoing'])
+			->setVariableSymbol((string) $transferData['variableSymbol']);
 
 		return $this;
 	}
