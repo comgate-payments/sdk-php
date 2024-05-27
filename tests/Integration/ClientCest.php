@@ -194,6 +194,7 @@ class ClientCest
 
 		// create the test payment
 		$payment = $I->createPayment();
+		$I->assertInstanceOf(Money::class, $payment->getPrice());
 		$payment->setMethods([PaymentMethodCode::CARD_CARD_CZ_CSOB_2]);
 		$payment->setTest(true);
 		$paymentsCreateResponse = $client->createPayment($payment);

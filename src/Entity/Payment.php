@@ -9,7 +9,7 @@ class Payment
 	/**
 	 * Payment parameters.
 	 *
-	 * @var array<string, int|string>
+	 * @var array<string, bool|int|string>
 	 */
 	protected $params = [
 		'test' => false,
@@ -23,18 +23,18 @@ class Payment
 		'excludedMethods' => [],
 		'account' => '',
 		'name' => '',
-        'fullName' => '',
-		'billingAddrCity' => '',
-		'billingAddrStreet' => '',
-		'billingAddrPostalCode' => '',
-		'billingAddrCountry' => '',
-		'delivery' => '',
-		'homeDeliveryCity' => '',
-		'homeDeliveryStreet' => '',
-		'homeDeliveryPostalCode' => '',
-		'homeDeliveryCountry' => '',
-		'category' => '',
 		// ... other params whithout default value
+		// 'fullName' => '',
+		// 'billingAddrCity' => '',
+		// 'billingAddrStreet' => '',
+		// 'billingAddrPostalCode' => '',
+		// 'billingAddrCountry' => '',
+		// 'delivery' => '',
+		// 'homeDeliveryCity' => '',
+		// 'homeDeliveryStreet' => '',
+		// 'homeDeliveryPostalCode' => '',
+		// 'homeDeliveryCountry' => '',
+		// 'category' => '',
 	];
 
 	/**
@@ -52,7 +52,7 @@ class Payment
         /**
          *
          * @param string $paramName
-         * @return string | Money
+         * @return string|Money
          * @throws ParamIsNotSetException
          */
 	public function getParam($paramName)
@@ -66,7 +66,7 @@ class Payment
 
         /**
          *
-         * @return array<string, int|string>
+         * @return array<string, bool|int|string>
          */
 	public function getParams(): array
 	{

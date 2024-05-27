@@ -14,7 +14,7 @@ class Transport implements ITransport
 	/** @var Config */
 	protected $config;
 
-	/** @var LoggerInterface */
+	/** @var LoggerInterface | null */
 	private $logger;
 
 	public function __construct(Config $config, LoggerInterface $logger = null)
@@ -47,7 +47,7 @@ class Transport implements ITransport
 		$e = curl_error($curl);
 
 		if ($this->logger !== null) {
-			$this->logger->log(LogLevel::INFO, 'Request to "'.$this->config->getUrl() . $urn .'" sent');
+			$this->logger->log(LogLevel::INFO, 'Request to "' . $this->config->getUrl() . $urn . '" sent');
 			$this->logger->log(LogLevel::DEBUG, 'Response: ' . $response);
 			$this->logger->log(LogLevel::DEBUG, 'cURL info: ' . json_encode(curl_getinfo($curl)));
 
@@ -96,11 +96,11 @@ class Transport implements ITransport
 	{
 		$response = new PsrResponse();
 
-		if (!str_contains($curlResponse, "\r\n\r\n")) {
+		if (!str_contains((string)$curlResponse, "\r\n\r\n")) {
 			$curlResponse = "\r\n\r\n" . $curlResponse;
 		}
 
-		$headerSplit = explode("\r\n\r\n", $curlResponse, 2);
+		$headerSplit = explode("\r\n\r\n", (string)$curlResponse, 2);
 		$headers = $headerSplit[0];
 		$body = $headerSplit[1];
 

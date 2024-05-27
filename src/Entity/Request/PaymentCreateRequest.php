@@ -43,7 +43,7 @@ class PaymentCreateRequest implements IRequest
 		unset($output['excludedMethods']);
 
 		// Optional
-		$output['preauth'] = (bool)$this->payment->isPreauth() ? 'true' : 'false';
+		$output['preauth'] = $this->payment->isPreauth() ? 'true' : 'false';
 		$output['test'] = $this->payment->isTest() ? 'true' : 'false';
 		$output['verification'] = $this->payment->isVerification() ? 'true' : 'false';
 		$output['embedded'] = $this->payment->isEmbedded() ? 'true' : 'false';
