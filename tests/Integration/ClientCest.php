@@ -3,7 +3,6 @@
 
 namespace Tests\Integration;
 
-use _PHPStan_b8e553790\Nette\Utils\DateTime;
 use Codeception\Attribute\DataProvider;
 use Codeception\Attribute\Group;
 use Codeception\Example;
@@ -13,6 +12,7 @@ use Comgate\SDK\Entity\Codes\CurrencyCode;
 use Comgate\SDK\Entity\Codes\PaymentMethodCode;
 use Comgate\SDK\Entity\Codes\PaymentStatusCode;
 use Comgate\SDK\Entity\Codes\RequestCode;
+use Comgate\SDK\Entity\Method;
 use Comgate\SDK\Entity\Money;
 use Comgate\SDK\Entity\Payment;
 use Comgate\SDK\Entity\Refund;
@@ -32,6 +32,7 @@ use Comgate\SDK\Entity\Transfer;
 use Comgate\SDK\Exception\Api\PreauthException;
 use Comgate\SDK\Exception\ApiException;
 use Tests\Support\IntegrationTester;
+use DateTime;
 
 class ClientCest
 {
@@ -44,6 +45,9 @@ class ClientCest
 
 		$I->assertInstanceOf(MethodsResponse::class, $methodsResponse);
 		$I->assertNotEmpty($methodsResponse->getMethodsList(), 'Methods list should not be empty');
+		foreach ($methodsResponse->getMethodsList() as $method) {
+			$I->assertInstanceOf(Method::class, $method);
+		}
 	}
 
 	#[Group('methods')]
