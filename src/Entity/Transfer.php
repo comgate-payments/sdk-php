@@ -13,6 +13,11 @@ class Transfer
 	protected string $accountOutgoing; // string(6) "1/0000"
 	protected string $variableSymbol; // string(10) "0123456789"
 
+	/**
+	 * @param array<string, string|int> $transferData
+	 * @return $this
+	 * @throws \Exception
+	 */
 	public function fromArray(array $transferData){
 		$this->setTransferId($transferData['transferId'])
 			->setTransferDate(new DateTime($transferData['transferDate']))

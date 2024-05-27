@@ -55,7 +55,10 @@ class MethodsResponse
 		return $this;
 	}
 
-	public function toArray()
+	/**
+	 * @return array<string, string|int>
+	 */
+	public function toArray(): array
 	{
 		$methodsArray = [];
 

@@ -29,7 +29,7 @@ class FileLogger implements LoggerInterface
 
 	/**
 	 * @param $message
-	 * @param array $context
+	 * @param mixed[] $context
 	 * @return void
 	 */
 	public function emergency($message, array $context = []): void
@@ -39,7 +39,7 @@ class FileLogger implements LoggerInterface
 
 	/**
 	 * @param $message
-	 * @param array $context
+	 * @param mixed[] $context
 	 * @return void
 	 */
 	public function alert($message, array $context = []): void
@@ -49,7 +49,7 @@ class FileLogger implements LoggerInterface
 
 	/**
 	 * @param $message
-	 * @param array $context
+	 * @param mixed[] $context
 	 * @return void
 	 */
 	public function critical($message, array $context = []): void
@@ -59,7 +59,7 @@ class FileLogger implements LoggerInterface
 
 	/**
 	 * @param $message
-	 * @param array $context
+	 * @param mixed[] $context
 	 * @return void
 	 */
 	public function error($message, array $context = []): void
@@ -69,7 +69,7 @@ class FileLogger implements LoggerInterface
 
 	/**
 	 * @param $message
-	 * @param array $context
+	 * @param mixed[] $context
 	 * @return void
 	 */
 	public function warning($message, array $context = []): void
@@ -79,7 +79,7 @@ class FileLogger implements LoggerInterface
 
 	/**
 	 * @param $message
-	 * @param array $context
+	 * @param mixed[] $context
 	 * @return void
 	 */
 	public function notice($message, array $context = []): void
@@ -89,7 +89,7 @@ class FileLogger implements LoggerInterface
 
 	/**
 	 * @param $message
-	 * @param array $context
+	 * @param mixed[] $context
 	 * @return void
 	 */
 	public function info($message, array $context = []): void
@@ -99,7 +99,7 @@ class FileLogger implements LoggerInterface
 
 	/**
 	 * @param $message
-	 * @param array $context
+	 * @param mixed[] $context
 	 * @return void
 	 */
 	public function debug($message, array $context = []): void

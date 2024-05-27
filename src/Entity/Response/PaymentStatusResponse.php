@@ -60,7 +60,10 @@ class PaymentStatusResponse
 			->setFee($parsedResponse['fee']);
 	}
 
-	public function toArray()
+	/**
+	 * @return array<string, string|int>
+	 */
+	public function toArray(): array
 	{
 		$output = [
 			'code' => $this->getCode(),

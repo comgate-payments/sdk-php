@@ -55,9 +55,9 @@ class Transport implements ITransport
 
 	/**
 	 * @param Config $config
-	 * @return Transport
+	 * @return ITransport
 	 */
-	public function setConfig(Config $config): Transport
+	public function setConfig(Config $config): ITransport
 	{
 		$this->config = $config;
 		return $this;
