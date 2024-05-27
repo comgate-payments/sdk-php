@@ -24,7 +24,7 @@ class PaymentStatusRequest implements IRequest
 	}
 
 	/**
-	 * @return mixed[]
+	 * @return array<string, string>
 	 */
 	public function toArray(): array
 	{

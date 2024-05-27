@@ -23,7 +23,7 @@ class RecurringPaymentRequest implements IRequest
 	}
 
 	/**
-	 * @return mixed[]
+	 * @return array<string, string|int>
 	 */
 	public function toArray(): array
 	{
