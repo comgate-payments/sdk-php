@@ -25,7 +25,7 @@ class PaymentCreateRequest implements IRequest
 	}
 
 	/**
-	 * @return array<string, string|int>
+	 * @return array<string, bool|string|int>
 	 */
 	public function toArray(): array
 	{

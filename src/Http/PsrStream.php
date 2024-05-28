@@ -7,8 +7,8 @@ use Psr\Http\Message\StreamInterface;
 
 class PsrStream implements StreamInterface
 {
-	/** @var null|resource */
-	protected $stream = null;
+	/** @var resource */
+	protected $stream;
 
 	public function __construct(string $content)
 	{
@@ -35,18 +35,14 @@ class PsrStream implements StreamInterface
 
 	public function detach()
 	{
-		if (isset($this->stream)) {
-			$detached = is_resource($this->stream) ? $this->stream : null;
-			$this->stream = null;
-			return $detached;
-		}
-		return null;
+		$detached = $this->stream;
+		return $detached;
 	}
 
 	public function getSize(): ?int
 	{
 		$stats = fstat($this->stream);
-		if($stats !== false){
+		if ($stats !== false) {
 			return $stats['size'];
 		}
 		return null;
@@ -54,7 +50,8 @@ class PsrStream implements StreamInterface
 
 	public function tell(): int
 	{
-		return ftell($this->stream);
+		$stream = ftell($this->stream);
+		return $stream !== false ? $stream : 0;
 	}
 
 	public function eof(): bool
@@ -84,7 +81,8 @@ class PsrStream implements StreamInterface
 
 	public function write($string): int
 	{
-		return fwrite($this->stream, $string);
+		$stream = fwrite($this->stream, $string);
+		return $stream !== false ? $stream : 0;
 	}
 
 	public function isReadable(): bool
@@ -94,6 +92,8 @@ class PsrStream implements StreamInterface
 
 	public function read($length): string
 	{
+		$length = max($length, 0);
+
 		$stream = fread($this->stream, $length);
 		return $stream !== false ? $stream : '';
 	}

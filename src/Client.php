@@ -109,7 +109,7 @@ class Client
 
         /**
          *
-         * @param array<string, int|string> $params
+         * @param array<string, string> $params
          * @return SimulationResponse
          */
 	public function simulation(array $params): SimulationResponse
