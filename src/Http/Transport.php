@@ -52,12 +52,20 @@ class Transport implements ITransport
 			$this->logger->log(LogLevel::DEBUG, 'cURL info: ' . json_encode(curl_getinfo($curl)));
 
 			// => [level, message]
-			$log = match (true) {
-				($response === false) => [LogLevel::ERROR, 'cURL request failed: ' . $e],
-				($httpCode >= 500) => [LogLevel::CRITICAL, 'Server error: HTTP code ' . $httpCode],
-				($httpCode >= 400) => [LogLevel::ERROR, 'Client error: HTTP code ' . $httpCode],
-				default => [LogLevel::INFO, 'cURL request completed successfully.'],
-			};
+			switch (true){
+				case ($response === false):
+					$log = [LogLevel::ERROR, 'cURL request failed: ' . $e];
+					break;
+				case ($httpCode >= 500):
+					$log = [LogLevel::CRITICAL, 'Server error: HTTP code ' . $httpCode];
+					break;
+				case ($httpCode >= 400):
+					$log = [LogLevel::ERROR, 'Client error: HTTP code ' . $httpCode];
+					break;
+				default:
+					$log = [LogLevel::INFO, 'cURL request completed successfully.'];
+					break;
+			}
 			$this->logger->log(...$log);
 		}
 
@@ -89,10 +97,10 @@ class Transport implements ITransport
 	}
 
 	/**
-	 * @param $curlResponse bool|string
+	 * @param bool|string $curlResponse
 	 * @return MessageInterface
 	 */
-	private function createResponse(bool|string $curlResponse): MessageInterface
+	private function createResponse($curlResponse): MessageInterface
 	{
 		$response = new PsrResponse();
 
