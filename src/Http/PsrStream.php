@@ -7,21 +7,25 @@ use Psr\Http\Message\StreamInterface;
 
 class PsrStream implements StreamInterface
 {
-	/** @var null|resource */
+	/** @var resource */
 	protected $stream;
 
-	public function __construct(string $content) {
-		if (!$this->stream = fopen('php://temp', 'r+')) {
-			$this->stream = null;
+	public function __construct(string $content)
+	{
+		$stream = fopen('php://temp', 'r+');
+
+		if ($stream !== false) {
+			$this->stream = $stream;
+			fwrite($this->stream, $content);
+			rewind($this->stream);
 		}
-		fwrite($this->stream, $content);
-		rewind($this->stream);
 	}
 
 	public function __toString(): string
 	{
 		rewind($this->stream);
-		return stream_get_contents($this->stream);
+		$streamString = stream_get_contents($this->stream);
+		return $streamString !== false ? $streamString : '';
 	}
 
 	public function close(): void
@@ -31,23 +35,23 @@ class PsrStream implements StreamInterface
 
 	public function detach()
 	{
-		if (isset($this->stream)) {
-			$detached = is_resource($this->stream) ? $this->stream : null;
-			$this->stream = null;
-			return $detached;
-		}
-		 return null;
+		$detached = $this->stream;
+		return $detached;
 	}
 
 	public function getSize(): ?int
 	{
 		$stats = fstat($this->stream);
-		return $stats['size'];
+		if ($stats !== false) {
+			return $stats['size'];
+		}
+		return null;
 	}
 
 	public function tell(): int
 	{
-		return ftell($this->stream);
+		$stream = ftell($this->stream);
+		return $stream !== false ? $stream : 0;
 	}
 
 	public function eof(): bool
@@ -77,7 +81,8 @@ class PsrStream implements StreamInterface
 
 	public function write($string): int
 	{
-		return fwrite($this->stream, $string);
+		$stream = fwrite($this->stream, $string);
+		return $stream !== false ? $stream : 0;
 	}
 
 	public function isReadable(): bool
@@ -87,12 +92,16 @@ class PsrStream implements StreamInterface
 
 	public function read($length): string
 	{
-		return fread($this->stream, $length);
+		$length = max($length, 0);
+
+		$stream = fread($this->stream, $length);
+		return $stream !== false ? $stream : '';
 	}
 
 	public function getContents(): string
 	{
-		return stream_get_contents($this->stream);
+		$stream = stream_get_contents($this->stream);
+		return $stream !== false ? $stream : '';
 	}
 
 	public function getMetadata($key = null)

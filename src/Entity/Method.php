@@ -13,12 +13,11 @@ class Method
 
 	private string $logo;
 
-        /**
-         * 
-         * @param array<string> $methodData
-         * @return self
-         */
-	public function fromArray(array $methodData): self
+	/**
+	 * @param array<string, string> $methodData
+	 * @return $this
+	 */
+	public function fromArray(array $methodData)
 	{
 		$this->setId($methodData['id'])
 			->setName($methodData['name'])

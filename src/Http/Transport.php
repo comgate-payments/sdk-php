@@ -14,7 +14,7 @@ class Transport implements ITransport
 	/** @var Config */
 	protected $config;
 
-	/** @var LoggerInterface */
+	/** @var LoggerInterface | null */
 	private $logger;
 
 	public function __construct(Config $config, LoggerInterface $logger = null)
@@ -47,17 +47,25 @@ class Transport implements ITransport
 		$e = curl_error($curl);
 
 		if ($this->logger !== null) {
-			$this->logger->log(LogLevel::INFO, 'Request to "'.$this->config->getUrl() . $urn .'" sent');
+			$this->logger->log(LogLevel::INFO, 'Request to "' . $this->config->getUrl() . $urn . '" sent');
 			$this->logger->log(LogLevel::DEBUG, 'Response: ' . $response);
 			$this->logger->log(LogLevel::DEBUG, 'cURL info: ' . json_encode(curl_getinfo($curl)));
 
 			// => [level, message]
-			$log = match (true) {
-				($response === false) => [LogLevel::ERROR, 'cURL request failed: ' . $e],
-				($httpCode >= 500) => [LogLevel::CRITICAL, 'Server error: HTTP code ' . $httpCode],
-				($httpCode >= 400) => [LogLevel::ERROR, 'Client error: HTTP code ' . $httpCode],
-				default => [LogLevel::INFO, 'cURL request completed successfully.'],
-			};
+			switch (true){
+				case ($response === false):
+					$log = [LogLevel::ERROR, 'cURL request failed: ' . $e];
+					break;
+				case ($httpCode >= 500):
+					$log = [LogLevel::CRITICAL, 'Server error: HTTP code ' . $httpCode];
+					break;
+				case ($httpCode >= 400):
+					$log = [LogLevel::ERROR, 'Client error: HTTP code ' . $httpCode];
+					break;
+				default:
+					$log = [LogLevel::INFO, 'cURL request completed successfully.'];
+					break;
+			}
 			$this->logger->log(...$log);
 		}
 
@@ -80,27 +88,27 @@ class Transport implements ITransport
 
 	/**
 	 * @param Config $config
-	 * @return Transport
+	 * @return ITransport
 	 */
-	public function setConfig(Config $config): Transport
+	public function setConfig(Config $config): ITransport
 	{
 		$this->config = $config;
 		return $this;
 	}
 
 	/**
-	 * @param $curlResponse bool|string
+	 * @param bool|string $curlResponse
 	 * @return MessageInterface
 	 */
-	private function createResponse(bool|string $curlResponse): MessageInterface
+	private function createResponse($curlResponse): MessageInterface
 	{
 		$response = new PsrResponse();
 
-		if (!str_contains($curlResponse, "\r\n\r\n")) {
+		if (!str_contains((string)$curlResponse, "\r\n\r\n")) {
 			$curlResponse = "\r\n\r\n" . $curlResponse;
 		}
 
-		$headerSplit = explode("\r\n\r\n", $curlResponse, 2);
+		$headerSplit = explode("\r\n\r\n", (string)$curlResponse, 2);
 		$headers = $headerSplit[0];
 		$body = $headerSplit[1];
 

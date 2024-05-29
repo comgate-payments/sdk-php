@@ -90,5 +90,4 @@ class Comgate
 	{
 		return new Transport($this->createConfig(), $this->logger);
 	}
-
 }

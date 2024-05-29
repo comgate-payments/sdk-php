@@ -32,6 +32,7 @@ use Comgate\SDK\Entity\Response\SimulationResponse;
 use Comgate\SDK\Entity\Response\SingleTransferResponse;
 use Comgate\SDK\Entity\Response\TransferListResponse;
 use Comgate\SDK\Http\ITransport;
+use Comgate\SDK\Http\Response;
 use DateTimeInterface;
 
 class Client
@@ -108,7 +109,7 @@ class Client
 
         /**
          *
-         * @param array<string, int|string> $params
+         * @param array<string, string> $params
          * @return SimulationResponse
          */
 	public function simulation(array $params): SimulationResponse

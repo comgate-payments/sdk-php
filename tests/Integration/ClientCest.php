@@ -15,8 +15,8 @@ use Comgate\SDK\Entity\Codes\LangCode;
 use Comgate\SDK\Entity\Codes\PaymentMethodCode;
 use Comgate\SDK\Entity\Codes\PaymentStatusCode;
 use Comgate\SDK\Entity\Codes\RequestCode;
-use Comgate\SDK\Entity\Codes\TypeCode;
 use Comgate\SDK\Entity\Method;
+use Comgate\SDK\Entity\Codes\TypeCode;
 use Comgate\SDK\Entity\Money;
 use Comgate\SDK\Entity\Payment;
 use Comgate\SDK\Entity\Refund;
@@ -48,6 +48,9 @@ class ClientCest
 
 		$I->assertInstanceOf(MethodsResponse::class, $methodsResponse);
 		$I->assertNotEmpty($methodsResponse->getMethodsList(), 'Methods list should not be empty');
+		foreach ($methodsResponse->getMethodsList() as $method) {
+			$I->assertInstanceOf(Method::class, $method);
+		}
 	}
 
 	#[Group('methods')]
@@ -191,6 +194,7 @@ class ClientCest
 
 		// create the test payment
 		$payment = $I->createPayment();
+		$I->assertInstanceOf(Money::class, $payment->getPrice());
 		$payment->setMethods([PaymentMethodCode::CARD_CARD_CZ_CSOB_2]);
 		$payment->setTest(true);
 		$paymentsCreateResponse = $client->createPayment($payment);
