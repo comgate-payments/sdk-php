@@ -51,9 +51,8 @@ class Payment
 	}
 
 	/**
-	 *
 	 * @param string $paramName
-	 * @return string|Money
+	 * @return bool|int|string|Money|array<int, string>
 	 * @throws ParamIsNotSetException
 	 */
 	public function getParam($paramName)
@@ -66,8 +65,7 @@ class Payment
 	}
 
 	/**
-	 *
-	 * @return array<string, bool|int|string>
+	 * @return array<string, bool|int|string|Money|array<int, string>>
 	 */
 	public function getParams(): array
 	{
@@ -75,8 +73,7 @@ class Payment
 	}
 
 	/**
-	 *
-	 * @param array<string, int|string> $params
+	 * @param array<string, bool|int|string|Money> $params
 	 * @return self
 	 */
 	public function setParams(array $params): self
@@ -127,7 +124,7 @@ class Payment
 
 	public function getCurrency(): string
 	{
-		return $this->getParamWithouMoney('curr');
+		return (string) $this->getParamWithoutMoney('curr');
 	}
 
 	public function setCurrency(string $currency): self
@@ -139,7 +136,7 @@ class Payment
 
 	public function getLabel(): string
 	{
-		return $this->getParamWithouMoney('label');
+		return (string) $this->getParamWithoutMoney('label');
 	}
 
 	public function setLabel(string $label): self
@@ -151,7 +148,7 @@ class Payment
 
 	public function getReferenceId(): string
 	{
-		return $this->getParamWithouMoney('refId');
+		return (string) $this->getParamWithoutMoney('refId');
 	}
 
 	public function setReferenceId(string $referenceId): self
@@ -163,7 +160,7 @@ class Payment
 
 	public function getEmail(): string
 	{
-		return $this->getParamWithouMoney('email');
+		return (string) $this->getParamWithoutMoney('email');
 	}
 
 	public function isTest(): bool
@@ -203,7 +200,7 @@ class Payment
 
 	/**
 	 *
-	 * @param array<string, int|string> $methods
+	 * @param array<int, string> $methods
 	 * @return self
 	 */
 	public function setMethods(array $methods): self
@@ -242,7 +239,7 @@ class Payment
 
 	public function getCountry(): ?string
 	{
-		return $this->getParamWithouMoney('country');
+		return (string) $this->getParamWithoutMoney('country');
 	}
 
 	public function setCountry(string $country): self
@@ -254,7 +251,7 @@ class Payment
 
 	public function getAccount(): ?string
 	{
-		return $this->getParamWithouMoney('account');
+		return (string) $this->getParamWithoutMoney('account');
 	}
 
 	public function setAccount(string $account): self
@@ -266,7 +263,7 @@ class Payment
 
 	public function getName(): ?string
 	{
-		return $this->getParamWithouMoney('name');
+		return (string) $this->getParamWithoutMoney('name');
 	}
 
 	public function setName(string $name): self
@@ -278,7 +275,7 @@ class Payment
 
 	public function getLang(): ?string
 	{
-		return $this->getParamWithouMoney('lang');
+		return (string) $this->getParamWithoutMoney('lang');
 	}
 
 	public function setLang(string $lang): self
@@ -290,7 +287,7 @@ class Payment
 
 	public function getTransactionId(): ?string
 	{
-		return $this->getParamWithouMoney('transactionId');
+		return (string) $this->getParamWithoutMoney('transactionId');
 	}
 
 	public function setTransactionId(string $transactionId): self
@@ -365,7 +362,7 @@ class Payment
 	 */
 	public function getPayerId(): ?string
 	{
-		return $this->getParamWithouMoney('payerId');
+		return (string) $this->getParamWithoutMoney('payerId');
 	}
 
 	/**
@@ -383,7 +380,7 @@ class Payment
 	 */
 	public function getApplePayPayload(): ?string
 	{
-		return $this->getParamWithouMoney('applePayPayload');
+		return (string) $this->getParamWithoutMoney('applePayPayload');
 	}
 
 	/**
@@ -401,7 +398,7 @@ class Payment
 	 */
 	public function getExpirationTime(): ?string
 	{
-		return $this->getParamWithouMoney('expirationTime');
+		return (string) $this->getParamWithoutMoney('expirationTime');
 	}
 
 	/**
@@ -420,7 +417,7 @@ class Payment
 	 */
 	public function getInitRecurringId(): ?string
 	{
-		return $this->getParamWithouMoney('initRecurringId');
+		return (string) $this->getParamWithoutMoney('initRecurringId');
 	}
 
 	/**
@@ -447,7 +444,7 @@ class Payment
 
 	public function getFullName(): ?string
 	{
-		return $this->getParamWithouMoney('fullName');
+		return (string) $this->getParamWithoutMoney('fullName');
 	}
 
 	public function setFullName(string $fullName): self
@@ -459,7 +456,7 @@ class Payment
 
 	public function getBillingAddrCity(): ?string
 	{
-		return $this->getParamWithouMoney('billingAddrCity');
+		return (string) $this->getParamWithoutMoney('billingAddrCity');
 	}
 
 	public function setBillingAddrCity(string $billingAddrCity): self
@@ -471,7 +468,7 @@ class Payment
 
 	public function getBillingAddrStreet(): ?string
 	{
-		return $this->getParamWithouMoney('billingAddrStreet');
+		return (string) $this->getParamWithoutMoney('billingAddrStreet');
 	}
 
 	public function setBillingAddrStreet(string $billingAddrStreet): self
@@ -483,7 +480,7 @@ class Payment
 
 	public function getBillingAddrPostalCode(): ?string
 	{
-		return $this->getParamWithouMoney('billingAddrPostalCode');
+		return (string) $this->getParamWithoutMoney('billingAddrPostalCode');
 	}
 
 	public function setBillingAddrPostalCode(string $billingAddrPostalCode): self
@@ -495,7 +492,7 @@ class Payment
 
 	public function getBillingAddrCountry(): ?string
 	{
-		return $this->getParamWithouMoney('billingAddrCountry');
+		return (string) $this->getParamWithoutMoney('billingAddrCountry');
 	}
 
 	public function setBillingAddrCountry(string $billingAddrCountry): self
@@ -507,7 +504,7 @@ class Payment
 
 	public function getDelivery(): ?string
 	{
-		return $this->getParamWithouMoney('delivery');
+		return (string) $this->getParamWithoutMoney('delivery');
 	}
 
 	public function setDelivery(string $delivery): self
@@ -519,7 +516,7 @@ class Payment
 
 	public function getHomeDeliveryCity(): ?string
 	{
-		return $this->getParamWithouMoney('homeDeliveryCity');
+		return (string) $this->getParamWithoutMoney('homeDeliveryCity');
 	}
 
 	public function setHomeDeliveryCity(string $homeDeliveryCity): self
@@ -531,7 +528,7 @@ class Payment
 
 	public function getHomeDeliveryStreet(): ?string
 	{
-		return $this->getParamWithouMoney('homeDeliveryStreet');
+		return (string) $this->getParamWithoutMoney('homeDeliveryStreet');
 	}
 
 	public function setHomeDeliveryStreet(string $homeDeliveryStreet): self
@@ -543,7 +540,7 @@ class Payment
 
 	public function getHomeDeliveryPostalCode(): ?string
 	{
-		return $this->getParamWithouMoney('homeDeliveryPostalCode');
+		return (string) $this->getParamWithoutMoney('homeDeliveryPostalCode');
 	}
 
 	public function setHomeDeliveryPostalCode(string $homeDeliveryPostalCode): self
@@ -555,7 +552,7 @@ class Payment
 
 	public function getHomeDeliveryCountry(): ?string
 	{
-		return $this->getParamWithouMoney('homeDeliveryCountry');
+		return (string) $this->getParamWithoutMoney('homeDeliveryCountry');
 	}
 
 	public function setHomeDeliveryCountry(string $homeDeliveryCountry): self
@@ -567,7 +564,7 @@ class Payment
 
 	public function getCategory(): ?string
 	{
-		return $this->getParamWithouMoney('category');
+		return (string) $this->getParamWithoutMoney('category');
 	}
 
 	public function setCategory(string $category): self
@@ -577,7 +574,7 @@ class Payment
 		return $this;
 	}
 
-	private function getParamWithouMoney(string $attributeName): string
+	private function getParamWithoutMoney(string $attributeName): bool|int|string
 	{
 		$param = $this->getParam($attributeName);
 		if ($param instanceof Money) {

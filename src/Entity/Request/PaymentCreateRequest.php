@@ -2,6 +2,7 @@
 
 namespace Comgate\SDK\Entity\Request;
 
+use Comgate\SDK\Entity\Money;
 use Comgate\SDK\Entity\Payment;
 use Comgate\SDK\Exception\LogicalException;
 
@@ -25,7 +26,7 @@ class PaymentCreateRequest implements IRequest
 	}
 
 	/**
-	 * @return array<string, bool|string|int>
+	 * @return array<string, bool|string|int|null>
 	 */
 	public function toArray(): array
 	{

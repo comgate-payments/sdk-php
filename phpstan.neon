@@ -1,5 +1,5 @@
 parameters:
-	level: 8
+	level: 6
 	ignoreErrors:
 		- '#^Unsafe usage of new static\(\)\.$#'
 
