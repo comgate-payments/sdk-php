@@ -2,7 +2,6 @@
 
 namespace Comgate\SDK\Http;
 
-use PHPStan\Type\ResourceType;
 use Psr\Http\Message\StreamInterface;
 
 class PsrStream implements StreamInterface
