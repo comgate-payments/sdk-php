@@ -73,10 +73,9 @@ class PaymentStatusResponse
 		}
 	}
 
-         /**
-         *
-         * @return array<string, bool|int|string>
-         */
+	/**
+	 * @return array<string, bool|string|int|null>
+	 */
 	public function toArray(): array
 	{
 		$output = [

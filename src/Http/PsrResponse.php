@@ -7,11 +7,19 @@ use Psr\Http\Message\StreamInterface;
 
 class PsrResponse implements MessageInterface
 {
-	/** @var array<string, array<string>> */
+	/**
+	 * @var array<string, array<string>>
+	 */
 	private $headers;
-	/** @var StreamInterface */
+	
+	/**
+	 * @var StreamInterface
+	 */
 	private $body;
-	/** @var string */
+
+	/**
+	 * @var string
+	 */
 	private $protocolVersion = "1.1";
 
 	public function getHeaders(): array

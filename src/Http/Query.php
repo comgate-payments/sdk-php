@@ -13,18 +13,22 @@ class Query
 		/** @var array<string, string> */
 		$result = [];
 
-		foreach (explode("&", $string) as $kv) {
-			$exploded = explode("=", rawurldecode($kv), 2);
+		foreach (explode("&", $string) as $keyValuePair) {
+			$exploded = explode("=", rawurldecode($keyValuePair), 2);
 			$key = $exploded[0];
 			$value = $exploded[1] ?? "";
-			if (array_key_exists($key, $result)) {
-				if (!is_array($result[$key])) {
-					$result[$key] = [$result[$key]];
-				}
-				$result[$key][] = $value;
-			} else {
-				$result[$key] = $value;
-			}
+			$result[$key] = $value;
+			// $exploded = explode("=", rawurldecode($keyValuePair), 2);
+			// $key = $exploded[0];
+			// $value = $exploded[1] ?? "";
+			// if (array_key_exists($key, $result)) {
+			// 	if (!is_array($result[$key])) {
+			// 		$result[$key] = [$result[$key]];
+			// 	}
+			// 	$result[$key][] = $value;
+			// } else {
+			// 	$result[$key] = $value;
+			// }
 		}
 
 		return $result;

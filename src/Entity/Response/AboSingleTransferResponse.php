@@ -14,13 +14,14 @@ class AboSingleTransferResponse extends FileResponse
 	public function __construct(Response $aboSingleTransferResponse)
 	{
 		$aboJson = $aboSingleTransferResponse->getContent();
-		$aboData = (array)json_decode($aboJson, true);
+		$aboData = json_decode($aboJson, true);
 
 		if (isset($aboData['code']) && isset($aboData['message'])) {
 			throw new ApiException($aboData['message'], $aboData['code']);
 		}
 
+		$decodedContent = base64_decode($aboData['abo'], true);
 		$this->setFilename($aboData['nazev'])
-			->setFileContent((string)base64_decode((string)$aboData['abo'], true));
+			->setFileContent($decodedContent !== false ? $decodedContent : '');
 	}
 }
