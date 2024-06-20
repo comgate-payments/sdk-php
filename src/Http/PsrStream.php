@@ -94,7 +94,7 @@ class PsrStream implements StreamInterface
 		$length = max($length, 0);
 
 		$stream = fread($this->stream, $length);
-		return !$stream ? '' : $stream;
+		return $stream == false ? '' : $stream;
 	}
 
 	public function getContents(): string
