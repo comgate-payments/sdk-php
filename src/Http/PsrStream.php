@@ -2,7 +2,6 @@
 
 namespace Comgate\SDK\Http;
 
-use PHPStan\Type\ResourceType;
 use Psr\Http\Message\StreamInterface;
 
 class PsrStream implements StreamInterface
@@ -95,7 +94,7 @@ class PsrStream implements StreamInterface
 		$length = max($length, 0);
 
 		$stream = fread($this->stream, $length);
-		return $stream !== false ? $stream : '';
+		return $stream == false ? '' : $stream;
 	}
 
 	public function getContents(): string

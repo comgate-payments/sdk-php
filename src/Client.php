@@ -32,7 +32,6 @@ use Comgate\SDK\Entity\Response\SimulationResponse;
 use Comgate\SDK\Entity\Response\SingleTransferResponse;
 use Comgate\SDK\Entity\Response\TransferListResponse;
 use Comgate\SDK\Http\ITransport;
-use Comgate\SDK\Http\Response;
 use DateTimeInterface;
 
 class Client
