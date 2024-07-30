@@ -104,7 +104,7 @@ class Transport implements ITransport
 	{
 		$response = new PsrResponse();
 
-		if (!str_contains((string)$curlResponse, "\r\n\r\n")) {
+		if (strstr((string)$curlResponse, "\r\n\r\n") === false) {
 			$curlResponse = "\r\n\r\n" . $curlResponse;
 		}
 
@@ -113,7 +113,7 @@ class Transport implements ITransport
 		$body = $headerSplit[1];
 
 		foreach (explode("\r\n", $headers) as $h) {
-			if (str_contains($h, ": ")) {
+			if (strstr($h, ": ") !== false) {
 				[$name, $value] = explode(": ", $h, 2);
 				$response = $response->withAddedHeader($name, $value);
 			}
