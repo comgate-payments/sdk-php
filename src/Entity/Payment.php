@@ -592,13 +592,16 @@ class Payment
 	{
 		$param = $this->getParam('businessFee');
 
-		if (!empty($param) && !($param instanceof Money)) {
+		if ($param !== null && !($param instanceof Money)) {
 			throw new Exception("The Money value is not instance of Money");
 		}
 
 		return $param;
 	}
 
+	/**
+	 * @param int|float|Money $businessFee
+	 */
 	public function setBusinessFee($businessFee): self
 	{
 		$this->setParam('businessFee', Money::of($businessFee));
