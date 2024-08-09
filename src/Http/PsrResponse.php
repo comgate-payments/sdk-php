@@ -11,7 +11,7 @@ class PsrResponse implements MessageInterface
 	 * @var array<string, array<string>>
 	 */
 	private $headers;
-	
+
 	/**
 	 * @var StreamInterface
 	 */
@@ -27,22 +27,22 @@ class PsrResponse implements MessageInterface
 		return $this->headers;
 	}
 
-	public function hasHeader(string $name): bool
+	public function hasHeader($name): bool
 	{
 		return isset($this->headers[$name]);
 	}
 
-	public function getHeader(string $name): array
+	public function getHeader($name): array
 	{
 		return $this->headers[$name] ?? [];
 	}
 
-	public function getHeaderLine(string $name): string
+	public function getHeaderLine($name): string
 	{
 		return join(", ", $this->getHeader($name));
 	}
 
-	public function withHeader(string $name, $value): MessageInterface
+	public function withHeader($name, $value): MessageInterface
 	{
 		$out = clone $this;
 		$out->headers[$name] = is_array($value) ? $value : [$value];
@@ -50,7 +50,7 @@ class PsrResponse implements MessageInterface
 		return $out;
 	}
 
-	public function withAddedHeader(string $name, $value): MessageInterface
+	public function withAddedHeader($name, $value): MessageInterface
 	{
 		$out = clone $this;
 
@@ -62,7 +62,7 @@ class PsrResponse implements MessageInterface
 		return $out;
 	}
 
-	public function withoutHeader(string $name): MessageInterface
+	public function withoutHeader($name): MessageInterface
 	{
 		$out = clone $this;
 		unset($out->headers[$name]);
@@ -88,7 +88,7 @@ class PsrResponse implements MessageInterface
 		return $this->protocolVersion;
 	}
 
-	public function withProtocolVersion(string $version): MessageInterface
+	public function withProtocolVersion($version): MessageInterface
 	{
 		$out = clone $this;
 		$out->protocolVersion = $version;

@@ -20,7 +20,7 @@
     "require": {
         "php": "^7.3 || ^8.0",
         "psr/log": "^1.1|^2|^3",
-        "psr/http-message": "^2.0"
+        "psr/http-message": "^1.0.1|^2"
     },
     "require-dev": {
         "codeception/codeception": "^4.2 || ^5.0",
