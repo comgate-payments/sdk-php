@@ -43,7 +43,8 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\Cases\\": "tests/cases",
-            "Tests\\Toolkit\\": "tests/toolkit"
+            "Tests\\Toolkit\\": "tests/toolkit",
+            "Tests\\PHPStanRule\\": "tests/PHPStanRule"
         }
     },
     "minimum-stability": "dev",
