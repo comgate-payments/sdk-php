@@ -24,8 +24,8 @@ class Payment
 		'excludedMethods' => [],
 		'account' => '',
 		'name' => '',
-		// ... other params whithout default value
 		// 'fullName' => '',
+		// 'phone' => '',
 		// 'billingAddrCity' => '',
 		// 'billingAddrStreet' => '',
 		// 'billingAddrPostalCode' => '',
@@ -442,6 +442,18 @@ class Payment
 		return $this;
 	}
 
+	public function getPhone(): ?string
+	{
+		return (string) $this->getParamWithoutMoney('phone');
+	}
+
+	public function setPhone(string $phone): self
+	{
+		$this->setParam('phone', $phone);
+
+		return $this;
+	}
+
 	public function getFullName(): ?string
 	{
 		return (string) $this->getParamWithoutMoney('fullName');
@@ -570,6 +582,27 @@ class Payment
 	public function setCategory(string $category): self
 	{
 		$this->setParam('category', $category);
+
+		return $this;
+	}
+
+	public function getBusinessFee(): ?Money
+	{
+		$param = $this->params['businessFee'] ?? null;
+
+		if ($param !== null && !($param instanceof Money)) {
+			throw new Exception("The Money value is not instance of Money");
+		}
+
+		return $param;
+	}
+
+	/**
+	 * @param int|float|Money $businessFee
+	 */
+	public function setBusinessFee($businessFee): self
+	{
+		$this->setParam('businessFee', Money::of($businessFee));
 
 		return $this;
 	}
