@@ -34,6 +34,7 @@ class PaymentCreateRequest implements IRequest
 		$output = $this->payment->getParams();
 
 		$output['price'] = $this->payment->getPrice()->get(); // in cents 10.25 => 1025
+		$output['businessFee'] =  $this->payment->getBusinessFee() !== null ? $this->payment->getBusinessFee()->get() : null; // in cents 10.25 => 1025
 		$output['prepareOnly'] = $this->payment->isPrepareOnly() ? 'true' : 'false';
 		$output['method'] = implode('+', $this->payment->getAllowedMethods());
 		unset($output['allowedMethods']);
