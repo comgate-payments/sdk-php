@@ -26,6 +26,7 @@ class Payment
 		'name' => '',
 		// ... other params whithout default value
 		// 'fullName' => '',
+		// 'phone' => '',
 		// 'billingAddrCity' => '',
 		// 'billingAddrStreet' => '',
 		// 'billingAddrPostalCode' => '',
@@ -438,6 +439,18 @@ class Payment
 	public function setDynamicExpiration(bool $dynamicExpiration): self
 	{
 		$this->setParam('dynamicExpiration', $dynamicExpiration);
+
+		return $this;
+	}
+
+	public function getPhone(): ?string
+	{
+		return (string) $this->getParamWithoutMoney('phone');
+	}
+
+	public function setPhone(string $phone): self
+	{
+		$this->setParam('phone', $phone);
 
 		return $this;
 	}
