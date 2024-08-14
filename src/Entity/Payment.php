@@ -24,8 +24,6 @@ class Payment
 		'excludedMethods' => [],
 		'account' => '',
 		'name' => '',
-		'businessFee' => 0,
-		// ... other params whithout default value
 		// 'fullName' => '',
 		// 'phone' => '',
 		// 'billingAddrCity' => '',
@@ -590,7 +588,7 @@ class Payment
 
 	public function getBusinessFee(): ?Money
 	{
-		$param = $this->getParam('businessFee');
+		$param = $this->params['businessFee'] ?? null;
 
 		if ($param !== null && !($param instanceof Money)) {
 			throw new Exception("The Money value is not instance of Money");
