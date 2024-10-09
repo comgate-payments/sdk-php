@@ -36,6 +36,8 @@ class Payment
 		// 'homeDeliveryPostalCode' => '',
 		// 'homeDeliveryCountry' => '',
 		// 'category' => '',
+		// 'chargeUnregulatedCardFees' => false,
+		// 'disableApplePayGooglePay' => false,
 	];
 
 	/**
@@ -586,23 +588,27 @@ class Payment
 		return $this;
 	}
 
-	public function getBusinessPrice(): ?Money
+
+	public function getChargeUnregulatedCardFees(): string
 	{
-		$param = $this->params['businessPrice'] ?? null;
-
-		if ($param !== null && !($param instanceof Money)) {
-			throw new Exception("The Money value is not instance of Money");
-		}
-
-		return $param;
+		return $this->getParam('chargeUnregulatedCardFees');
 	}
 
-	/**
-	 * @param int|float|Money $businessPrice
-	 */
-	public function setBusinessPrice($businessPrice): self
+	public function setChargeUnregulatedCardFees(string $chargeUnregulatedCardFees): self
 	{
-		$this->setParam('businessPrice', Money::of($businessPrice));
+		$this->setParam('chargeUnregulatedCardFees', $chargeUnregulatedCardFees);
+
+		return $this;
+	}
+
+	public function getDisableApplePayGooglePay(): bool
+	{
+		return $this->getParam('disableApplePayGooglePay');
+	}
+
+	public function setDisableApplePayGooglePay(bool $disableApplePayGooglePay): self
+	{
+		$this->setParam('disableApplePayGooglePay', $disableApplePayGooglePay);
 
 		return $this;
 	}
