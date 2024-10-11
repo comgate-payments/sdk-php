@@ -588,7 +588,6 @@ class Payment
 		return $this;
 	}
 
-
 	public function getChargeUnregulatedCardFees(): string
 	{
 		return $this->getParam('chargeUnregulatedCardFees');
