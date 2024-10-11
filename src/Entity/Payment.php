@@ -36,6 +36,8 @@ class Payment
 		// 'homeDeliveryPostalCode' => '',
 		// 'homeDeliveryCountry' => '',
 		// 'category' => '',
+		// 'chargeUnregulatedCardFees' => false,
+		// 'enableApplePayGooglePay' => false,
 	];
 
 	/**
@@ -586,23 +588,37 @@ class Payment
 		return $this;
 	}
 
-	public function getBusinessPrice(): ?Money
+	public function getChargeUnregulatedCardFees(): string
 	{
-		$param = $this->params['businessPrice'] ?? null;
+		return $this->getParam('chargeUnregulatedCardFees');
+	}
 
-		if ($param !== null && !($param instanceof Money)) {
-			throw new Exception("The Money value is not instance of Money");
-		}
+	public function setChargeUnregulatedCardFees(string $chargeUnregulatedCardFees): self
+	{
+		$this->setParam('chargeUnregulatedCardFees', $chargeUnregulatedCardFees);
 
-		return $param;
+		return $this;
 	}
 
 	/**
-	 * @param int|float|Money $businessPrice
+	 * Vrací true/false/null hodnotu zapnutého Google/Apple pay.
+	 * @return null|bool
 	 */
-	public function setBusinessPrice($businessPrice): self
+	public function getEnableApplePayGooglePay()
 	{
-		$this->setParam('businessPrice', Money::of($businessPrice));
+		return $this->getParam('enableApplePayGooglePay');
+	}
+
+	/**
+	 * Explicitně umožňuje povolení Apple Pay a Google Pay na platbách s přirážkami za neregulovanou kartu. Případně pro přímé zakázání pro konkrétní platbu
+	 *
+	 * @param null|bool $enableApplePayGooglePay
+	 * @return Payment
+	 */
+	// Použit komentář místo parametrového typu kvůli nekompatibilitě s null hodnotou.
+	public function setEnableApplePayGooglePay($enableApplePayGooglePay): self
+	{
+		$this->setParam('enableApplePayGooglePay', $enableApplePayGooglePay);
 
 		return $this;
 	}
