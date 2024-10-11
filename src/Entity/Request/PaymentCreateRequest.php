@@ -35,7 +35,7 @@ class PaymentCreateRequest implements IRequest
 
 		$output['price'] = $this->payment->getPrice()->get(); // in cents 10.25 => 1025
         $output['chargeUnregulatedCardFees'] = $this->payment->getChargeUnregulatedCardFees();
-        $output['disableApplePayGooglePay'] = $this->payment->getDisableApplePayGooglePay() ? 'true' : 'false';
+        $output['enableApplePayGooglePay'] = $this->payment->getEnableApplePayGooglePay();
 		$output['prepareOnly'] = $this->payment->isPrepareOnly() ? 'true' : 'false';
 		$output['method'] = implode('+', $this->payment->getAllowedMethods());
 		unset($output['allowedMethods']);

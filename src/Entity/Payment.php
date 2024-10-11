@@ -37,7 +37,7 @@ class Payment
 		// 'homeDeliveryCountry' => '',
 		// 'category' => '',
 		// 'chargeUnregulatedCardFees' => false,
-		// 'disableApplePayGooglePay' => false,
+		// 'enableApplePayGooglePay' => false,
 	];
 
 	/**
@@ -600,14 +600,25 @@ class Payment
 		return $this;
 	}
 
-	public function getDisableApplePayGooglePay(): bool
+	/**
+	 * Vrací true/false/null hodnotu zapnutého Google/Apple pay.
+	 * @return null|bool
+	 */
+	public function getEnableApplePayGooglePay()
 	{
-		return $this->getParam('disableApplePayGooglePay');
+		return $this->getParam('enableApplePayGooglePay');
 	}
 
-	public function setDisableApplePayGooglePay(bool $disableApplePayGooglePay): self
+	/**
+	 * Explicitně umožňuje povolení Apple Pay a Google Pay na platbách s přirážkami za neregulovanou kartu. Případně pro přímé zakázání pro konkrétní platbu
+	 *
+	 * @param null|bool $enableApplePayGooglePay
+	 * @return Payment
+	 */
+	// Použit komentář místo parametrového typu kvůli nekompatibilitě s null hodnotou.
+	public function setEnableApplePayGooglePay($enableApplePayGooglePay): self
 	{
-		$this->setParam('disableApplePayGooglePay', $disableApplePayGooglePay);
+		$this->setParam('enableApplePayGooglePay', $enableApplePayGooglePay);
 
 		return $this;
 	}
