@@ -588,12 +588,12 @@ class Payment
 		return $this;
 	}
 
-	public function getChargeUnregulatedCardFees(): string
+	public function getChargeUnregulatedCardFees(): bool
 	{
 		return $this->getParam('chargeUnregulatedCardFees');
 	}
 
-	public function setChargeUnregulatedCardFees(string $chargeUnregulatedCardFees): self
+	public function setChargeUnregulatedCardFees(bool $chargeUnregulatedCardFees): self
 	{
 		$this->setParam('chargeUnregulatedCardFees', $chargeUnregulatedCardFees);
 
