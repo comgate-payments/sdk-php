@@ -5,12 +5,12 @@
 </p>
 
 <p align=center>
-  <a href="https://github.com/comgate-payments/sdk-php/actions"><img src="https://badgen.net/github/checks/comgate-payments/sdk-php"></a>
-  <a href="https://coveralls.io/r/comgate-payments/sdk-php"><img src="https://badgen.net/coveralls/c/github/comgate-payments/sdk-php"></a>
-  <a href="https://packagist.org/packages/comgate-payments/sdk-php"><img src="https://badgen.net/packagist/dm/comgate-payments/sdk-php"></a>
-  <a href="https://packagist.org/packages/comgate-payments/sdk-php"><img src="https://badgen.net/packagist/v/comgate-payments/sdk-php"></a>
-  <a href="https://packagist.org/packages/comgate-payments/sdk-php"><img src="https://badgen.net/packagist/php/comgate-payments/sdk-php"></a>
-  <a href="https://github.com/comgate-payments/sdk-php"><img src="https://badgen.net/github/license/comgate-payments/sdk-php"></a>
+  <a href="https://github.com/comgate/sdk/actions"><img src="https://badgen.net/github/checks/comgate/sdk"></a>
+  <a href="https://coveralls.io/r/comgate/sdk"><img src="https://badgen.net/coveralls/c/github/comgate/sdk"></a>
+  <a href="https://packagist.org/packages/comgate/sdk"><img src="https://badgen.net/packagist/dm/comgate/sdk"></a>
+  <a href="https://packagist.org/packages/comgate/sdk"><img src="https://badgen.net/packagist/v/comgate/sdk"></a>
+  <a href="https://packagist.org/packages/comgate/sdk"><img src="https://badgen.net/packagist/php/comgate/sdk"></a>
+  <a href="https://github.com/comgate/sdk"><img src="https://badgen.net/github/license/comgate/sdk"></a>
 </p>
 
 ## Getting Started
