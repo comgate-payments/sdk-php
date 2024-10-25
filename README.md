@@ -5,12 +5,12 @@
 </p>
 
 <p align=center>
-  <a href="https://github.com/comgate/sdk/actions"><img src="https://badgen.net/github/checks/comgate/sdk"></a>
-  <a href="https://coveralls.io/r/comgate/sdk"><img src="https://badgen.net/coveralls/c/github/comgate/sdk"></a>
+  <a href="https://github.com/comgate-payments/sdk-php/actions"><img src="https://badgen.net/github/checks/comgate-payments/sdk-php"></a>
+  <a href="https://coveralls.io/r/comgate-payments/sdk-php"><img src="https://badgen.net/coveralls/c/github/comgate-payments/sdk-php"></a>
   <a href="https://packagist.org/packages/comgate/sdk"><img src="https://badgen.net/packagist/dm/comgate/sdk"></a>
   <a href="https://packagist.org/packages/comgate/sdk"><img src="https://badgen.net/packagist/v/comgate/sdk"></a>
   <a href="https://packagist.org/packages/comgate/sdk"><img src="https://badgen.net/packagist/php/comgate/sdk"></a>
-  <a href="https://github.com/comgate/sdk"><img src="https://badgen.net/github/license/comgate/sdk"></a>
+  <a href="https://github.com/comgate-payments/sdk-php"><img src="https://badgen.net/github/license/comgate-payments/sdk-php"></a>
 </p>
 
 ## Getting Started
@@ -266,10 +266,6 @@ $client = Comgate::defaults()
 Take a look at [our tests](https://github.com/comgate-payments/sdk-php/blob/master/tests/fixtures) to see the logger format.
 
 ## Maintenance
-
-<a href="https://github.com/f3l1x">
-    <img width="80" height="80" src="https://avatars.githubusercontent.com/f3l1x">
-</a>
 
 If you find a bug, please submit the issue in [Github](https://github.com/comgate-payments/sdk-php/issues) directly.
 
