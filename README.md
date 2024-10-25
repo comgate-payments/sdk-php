@@ -25,7 +25,7 @@ You have to install php-xml extension on your PHP server (e.g.: Ubuntu: apt-get 
 
 ### Documentation
 
-- https://help.comgate.cz/docs/protocol-api-en (english version)
+- https://help.comgate.cz/docs/en/api-protocol-en (english version)
 - https://help.comgate.cz/docs/api-protokol (czech version)
 
 ### Registration
