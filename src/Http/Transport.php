@@ -42,6 +42,12 @@ class Transport implements ITransport
 		curl_setopt($curl, CURLOPT_HTTPHEADER, ["content-type: application/x-www-form-urlencoded",]);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
+		if(isset($this->config->getOptions()['transport'])){
+			foreach ($this->config->getOptions()['transport'] as $configKey => $configValue) {
+				curl_setopt($curl, $configKey, $configValue);
+			}
+		}
+
 		$response = curl_exec($curl);
 		$httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		$e = curl_error($curl);

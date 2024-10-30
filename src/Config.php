@@ -16,11 +16,15 @@ class Config
 	/** @var string */
 	private $url;
 
-	public function __construct(string $merchant, string $secret, string $url = self::URL)
+	/** @var array */
+	private $options = [];
+
+	public function __construct(string $merchant, string $secret, string $url = self::URL, $options = [])
 	{
 		$this->merchant = $merchant;
 		$this->secret = $secret;
 		$this->setUrl($url);
+		$this->setOptions($options);
 	}
 
 	public function getMerchant(): string
@@ -67,5 +71,16 @@ class Config
 	public function setUrl(string $url): void
 	{
 		$this->url = rtrim($url, "/") . "/";
+	}
+
+	public function getOptions(): array
+	{
+		return $this->options;
+	}
+
+	public function setOptions(array $options): Config
+	{
+		$this->options = $options;
+		return $this;
 	}
 }

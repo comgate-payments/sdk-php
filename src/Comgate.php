@@ -18,6 +18,9 @@ class Comgate
 	/** @var string */
 	private $secret;
 
+	/** @var array */
+	private $options = [];
+
 	/** @var LoggerInterface|null */
 	private $logger = null;
 
@@ -83,11 +86,22 @@ class Comgate
 
 	protected function createConfig(): Config
 	{
-		return new Config($this->merchant, $this->secret, $this->url);
+		return new Config($this->merchant, $this->secret, $this->url, $this->options);
 	}
 
 	protected function createTransport(): ITransport
 	{
 		return new Transport($this->createConfig(), $this->logger);
+	}
+
+	public function getOptions(): array
+	{
+		return $this->options;
+	}
+
+	public function setOptions(array $options): self
+	{
+		$this->options = $options;
+		return $this;
 	}
 }

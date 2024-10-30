@@ -17,6 +17,10 @@ class TransportCest
 			->setMerchant($_ENV['API_MERCHANT'])
 			->setSecret($_ENV['API_SECRET'])
 			->setUrl($_ENV['API_URL'])
+			->setOptions(['transport' => [
+				CURLOPT_SSL_VERIFYPEER => true,
+				CURLOPT_SSL_VERIFYHOST => true,
+			]])
 			->createClient();
 		$config = new Config('merchant', 'secret');
 
