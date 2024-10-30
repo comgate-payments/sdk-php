@@ -19,7 +19,7 @@ class Comgate
 	private $secret;
 
 	/**
-	 * @var array<int, string>
+	 * @var array<string, array<string, mixed>>
 	 */
 	private $options = [];
 
@@ -106,7 +106,7 @@ class Comgate
 	}
 
 	/**
-	 * @return string[]
+	 * @return array<string, mixed>
 	 */
 	public function getOptions(): array
 	{
@@ -114,7 +114,7 @@ class Comgate
 	}
 
 	/**
-	 * @param array<int, string> $options
+	 * @param array<string, array<string, mixed>> $options
 	 * @return $this
 	 */
 	public function setOptions(array $options): self

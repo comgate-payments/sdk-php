@@ -16,11 +16,17 @@ class Config
 	/** @var string */
 	private $url;
 
-	/** 
-	 * @var array<int, string> 
+	/**
+	 * @var array<string, array<string, mixed>>
 	 */
 	private $options = [];
 
+	/**
+	 * @param string $merchant
+	 * @param string $secret
+	 * @param string $url
+	 * @param array<string, array<string, mixed>> $options
+	 */
 	public function __construct(string $merchant, string $secret, string $url = self::URL, $options = [])
 	{
 		$this->merchant = $merchant;
@@ -76,7 +82,7 @@ class Config
 	}
 
 	/**
-	 * @return string[]
+	 * @return array<string, mixed>
 	 */
 	public function getOptions(): array
 	{
@@ -84,7 +90,7 @@ class Config
 	}
 
 	/**
-	 * @param array<int, string> $options
+	 * @param array<string, array<string, mixed>> $options
 	 * @return $this
 	 */
 	public function setOptions(array $options): Config
