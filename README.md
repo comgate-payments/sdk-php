@@ -6,10 +6,9 @@
 
 <p align=center>
   <a href="https://github.com/comgate-payments/sdk-php/actions"><img src="https://badgen.net/github/checks/comgate-payments/sdk-php"></a>
-  <a href="https://coveralls.io/r/comgate-payments/sdk-php"><img src="https://badgen.net/coveralls/c/github/comgate-payments/sdk-php"></a>
-  <a href="https://packagist.org/packages/comgate-payments/sdk-php"><img src="https://badgen.net/packagist/dm/comgate-payments/sdk-php"></a>
-  <a href="https://packagist.org/packages/comgate-payments/sdk-php"><img src="https://badgen.net/packagist/v/comgate-payments/sdk-php"></a>
-  <a href="https://packagist.org/packages/comgate-payments/sdk-php"><img src="https://badgen.net/packagist/php/comgate-payments/sdk-php"></a>
+  <a href="https://packagist.org/packages/comgate/sdk"><img src="https://badgen.net/packagist/dm/comgate/sdk"></a>
+  <a href="https://packagist.org/packages/comgate/sdk"><img src="https://badgen.net/packagist/v/comgate/sdk"></a>
+  <a href="https://packagist.org/packages/comgate/sdk"><img src="https://badgen.net/packagist/php/comgate/sdk"></a>
   <a href="https://github.com/comgate-payments/sdk-php"><img src="https://badgen.net/github/license/comgate-payments/sdk-php"></a>
 </p>
 
@@ -26,7 +25,7 @@ You have to install php-xml extension on your PHP server (e.g.: Ubuntu: apt-get 
 
 ### Documentation
 
-- https://help.comgate.cz/docs/protocol-api-en (english version)
+- https://help.comgate.cz/docs/en/api-protocol-en (english version)
 - https://help.comgate.cz/docs/api-protokol (czech version)
 
 ### Registration
@@ -267,14 +266,10 @@ Take a look at [our tests](https://github.com/comgate-payments/sdk-php/blob/mast
 
 ## Maintenance
 
-<a href="https://github.com/f3l1x">
-    <img width="80" height="80" src="https://avatars.githubusercontent.com/f3l1x">
-</a>
-
 If you find a bug, please submit the issue in [Github](https://github.com/comgate-payments/sdk-php/issues) directly.
 
 Thank you for using our Comgate payment.
 
 ## License
 
-Copyright (c) 2021 Comgatea a.s. [MIT Licensed](LICENSE).
+Copyright (c) 2024 Comgate a.s. [MIT Licensed](LICENSE).
