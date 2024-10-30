@@ -16,6 +16,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
+      - name: Create .env file from secrets
+        run: |
+          echo "API_MERCHANT=${{ secrets.API_MERCHANT }}" >> .env
+          echo "API_SECRET=${{ secrets.API_SECRET }}" >> .env
+          echo "API_URL=${{ secrets.API_URL }}" >> .env
+
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
