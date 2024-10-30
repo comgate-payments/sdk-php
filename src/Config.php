@@ -16,7 +16,9 @@ class Config
 	/** @var string */
 	private $url;
 
-	/** @var array */
+	/** 
+	 * @var array<int, string> 
+	 */
 	private $options = [];
 
 	public function __construct(string $merchant, string $secret, string $url = self::URL, $options = [])
@@ -73,11 +75,18 @@ class Config
 		$this->url = rtrim($url, "/") . "/";
 	}
 
+	/**
+	 * @return string[]
+	 */
 	public function getOptions(): array
 	{
 		return $this->options;
 	}
 
+	/**
+	 * @param array<int, string> $options
+	 * @return $this
+	 */
 	public function setOptions(array $options): Config
 	{
 		$this->options = $options;

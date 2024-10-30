@@ -18,7 +18,9 @@ class Comgate
 	/** @var string */
 	private $secret;
 
-	/** @var array */
+	/**
+	 * @var array<int, string>
+	 */
 	private $options = [];
 
 	/** @var LoggerInterface|null */
@@ -79,26 +81,42 @@ class Comgate
 		return $this;
 	}
 
+	/**
+	 * @return Client
+	 */
 	public function createClient(): Client
 	{
 		return new Client($this->createTransport());
 	}
 
+	/**
+	 * @return Config
+	 */
 	protected function createConfig(): Config
 	{
 		return new Config($this->merchant, $this->secret, $this->url, $this->options);
 	}
 
+	/**
+	 * @return ITransport
+	 */
 	protected function createTransport(): ITransport
 	{
 		return new Transport($this->createConfig(), $this->logger);
 	}
 
+	/**
+	 * @return string[]
+	 */
 	public function getOptions(): array
 	{
 		return $this->options;
 	}
 
+	/**
+	 * @param array<int, string> $options
+	 * @return $this
+	 */
 	public function setOptions(array $options): self
 	{
 		$this->options = $options;
