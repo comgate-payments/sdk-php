@@ -26,8 +26,8 @@ jobs:
           echo "API_MERCHANT=${{ secrets.API_MERCHANT }}" >> .env
           echo "API_SECRET=${{ secrets.API_SECRET }}" >> .env
           echo "API_URL=${{ secrets.API_URL }}" >> .env
-          echo "API_URL=${{ secrets.API_URL }}"
-          echo "API_URL2=$API_URL"
+          aurl=${{ secrets.API_URL }}
+          echo "delka url: ${#aurl}"
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
