@@ -26,8 +26,12 @@ jobs:
           echo "API_MERCHANT=${{ secrets.API_MERCHANT }}" >> .env
           echo "API_SECRET=${{ secrets.API_SECRET }}" >> .env
           echo "API_URL=${{ secrets.API_URL }}" >> .env
-          aurl=${{ secrets.API_URL }}
-          echo "delka url: ${#aurl}"
+
+      - name: Load .env file
+        # This action will load variables from the .env file into the environment
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          env: '.env'
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
