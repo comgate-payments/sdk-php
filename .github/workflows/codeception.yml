@@ -37,7 +37,6 @@ jobs:
 
       - name: Update php.ini to include environment variables
         run: |
-#          php -i
           echo "variables_order = 'EGPCS'" >> /etc/php/8.3/cli/php.ini
 
       - name: Run Codeception Tests
