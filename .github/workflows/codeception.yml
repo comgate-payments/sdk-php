@@ -18,10 +18,10 @@ jobs:
 
       - name: Create .env file from secrets
         run: |
-          echo "API_MERCHANT=${{ secrets.API_MERCHANT }}" >> .env
-          echo "API_SECRET=${{ secrets.API_SECRET }}" >> .env
-          echo "API_URL=${{ secrets.API_URL }}" >> .env
-          echo "API_URL=${{ secrets.API_URL }}"
+          echo "API_MERCHANT=${{ SDK_PHP_ENV_CI.API_MERCHANT }}" >> .env
+          echo "API_SECRET=${{ SDK_PHP_ENV_CI.API_SECRET }}" >> .env
+          echo "API_URL=${{ SDK_PHP_ENV_CI.API_URL }}" >> .env
+          echo "API_URL=${{ SDK_PHP_ENV_CI.API_URL }}"
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
