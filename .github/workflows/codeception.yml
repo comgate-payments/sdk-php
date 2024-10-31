@@ -12,10 +12,10 @@ jobs:
   codeception-tests:
     runs-on: ubuntu-latest
 
-    env:
-      API_MERCHANT: ${{ secrets.API_MERCHANT }}
-      API_SECRET: ${{ secrets.API_SECRET }}
-      API_URL: ${{ secrets.API_URL }}
+#    env:
+#      API_MERCHANT: ${{ secrets.API_MERCHANT }}
+#      API_SECRET: ${{ secrets.API_SECRET }}
+#      API_URL: ${{ secrets.API_URL }}
 
     steps:
       - name: Check out repository
@@ -44,7 +44,8 @@ jobs:
           ls -al .
           cat ./.env
           vendor/bin/codecept run
-        env:
-          API_MERCHANT: ${{ secrets.API_MERCHANT }}
-          API_SECRET: ${{ secrets.API_SECRET }}
-          API_URL: ${{ secrets.API_URL }}
+
+#        env:
+#          API_MERCHANT: ${{ secrets.API_MERCHANT }}
+#          API_SECRET: ${{ secrets.API_SECRET }}
+#          API_URL: ${{ secrets.API_URL }}
