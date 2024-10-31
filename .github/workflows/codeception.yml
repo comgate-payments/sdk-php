@@ -39,7 +39,3 @@ jobs:
 
       - name: Run Codeception Tests
         run: vendor/bin/codecept run
-        with:
-          API_MERCHANT: ${{ secrets.API_MERCHANT }}
-          API_SECRET: ${{ secrets.API_SECRET }}
-          API_URL: ${{ secrets.API_URL }}
