@@ -21,6 +21,7 @@ jobs:
           echo "API_MERCHANT=${{ secrets.API_MERCHANT }}" >> .env
           echo "API_SECRET=${{ secrets.API_SECRET }}" >> .env
           echo "API_URL=${{ secrets.API_URL }}" >> .env
+          echo "API_URL=${{ secrets.API_URL }}"
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
