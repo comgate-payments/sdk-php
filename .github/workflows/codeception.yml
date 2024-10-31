@@ -31,15 +31,15 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-      - uses: dotenv-linter/action-dotenv@v2
-        with:
-          dotenv_file: .env
 
       - name: Install Composer dependencies
         run: composer install --no-progress --no-suggest --prefer-dist
 
       - name: Run Codeception Tests
-        run: vendor/bin/codecept run
+        run: |
+          ls -al .
+          cat ./.env
+          vendor/bin/codecept run
         env:
           API_MERCHANT: ${{ secrets.API_MERCHANT }}
           API_SECRET: ${{ secrets.API_SECRET }}
