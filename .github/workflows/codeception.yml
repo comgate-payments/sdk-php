@@ -27,6 +27,7 @@ jobs:
           echo "API_SECRET=${{ secrets.API_SECRET }}" >> .env
           echo "API_URL=${{ secrets.API_URL }}" >> .env
           echo "API_URL=${{ secrets.API_URL }}"
+          echo "API_URL2=$API_URL"
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -38,3 +39,7 @@ jobs:
 
       - name: Run Codeception Tests
         run: vendor/bin/codecept run
+        with:
+          API_MERCHANT: ${{ secrets.API_MERCHANT }}
+          API_SECRET: ${{ secrets.API_SECRET }}
+          API_URL: ${{ secrets.API_URL }}
