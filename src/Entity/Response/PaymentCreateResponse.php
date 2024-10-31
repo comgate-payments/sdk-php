@@ -27,6 +27,10 @@ class PaymentCreateResponse
 	{
 		$parsedResponse = Query::parse($paymentsCreateResponse->getContent());
 
+		if(isset($parsedResponse['code']) === false) {
+			throw new ApiException(sprintf('Unexpected response "%1$s"', var_export($parsedResponse, true)));
+		}
+
 		$code = (int) $parsedResponse['code'];
 		$message = $parsedResponse['message'];
 

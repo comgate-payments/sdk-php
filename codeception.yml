@@ -16,7 +16,3 @@ coverage:
     show_uncovered: true
     include:
         - src/*
-params:
-  - API_MERCHANT: '%API_MERCHANT%'
-  - API_SECRET: '%API_SECRET%'
-  - API_URL: '%API_URL%'
