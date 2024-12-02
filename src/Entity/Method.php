@@ -13,18 +13,39 @@ class Method
 
 	private string $logo;
 
+	private string $group;
+
+	private string $groupLabel;
+
 	/**
 	 * @param array<string, string> $methodData
 	 * @return $this
 	 */
-	public function fromArray(array $methodData)
+	public function fromArray(array $methodData): self
 	{
 		$this->setId($methodData['id'])
 			->setName($methodData['name'])
 			->setDescription($methodData['description'])
-			->setLogo($methodData['logo']);
+			->setLogo($methodData['logo'])
+			->setGroup($methodData['group'])
+			->setGroupLabel($methodData['groupLabel']);
 
 		return $this;
+	}
+
+	/**
+	 * @return array<string, string>
+	 */
+	public function toArray(): array
+	{
+		return [
+			'id'          => $this->getId(),
+			'name'        => $this->getName(),
+			'description' => $this->getDescription(),
+			'logo'        => $this->getLogo(),
+			'group'       => $this->getGroup(),
+			'groupLabel'  => $this->getGroupLabel(),
+		];
 	}
 
 	/**
@@ -96,6 +117,28 @@ class Method
 	public function setLogo(string $logo): self
 	{
 		$this->logo = $logo;
+		return $this;
+	}
+
+	public function getGroup(): string
+	{
+		return $this->group;
+	}
+
+	public function setGroup(string $group): Method
+	{
+		$this->group = $group;
+		return $this;
+	}
+
+	public function getGroupLabel(): string
+	{
+		return $this->groupLabel;
+	}
+
+	public function setGroupLabel(string $groupLabel): Method
+	{
+		$this->groupLabel = $groupLabel;
 		return $this;
 	}
 
