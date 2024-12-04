@@ -37,7 +37,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Comgate\\SDK\\": "src/"
+            "Comgate\\SDK\\": "src/",
+            "Tests\\": "tests/"
         }
     },
     "autoload-dev": {
