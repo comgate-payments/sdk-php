@@ -66,12 +66,7 @@ class MethodsResponse
 		$methodsArray = [];
 
 		foreach ($this->methodsList as $method) {
-			$methodsArray[] = [
-				'id' => $method->getId(),
-				'name' => $method->getName(),
-				'description' => $method->getDescription(),
-				'logo' => $method->getLogo(),
-			];
+			$methodsArray[] = $method->toArray();
 		}
 
 		return $methodsArray;

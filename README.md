@@ -129,6 +129,8 @@ try {
             $method->getName(),
             $method->getDescription(),
             $method->getLogo(),
+            $method->getGroup(),
+            $method->getGroupLabel(),
         ]);
     }
 } catch (ApiException $e) {
