@@ -164,7 +164,7 @@ class Client
 	}
 
 	/**
-	 * Method only for specific merchant, who are PCI DSS certified.
+	 * Method only for specific merchant, who are PCI DSS certified
 	 * @param Payment $payment
 	 * @param PaymentCard $paymentCard
 	 * @return MotoPaymentCreateResponse|null
