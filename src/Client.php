@@ -176,14 +176,15 @@ class Client
 		$publicCryptoKeyResponse = new PublicCryptoKeyResponse($this->transport->post($publicCryptoKeyRequest->getUrn(), $publicCryptoKeyRequest->toArray()));
 
 		$publicJkwKey = null;
-		$jwkData = json_decode(base64_decode($publicCryptoKeyResponse->getKey(), true), true);
+		$jwkData = json_decode(base64_decode($publicCryptoKeyResponse->getKey()), true);
 		if (isset($jwkData['jwk'])){
-			$publicJkwKey = strval(json_encode($jwkData['jwk']));
+			$publicJkwKey = json_encode($jwkData['jwk']);
 		}
-		if (!is_null($publicJkwKey) && $publicJkwKey != '') {
+		if (is_null($publicJkwKey) || $publicJkwKey == '') {
 			throw new Exception('No public encryption key for encrypting card data');
 		}
 
+		/** @var \phpseclib3\Crypt\RSA\PublicKey $rsa */
 		$rsa = RSA::loadPublicKey($publicJkwKey);
 
 		$motoPayment = new MotoPayment();
