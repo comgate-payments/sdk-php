@@ -176,7 +176,7 @@ class Client
 		$publicCryptoKeyResponse = new PublicCryptoKeyResponse($this->transport->post($publicCryptoKeyRequest->getUrn(), $publicCryptoKeyRequest->toArray()));
 
 		$publicJkwKey = null;
-		$jwkData = json_decode(base64_decode($publicCryptoKeyResponse->getKey()), true);
+		$jwkData = json_decode(base64_decode($publicCryptoKeyResponse->getKey(), true), true);
 		if (isset($jwkData['jwk'])){
 			$publicJkwKey = json_encode($jwkData['jwk']);
 		}
