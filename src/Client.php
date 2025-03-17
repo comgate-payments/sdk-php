@@ -180,7 +180,7 @@ class Client
 		if (isset($jwkData['jwk'])){
 			$publicJkwKey = json_encode($jwkData['jwk']);
 		}
-		if (empty($publicJkwKey)) {
+		if (!is_null($publicJkwKey) && $publicJkwKey !== '') {
 			throw new Exception('No public encryption key for encrypting card data');
 		}
 		$rsa = RSA::loadPublicKey($publicJkwKey);
