@@ -43,10 +43,10 @@ class MotoPaymentCreateResponse
 				throw new MissingParamException($message, $code);
 
 			default:
-				if (!empty($parsedResponse['transId'])) {
+				if (isset($parsedResponse['transId'])) {
 					$message .= ' - ' . $parsedResponse['transId'];
 				}
-				if (!empty($parsedResponse['status'])) {
+				if (isset($parsedResponse['status'])) {
 					$message .= ' - ' . $parsedResponse['status'];
 				}
 				throw new ApiException($message, $code);

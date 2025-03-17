@@ -86,13 +86,13 @@ class PaymentCard
 	 * @throws Exception
 	 */
 	private function validate() {
-		if (!empty($this->cardNumber) && !preg_match('/^[0-9]{16}$/', $this->cardNumber)) {
+		if (!is_null($this->cardNumber) && !preg_match('/^[0-9]{16}$/', $this->cardNumber)) {
 			throw new Exception(sprintf('Invalid card number: %s. (Required 16 digits)', $this->cardNumber));
 		}
-		if (!empty($this->cardExpiration) && !preg_match('/^[0-9]{6}$/', $this->cardExpiration)) {
+		if (!is_null($this->cardExpiration) && !preg_match('/^[0-9]{6}$/', $this->cardExpiration)) {
 			throw new Exception(sprintf('Invalid card expiration: %s. (Required format YYYYMM)', $this->cardExpiration));
 		}
-		if (!empty($this->cardCvv) && !preg_match('/^[0-9]{3}$/', $this->cardCvv)) {
+		if (!is_null($this->cardCvv) && !preg_match('/^[0-9]{3}$/', $this->cardCvv)) {
 			throw new Exception(sprintf('Invalid card CVV: %s. (Required 3 digits)', $this->cardCvv));
 		}
 		return true;
