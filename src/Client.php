@@ -176,7 +176,7 @@ class Client
 		$publicCryptoKeyResponse = new PublicCryptoKeyResponse($this->transport->post($publicCryptoKeyRequest->getUrn(), $publicCryptoKeyRequest->toArray()));
 
 		$publicJkwKey = null;
-		$jwkData = json_decode(base64_decode($publicCryptoKeyResponse->getKey()), true);
+		$jwkData = json_decode(base64_decode($publicCryptoKeyResponse->getKey(), false), true);
 		if (isset($jwkData['jwk'])){
 			$publicJkwKey = json_encode($jwkData['jwk']);
 		}
@@ -188,19 +188,19 @@ class Client
 		$motoPayment = new MotoPayment();
 		$motoPayment->setParams($payment->getParams());
 
-		if (!empty($paymentCard->getCardNumber())){
+		if (!is_null($paymentCard->getCardNumber()) && $paymentCard->getCardNumber() !== '') {
 			$motoPayment->setEncryptedCardNumber(base64_encode($rsa->encrypt($paymentCard->getCardNumber())));
 		} else {
 			throw new Exception('No card number for encrypting card data');
 		}
 
-		if (!empty($paymentCard->getCardExpiration())){
+		if (!is_null($paymentCard->getCardExpiration()) && $paymentCard->getCardExpiration() !== '') {
 			$motoPayment->setEncryptedCardExpiration(base64_encode($rsa->encrypt($paymentCard->getCardExpiration())));
 		} else {
 			throw new Exception('No card expiration for encrypting card data');
 		}
 
-		if (!empty($paymentCard->getCardCvv())){
+		if (!is_null($paymentCard->getCardCvv()) && $paymentCard->getCardCvv() !== '') {
 			$motoPayment->setEncryptedCardCvv(base64_encode($rsa->encrypt($paymentCard->getCardCvv())));
 		}
 
