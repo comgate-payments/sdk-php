@@ -183,7 +183,7 @@ class Client
 		if (!is_null($publicJkwKey) && $publicJkwKey != '') {
 			throw new Exception('No public encryption key for encrypting card data');
 		}
-		/**  @phpstan-ignore-next-line */
+
 		$rsa = RSA::loadPublicKey($publicJkwKey);
 
 		$motoPayment = new MotoPayment();
