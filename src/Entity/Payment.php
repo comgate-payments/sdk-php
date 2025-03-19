@@ -620,6 +620,7 @@ class Payment
 	public function setUrlPending(string $urlPending): self
 	{
 		$this->setParam('url_pending', $urlPending);
+
 		return $this;
 	}
 
