@@ -4,8 +4,8 @@ namespace Comgate\SDK\Entity\Response;
 
 use Comgate\SDK\Exception\Api\MissingParamException;
 use Comgate\SDK\Exception\ApiException;
-use Comgate\SDK\Http\Response;
 use Comgate\SDK\Http\Query;
+use Comgate\SDK\Http\Response;
 
 class PaymentCreateResponse
 {
@@ -26,6 +26,10 @@ class PaymentCreateResponse
 	public function __construct(Response $paymentsCreateResponse)
 	{
 		$parsedResponse = Query::parse($paymentsCreateResponse->getContent());
+
+		if ([] === $parsedResponse) {
+			throw new ApiException($paymentsCreateResponse->getContent());
+		}
 
 		$code = (int) $parsedResponse['code'];
 		$message = $parsedResponse['message'];
