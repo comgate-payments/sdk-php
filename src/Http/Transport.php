@@ -17,7 +17,7 @@ class Transport implements ITransport
 	/** @var LoggerInterface | null */
 	private $logger;
 
-	public function __construct(Config $config, LoggerInterface $logger = null)
+	public function __construct(Config $config, ?LoggerInterface $logger = null)
 	{
 		$this->config = $config;
 		$this->logger = $logger;

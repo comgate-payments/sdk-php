@@ -68,7 +68,7 @@ class Client
 		return new PaymentStatusResponse($statusResponse);
 	}
 
-	public function getMethods(MethodsRequest $methodsRequest = null): MethodsResponse
+	public function getMethods(?MethodsRequest $methodsRequest = null): MethodsResponse
 	{
 		if (($methodsRequest instanceof MethodsRequest) === false) {
 			$methodsRequest = new MethodsRequest();
