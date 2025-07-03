@@ -275,4 +275,3 @@ Thank you for using our Comgate payment.
 ## License
 
 Copyright (c) 2024 Comgate a.s. [MIT Licensed](LICENSE).
-
