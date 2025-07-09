@@ -3,10 +3,13 @@
 namespace Comgate\SDK;
 
 use Comgate\SDK\Entity\Money;
+use Comgate\SDK\Entity\MotoPayment;
 use Comgate\SDK\Entity\Payment;
+use Comgate\SDK\Entity\PaymentCard;
 use Comgate\SDK\Entity\Refund;
 use Comgate\SDK\Entity\Request\AboSingleTransferRequest;
 use Comgate\SDK\Entity\Request\CsvSingleTransferRequest;
+use Comgate\SDK\Entity\Request\MotoPaymentCreateRequest;
 use Comgate\SDK\Entity\Request\PaymentCreateRequest;
 use Comgate\SDK\Entity\Request\MethodsRequest;
 use Comgate\SDK\Entity\Request\PaymentCancelRequest;
@@ -14,6 +17,7 @@ use Comgate\SDK\Entity\Request\PaymentRefundRequest;
 use Comgate\SDK\Entity\Request\PreauthCancelRequest;
 use Comgate\SDK\Entity\Request\PaymentStatusRequest;
 use Comgate\SDK\Entity\Request\PreauthCaptureRequest;
+use Comgate\SDK\Entity\Request\PublicCryptoKeyRequest;
 use Comgate\SDK\Entity\Request\RecurringPaymentRequest;
 use Comgate\SDK\Entity\Request\SimulationRequest;
 use Comgate\SDK\Entity\Request\SingleTransferRequest;
@@ -21,11 +25,13 @@ use Comgate\SDK\Entity\Request\TransferListRequest;
 use Comgate\SDK\Entity\Response\AboSingleTransferResponse;
 use Comgate\SDK\Entity\Response\CsvSingleTransferResponse;
 use Comgate\SDK\Entity\Response\MethodsResponse;
+use Comgate\SDK\Entity\Response\MotoPaymentCreateResponse;
 use Comgate\SDK\Entity\Response\PaymentCancelResponse;
 use Comgate\SDK\Entity\Response\PaymentCreateResponse;
 use Comgate\SDK\Entity\Response\PaymentStatusResponse;
 use Comgate\SDK\Entity\Response\PreauthCancelResponse;
 use Comgate\SDK\Entity\Response\PreauthCaptureResponse;
+use Comgate\SDK\Entity\Response\PublicCryptoKeyResponse;
 use Comgate\SDK\Entity\Response\RecurringPaymentResponse;
 use Comgate\SDK\Entity\Response\RefundResponse;
 use Comgate\SDK\Entity\Response\SimulationResponse;
@@ -33,6 +39,8 @@ use Comgate\SDK\Entity\Response\SingleTransferResponse;
 use Comgate\SDK\Entity\Response\TransferListResponse;
 use Comgate\SDK\Http\ITransport;
 use DateTimeInterface;
+use Exception;
+use phpseclib3\Crypt\RSA;
 
 class Client
 {
@@ -153,6 +161,54 @@ class Client
 		$aboSingleTransferResponse = $this->transport->post($aboSingleTransferRequest->getUrn(),
 			$aboSingleTransferRequest->toArray());
 		return new AboSingleTransferResponse($aboSingleTransferResponse);
+	}
+
+	/**
+	 * Method only for specific merchant, who are PCI DSS certified
+	 * @param Payment $payment
+	 * @param PaymentCard $paymentCard
+	 * @return MotoPaymentCreateResponse|null
+	 * @throws Exception
+	 */
+	public function createMotoPayment(Payment $payment, PaymentCard $paymentCard): ?MotoPaymentCreateResponse
+	{
+		$publicCryptoKeyRequest = new PublicCryptoKeyRequest();
+		$publicCryptoKeyResponse = new PublicCryptoKeyResponse($this->transport->post($publicCryptoKeyRequest->getUrn(), $publicCryptoKeyRequest->toArray()));
+
+		$publicJkwKey = null;
+		$jwkData = json_decode(base64_decode($publicCryptoKeyResponse->getKey(), true), true);
+		if (isset($jwkData['jwk'])){
+			$publicJkwKey = json_encode($jwkData['jwk']);
+		}
+		if (is_null($publicJkwKey) || $publicJkwKey == '') {
+			throw new Exception('No public encryption key for encrypting card data');
+		}
+
+		/** @var \phpseclib3\Crypt\RSA\PublicKey $rsa */
+		$rsa = RSA::loadPublicKey($publicJkwKey);
+
+		$motoPayment = new MotoPayment();
+		$motoPayment->setParams($payment->getParams());
+
+		if (!is_null($paymentCard->getCardNumber()) && $paymentCard->getCardNumber() !== '') {
+			$motoPayment->setEncryptedCardNumber(base64_encode($rsa->encrypt($paymentCard->getCardNumber())));
+		} else {
+			throw new Exception('No card number for encrypting card data');
+		}
+
+		if (!is_null($paymentCard->getCardExpiration()) && $paymentCard->getCardExpiration() !== '') {
+			$motoPayment->setEncryptedCardExpiration(base64_encode($rsa->encrypt($paymentCard->getCardExpiration())));
+		} else {
+			throw new Exception('No card expiration for encrypting card data');
+		}
+
+		if (!is_null($paymentCard->getCardCvv()) && $paymentCard->getCardCvv() !== '') {
+			$motoPayment->setEncryptedCardCvv(base64_encode($rsa->encrypt($paymentCard->getCardCvv())));
+		}
+
+		$motoPaymentCreateRequest = new MotoPaymentCreateRequest($motoPayment);
+		$motoPaymentCreateResponse = $this->transport->post($motoPaymentCreateRequest->getUrn(), $motoPaymentCreateRequest->toArray());
+		return new MotoPaymentCreateResponse($motoPaymentCreateResponse);
 	}
 
 	/**

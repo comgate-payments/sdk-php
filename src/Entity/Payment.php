@@ -628,7 +628,7 @@ class Payment
 	 * @return bool|int|string
 	 * @throws Exception
 	 */
-	private function getParamWithoutMoney(string $attributeName)
+	protected function getParamWithoutMoney(string $attributeName)
 	{
 		$param = $this->getParam($attributeName);
 		if ($param instanceof Money) {

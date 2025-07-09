@@ -10,7 +10,7 @@ class PaymentCreateRequest implements IRequest
 {
 
 	/** @var Payment */
-	private $payment;
+	protected $payment;
 
 	public function __construct(Payment $payment)
 	{
