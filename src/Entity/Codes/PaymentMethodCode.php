@@ -42,7 +42,7 @@ final class PaymentMethodCode
 	public const BANK_MBANK_BUTTON_PSD2 = 'BANK_CZ_MB_PSD2';
 	public const BANK_MONETA_BUTTON_PSD2 = 'BANK_CZ_MO_PSD2';
 	public const BANK_RB_BUTTON_PSD2 = 'BANK_CZ_RB_PSD2';
-	public const BANK_UNICREDIT_BUTTON_PSD2 = 'BANK_CZ_UC_PSD2'; // tatím neaktivní
+	public const BANK_UNICREDIT_BUTTON_PSD2 = 'BANK_CZ_UC_PSD2';
 	public const BANK_PARTNERS_BUTTON_PSD2 = 'BANK_CZ_PB_PSD2';
 	public const LATER_TWISTO = 'LATER_TWISTO';
 	public const LATER_SKIPPAY = 'LATER_SKIPPAY';
