@@ -36,7 +36,6 @@ class RecurringPaymentRequest implements IRequest
 			'label' => $this->getPayment()->getLabel(),
 			'refId' => $this->getPayment()->getReferenceId(),
 			'account' => $this->getPayment()->getAccount(),
-			'email' => $this->getPayment()->getEmail(),
 			'name' => $this->getPayment()->getName(),
 			'prepareOnly' => $this->getPayment()->isPrepareOnly(),
 			'initRecurringId' => $this->getPayment()->getInitRecurringId(),
