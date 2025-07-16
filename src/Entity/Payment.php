@@ -637,4 +637,38 @@ class Payment
 
 		return $param;
 	}
+
+	public function getUrlPaid(): string
+	{
+		return $this->getParam('urlPaid');
+	}
+	public function setUrlPaid(string $urlPaid): self
+	{
+		$this->setParam('urlPaid', $urlPaid);
+
+		return $this;
+	}
+
+	public function getUrlCancelled(): string
+	{
+		return $this->getParam('urlCancelled');
+	}
+	public function setUrlCancelled(string $urlCancelled): self
+	{
+		$this->setParam('urlCancelled', $urlCancelled);
+
+		return $this;
+	}
+
+	public function getUrlPending(): string
+	{
+		return $this->getParam('urlPending');
+	}
+	public function setUrlPending(string $urlPending): self
+	{
+		$this->setParam('urlPending', $urlPending);
+
+		return $this;
+	}
+
 }

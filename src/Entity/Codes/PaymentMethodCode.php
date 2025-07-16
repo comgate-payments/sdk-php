@@ -14,6 +14,7 @@ final class PaymentMethodCode
 	public const LOAN_ALL = 'LOAN_ALL';
 	public const APPLEPAY_REDIRECT = 'APPLEPAY_REDIRECT';
 	public const GOOGLEPAY_REDIRECT = 'GOOGLEPAY_REDIRECT';
+	public const PAYPAL = 'PAYPAL';
 
 	// CZ
 
@@ -41,7 +42,8 @@ final class PaymentMethodCode
 	public const BANK_MBANK_BUTTON_PSD2 = 'BANK_CZ_MB_PSD2';
 	public const BANK_MONETA_BUTTON_PSD2 = 'BANK_CZ_MO_PSD2';
 	public const BANK_RB_BUTTON_PSD2 = 'BANK_CZ_RB_PSD2';
-	public const BANK_UNICREDIT_BUTTON_PSD2 = 'BANK_CZ_UC_PSD2'; // tatím neaktivní
+	public const BANK_UNICREDIT_BUTTON_PSD2 = 'BANK_CZ_UC_PSD2';
+	public const BANK_PARTNERS_BUTTON_PSD2 = 'BANK_CZ_PB_PSD2';
 	public const LATER_TWISTO = 'LATER_TWISTO';
 	public const LATER_SKIPPAY = 'LATER_SKIPPAY';
 	public const LATER_PLATIMPAK = 'LATER_PLATIMPAK';
@@ -54,8 +56,13 @@ final class PaymentMethodCode
 	public const LOAN_ESSOX = 'LOAN_ESSOX';
 	public const LOAN_COFIDIS = 'LOAN_COFIDIS';
 
+	// EUR
+
+	public const BANK_OTHER_EUR_TRANSFER = 'BANK_EUR_OTHER';
+
 	// SK
 
+	public const LOAN_TB = 'LOAN_TB';
 	public const BANK_OTHER_SK_TRANSFER = 'BANK_SK_OTHER';
 	public const BANK_VUB_SK_BUTTON = 'BANK_SK_VUB_P';
 	public const BANK_TATRA_SK_BUTTON = 'BANK_SK_TB_P';
@@ -67,6 +74,8 @@ final class PaymentMethodCode
 	public const BANK_SK_TATRA_SK_BUTTON_PSD2 = 'BANK_SK_TB_PSD2';
 	public const BANK_SK_UNICREDIT_SK_BUTTON_PSD2 = 'BANK_SK_UC_PSD2';
 	public const BANK_SK_VUB_SK_BUTTON_PSD2 = 'BANK_SK_VUB_PSD2';
+	public const PART_SK_SKIPPAY = 'PART_SK_SKIPPAY';
+
 
 	// PL
 
@@ -101,6 +110,7 @@ final class PaymentMethodCode
 		self::LOAN_ALL,
 		self::APPLEPAY_REDIRECT,
 		self::GOOGLEPAY_REDIRECT,
+		self::PAYPAL,
 		self::CARD_CARD_CZ_CSOB_2,
 		self::CARD_CARD_CZ_COMGATE,
 		self::CARD_CARD_CZ_BS,
@@ -125,6 +135,7 @@ final class PaymentMethodCode
 		self::BANK_MONETA_BUTTON_PSD2,
 		self::BANK_RB_BUTTON_PSD2,
 		self::BANK_UNICREDIT_BUTTON_PSD2,
+		self::BANK_PARTNERS_BUTTON_PSD2,
 		self::LATER_TWISTO,
 		self::LATER_SKIPPAY,
 		self::LATER_PLATIMPAK,
@@ -136,7 +147,9 @@ final class PaymentMethodCode
 		self::LOAN_HOMECREDIT,
 		self::LOAN_ESSOX,
 		self::LOAN_COFIDIS,
+		self::LOAN_TB,
 		self::BANK_OTHER_SK_TRANSFER,
+		self::BANK_OTHER_EUR_TRANSFER,
 		self::BANK_VUB_SK_BUTTON,
 		self::BANK_TATRA_SK_BUTTON,
 		self::BANK_CSOB_SK_BUTTON,
@@ -147,6 +160,7 @@ final class PaymentMethodCode
 		self::BANK_SK_TATRA_SK_BUTTON_PSD2,
 		self::BANK_SK_UNICREDIT_SK_BUTTON_PSD2,
 		self::BANK_SK_VUB_SK_BUTTON_PSD2,
+		self::PART_SK_SKIPPAY,
 		self::BANK_PL_ALR,
 		self::BANK_PL_BGZ,
 		self::BANK_PL_BL,

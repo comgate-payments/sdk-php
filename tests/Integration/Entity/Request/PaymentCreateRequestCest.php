@@ -52,6 +52,9 @@ class PaymentCreateRequestCest
 					->setEmbedded(true)
 					->setAccount('123456')
 					->setName('product name')
+					->setUrlPaid('https://example.com/paid')
+					->setUrlPending('https://example.com/pending')
+					->setUrlCancelled('https://example.com/cancelled')
 				,
 				'result' => [
 					'initRecurring' => 'true',
@@ -65,6 +68,9 @@ class PaymentCreateRequestCest
 					'name' => 'product name',
 					'price' => 456,
 					'dynamicExpiration' => 'false',
+					'urlPaid' => 'https://example.com/paid',
+					'urlPending' => 'https://example.com/pending',
+					'urlCancelled' => 'https://example.com/cancelled',
 				],
 			],
 		];
