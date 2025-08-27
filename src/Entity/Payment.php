@@ -14,30 +14,42 @@ class Payment
 	 */
 	protected $params = [
 		'test' => false,
-		'prepareOnly' => true,
-		'initRecurring' => false,
+		'country' => '',
+		'price' => 0,
+		'curr' => '',
+		'label' => '',
+		'refId' => '',
+		'method' => '',
+		'account' => '',
+		'email' => '',
+		'phone' => '',
+		'fullName' => '',
+		'billingAddrCity' => '',
+		'billingAddrStreet' => '',
+		'billingAddrPostalCode' => '',
+		'billingAddrCountry' => '',
+		'delivery' => '',
+		'homeDeliveryCity' => '',
+		'homeDeliveryStreet' => '',
+		'homeDeliveryPostalCode' => '',
+		'homeDeliveryCountry' => '',
+		'category' => '',
+		'name' => '',
+		'lang' => '',
 		'preauth' => false,
+		'initRecurring' => false,
 		'verification' => false,
-		'embedded' => false,
+		'expirationTime' => '',
 		'dynamicExpiration' => false,
+		'url_paid' => '',
+		'url_cancelled' => '',
+		'url_pending' => '',
+		'chargeUnregulatedCardFees' => false,
+		'enableApplePayGooglePay' => false,
+		'prepareOnly' => true,
+		'embedded' => false,
 		'allowedMethods' => [],
 		'excludedMethods' => [],
-		'account' => '',
-		'name' => '',
-		// 'fullName' => '',
-		// 'phone' => '',
-		// 'billingAddrCity' => '',
-		// 'billingAddrStreet' => '',
-		// 'billingAddrPostalCode' => '',
-		// 'billingAddrCountry' => '',
-		// 'delivery' => '',
-		// 'homeDeliveryCity' => '',
-		// 'homeDeliveryStreet' => '',
-		// 'homeDeliveryPostalCode' => '',
-		// 'homeDeliveryCountry' => '',
-		// 'category' => '',
-		// 'chargeUnregulatedCardFees' => false,
-		// 'enableApplePayGooglePay' => false,
 	];
 
 	/**
@@ -585,6 +597,39 @@ class Payment
 	{
 		$this->setParam('category', $category);
 
+		return $this;
+	}
+
+	public function getUrlPaid(): ?string
+	{
+		return (string) $this->getParamWithoutMoney('url_paid');
+	}
+
+	public function setUrlPaid(string $urlPaid): self
+	{
+		$this->setParam('url_paid', $urlPaid);
+		return $this;
+	}
+
+	public function getUrlCancelled(): ?string
+	{
+		return (string) $this->getParamWithoutMoney('url_cancelled');
+	}
+
+	public function setUrlCancelled(string $urlPaid): self
+	{
+		$this->setParam('url_cancelled', $urlPaid);
+		return $this;
+	}
+
+	public function getUrlPending(): ?string
+	{
+		return (string) $this->getParamWithoutMoney('url_pending');
+	}
+
+	public function setUrlPending(string $urlPaid): self
+	{
+		$this->setParam('url_pending', $urlPaid);
 		return $this;
 	}
 
