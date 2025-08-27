@@ -29,16 +29,13 @@ class RecurringPaymentRequest implements IRequest
 	{
 		// Required
 		$output = [
-			'country' => $this->getPayment()->getCountry(),
 			'test' => $this->getPayment()->isTest(),
 			'price' => $this->getPayment()->getPrice()->get(),
 			'curr' => $this->getPayment()->getCurrency(),
 			'label' => $this->getPayment()->getLabel(),
 			'refId' => $this->getPayment()->getReferenceId(),
 			'account' => $this->getPayment()->getAccount(),
-			'email' => $this->getPayment()->getEmail(),
 			'name' => $this->getPayment()->getName(),
-			'prepareOnly' => $this->getPayment()->isPrepareOnly(),
 			'initRecurringId' => $this->getPayment()->getInitRecurringId(),
 		];
 
