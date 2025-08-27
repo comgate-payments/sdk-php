@@ -21,7 +21,6 @@ class SingleTransferResponse
 	 */
 	public function __construct(Response $singleTransferResponse)
 	{
-		$paymentsListJson = $singleTransferResponse->getContent();
 		$paymentsInfoList = json_decode($singleTransferResponse->getContent(), true);
 
 
