@@ -201,9 +201,9 @@ jobs:
       - name: "Tests"
         run: "make tests"
         env:
-          API_MERCHANT: ${{ secrets.API_MERCHANT }}
-          API_SECRET: ${{ secrets.API_SECRET }}
-          API_URL: ${{ secrets.API_URL }}
+          echo "API_MERCHANT=${{ secrets.API_MERCHANT }}" >> .env
+          echo "API_SECRET=${{ secrets.API_SECRET }}" >> .env
+          echo "API_URL=${{ secrets.API_URL }}" >> .env
 
       - name: "Upload test output"
         if: ${{ failure() }}
