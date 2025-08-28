@@ -616,9 +616,9 @@ class Payment
 		return (string) $this->getParamWithoutMoney('url_cancelled');
 	}
 
-	public function setUrlCancelled(string $urlPaid): self
+	public function setUrlCancelled(string $urlCancelled): self
 	{
-		$this->setParam('url_cancelled', $urlPaid);
+		$this->setParam('url_cancelled', $urlCancelled);
 		return $this;
 	}
 
@@ -627,9 +627,9 @@ class Payment
 		return (string) $this->getParamWithoutMoney('url_pending');
 	}
 
-	public function setUrlPending(string $urlPaid): self
+	public function setUrlPending(string $urlPending): self
 	{
-		$this->setParam('url_pending', $urlPaid);
+		$this->setParam('url_pending', $urlPending);
 		return $this;
 	}
 
