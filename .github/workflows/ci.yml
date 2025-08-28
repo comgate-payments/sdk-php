@@ -13,7 +13,7 @@ env:
 
 jobs:
   qa:
-    name: "Quality assurance"
+    name: "Quality assurance test"
     runs-on: "${{ matrix.operating-system }}"
 
     strategy:
