@@ -9,6 +9,7 @@ use Comgate\SDK\Entity\PaymentCard;
 use Comgate\SDK\Entity\Refund;
 use Comgate\SDK\Entity\Request\AboSingleTransferRequest;
 use Comgate\SDK\Entity\Request\AppleDomainAssociationRequest;
+use Comgate\SDK\Entity\Request\CsvDownloadRequest;
 use Comgate\SDK\Entity\Request\CsvSingleTransferRequest;
 use Comgate\SDK\Entity\Request\MotoPaymentCreateRequest;
 use Comgate\SDK\Entity\Request\PaymentCreateRequest;
@@ -25,6 +26,7 @@ use Comgate\SDK\Entity\Request\SingleTransferRequest;
 use Comgate\SDK\Entity\Request\TransferListRequest;
 use Comgate\SDK\Entity\Response\AboSingleTransferResponse;
 use Comgate\SDK\Entity\Response\AppleDomainAssociationResponse;
+use Comgate\SDK\Entity\Response\CsvDownloadResponse;
 use Comgate\SDK\Entity\Response\CsvSingleTransferResponse;
 use Comgate\SDK\Entity\Response\MethodsResponse;
 use Comgate\SDK\Entity\Response\MotoPaymentCreateResponse;
@@ -170,6 +172,13 @@ class Client
 		$appleDomainAssociationResponse = $this->transport->post($appleDomainAssociationRequest->getUrn(),
 			$appleDomainAssociationRequest->toArray());
 		return new AppleDomainAssociationResponse($appleDomainAssociationResponse);
+	}
+	public function getCsvDownload(string $date, bool $test = false){
+		$appleDomainAssociationRequest = new CsvDownloadRequest($date, $test);
+		$appleDomainAssociationResponse = $this->transport->post($appleDomainAssociationRequest->getUrn(),
+			$appleDomainAssociationRequest->toArray());
+
+		new CsvDownloadResponse($appleDomainAssociationResponse);
 	}
 
 	/**
