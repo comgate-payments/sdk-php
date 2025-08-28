@@ -198,12 +198,14 @@ jobs:
       - name: "Install dependencies"
         run: "${{ env.composer-install }} ${{ matrix.composer-args }}"
 
-      - name: "Tests"
-        run: "make tests"
-        env:
+      - name: "Env variables"
+        run: |
           echo "API_MERCHANT=${{ secrets.API_MERCHANT }}" >> .env
           echo "API_SECRET=${{ secrets.API_SECRET }}" >> .env
           echo "API_URL=${{ secrets.API_URL }}" >> .env
+
+      - name: "Tests"
+        run: "make tests"
 
       - name: "Upload test output"
         if: ${{ failure() }}
