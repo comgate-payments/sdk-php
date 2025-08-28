@@ -137,7 +137,7 @@ jobs:
       - name: "PHPStan"
         run: "make phpstan"
 
-#  tests:
+#  tests: smazat
 #    name: "Tests"
 #    runs-on: "${{ matrix.operating-system }}"
 #
