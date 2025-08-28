@@ -69,9 +69,9 @@ class PaymentCreateRequest implements IRequest
 		if ($this->payment->getExpirationTime() !== null) {
 			$output['expirationTime'] = $this->payment->getExpirationTime();
 		}
-		$output['url_paid'] = $this->payment->getUrlPaid() ?? '';
-		$output['url_cancelled'] = $this->payment->getUrlCancelled() ?? '';
-		$output['url_pending'] = $this->payment->getUrlPending() ?? '';
+		$output['url_paid'] = $this->payment->getUrlPaidRedirect() ?? '';
+		$output['url_cancelled'] = $this->payment->getUrlCancelledRedirect() ?? '';
+		$output['url_pending'] = $this->payment->getUrlPendingRedirect() ?? '';
 		$output['chargeUnregulatedCardFees'] = $this->payment->getChargeUnregulatedCardFees();
 		$output['enableApplePayGooglePay'] = $this->payment->getEnableApplePayGooglePay() ?? '';
 

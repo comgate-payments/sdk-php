@@ -600,34 +600,34 @@ class Payment
 		return $this;
 	}
 
-	public function getUrlPaid(): ?string
+	public function getUrlPaidRedirect(): ?string
 	{
 		return (string) $this->getParamWithoutMoney('url_paid');
 	}
 
-	public function setUrlPaid(string $urlPaid): self
+	public function setUrlPaidRedirect(string $urlPaid): self
 	{
 		$this->setParam('url_paid', $urlPaid);
 		return $this;
 	}
 
-	public function getUrlCancelled(): ?string
+	public function getUrlCancelledRedirect(): ?string
 	{
 		return (string) $this->getParamWithoutMoney('url_cancelled');
 	}
 
-	public function setUrlCancelled(string $urlCancelled): self
+	public function setUrlCancelledRedirect(string $urlCancelled): self
 	{
 		$this->setParam('url_cancelled', $urlCancelled);
 		return $this;
 	}
 
-	public function getUrlPending(): ?string
+	public function getUrlPendingRedirect(): ?string
 	{
 		return (string) $this->getParamWithoutMoney('url_pending');
 	}
 
-	public function setUrlPending(string $urlPending): self
+	public function setUrlPendingRedirect(string $urlPending): self
 	{
 		$this->setParam('url_pending', $urlPending);
 		return $this;
