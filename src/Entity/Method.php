@@ -183,7 +183,7 @@ class Method
 
 	/**
 	 * @param string $name_short
-	 * @return void
+	 * @return self
 	 */
 	public function setNameShort(string $name_short): self
 	{
@@ -201,7 +201,7 @@ class Method
 
 	/**
 	 * @param string $logo_240
-	 * @return void
+	 * @return self
 	 */
 	public function setLogo240(string $logo_240): self
 	{
@@ -219,7 +219,7 @@ class Method
 
 	/**
 	 * @param string $cblogo
-	 * @return void
+	 * @return self
 	 */
 	public function setCblogo(string $cblogo): self
 	{
@@ -237,7 +237,7 @@ class Method
 
 	/**
 	 * @param string $clogo
-	 * @return void
+	 * @return self
 	 */
 	public function setClogo(string $clogo): self
 	{
@@ -255,7 +255,7 @@ class Method
 
 	/**
 	 * @param string $sblogo
-	 * @return void
+	 * @return self
 	 */
 	public function setSblogo(string $sblogo): self
 	{
@@ -273,7 +273,7 @@ class Method
 
 	/**
 	 * @param string $slogo
-	 * @return void
+	 * @return self
 	 */
 	public function setSlogo(string $slogo): self
 	{

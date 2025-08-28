@@ -2,9 +2,7 @@
 
 namespace Comgate\SDK\Entity\Request;
 
-use Comgate\SDK\Entity\Money;
 use Comgate\SDK\Entity\Payment;
-use Comgate\SDK\Exception\LogicalException;
 
 class PaymentCreateRequest implements IRequest
 {
@@ -68,7 +66,7 @@ class PaymentCreateRequest implements IRequest
 		$output['category'] = $this->payment->getCategory() ?? '';
 		$output['name'] = $this->payment->getName() ?? '';
 		$output['lang'] = $this->payment->getLang() ?? '';
-		if (!empty($this->payment->getExpirationTime())) {
+		if ($this->payment->getExpirationTime() !== null) {
 			$output['expirationTime'] = $this->payment->getExpirationTime();
 		}
 		$output['url_paid'] = $this->payment->getUrlPaid() ?? '';
