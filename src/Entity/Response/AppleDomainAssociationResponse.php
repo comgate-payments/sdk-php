@@ -7,7 +7,7 @@ use Comgate\SDK\Exception\ApiException;
 use Comgate\SDK\Http\Query;
 use Comgate\SDK\Http\Response;
 
-class AppleDomainAssociationResponse extends FileResponse
+class AppleDomainAssociationResponse
 {
 	protected string $fileContent;
 	/**

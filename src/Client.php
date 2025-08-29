@@ -169,7 +169,7 @@ class Client
 		return new AboSingleTransferResponse($aboSingleTransferResponse);
 	}
 
-	public function getAppleDomainAssociation(string $method): AppleDomainAssociationResponse{
+	public function getAppleDomainAssociation(string $method = ''): AppleDomainAssociationResponse{
 		$appleDomainAssociationRequest = new AppleDomainAssociationRequest($method);
 		$appleDomainAssociationResponse = $this->transport->post($appleDomainAssociationRequest->getUrn(),
 			$appleDomainAssociationRequest->toArray());
