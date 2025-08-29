@@ -74,7 +74,7 @@ class Client
 		return new PaymentStatusResponse($statusResponse);
 	}
 
-	public function getMethods(MethodsRequest $methodsRequest = null): MethodsResponse
+	public function getMethods(?MethodsRequest $methodsRequest = null): MethodsResponse
 	{
 		if (($methodsRequest instanceof MethodsRequest) === false) {
 			$methodsRequest = new MethodsRequest();
@@ -169,13 +169,13 @@ class Client
 		return new AboSingleTransferResponse($aboSingleTransferResponse);
 	}
 
-	public function getAppleDomainAssociation(string $method){
+	public function getAppleDomainAssociation(string $method): AppleDomainAssociationResponse{
 		$appleDomainAssociationRequest = new AppleDomainAssociationRequest($method);
 		$appleDomainAssociationResponse = $this->transport->post($appleDomainAssociationRequest->getUrn(),
 			$appleDomainAssociationRequest->toArray());
 		return new AppleDomainAssociationResponse($appleDomainAssociationResponse);
 	}
-	public function getCsvDownload(string $date, bool $test = false){
+	public function getCsvDownload(string $date, bool $test = false): void{
 		$csvDownloadRequest = new CsvDownloadRequest($date, $test);
 		$csvDownloadResponse = $this->transport->post($csvDownloadRequest->getUrn(),
 			$csvDownloadRequest->toArray());
@@ -183,7 +183,7 @@ class Client
 		new CsvDownloadResponse($csvDownloadResponse);
 	}
 
-	public function getAboDownload(string $date, string $type = '',  bool $test = false, string $encoding = 'utf8'){
+	public function getAboDownload(string $date, string $type = '',  bool $test = false, string $encoding = 'utf8'): void{
 		$aboDownloadRequest = new AboDownloadRequest($date, $type, $test, $encoding);
 		$aboDownloadResponse = $this->transport->post($aboDownloadRequest->getUrn(),
 			$aboDownloadRequest->toArray());
