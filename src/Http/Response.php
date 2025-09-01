@@ -36,4 +36,12 @@ class Response
 
 		return $this->content;
 	}
+
+	/**
+	 * @return string[][]
+	 */
+	public function getHeader()
+	{
+		return $this->origin->getHeaders();
+	}
 }
