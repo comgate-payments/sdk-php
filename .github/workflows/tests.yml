@@ -91,7 +91,7 @@ jobs:
           -v https://payments.comgate-test.cz/core/index/hello 2>&1 | grep 'HTTP/2 200'
 
       - name: "Build Codeception actors"
-        run: "vendor/bin/codecept build"
+        run: "vendor/bin/codecept build -v"
 
       - name: "Tests"
         run: "vendor/bin/codecept run"
