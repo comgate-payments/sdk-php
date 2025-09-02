@@ -98,7 +98,7 @@ class ClientCest
 		$client = $this->getClient();
 
 		//create a payment
-//		$payment = $I->createPayment();
+		$payment = $I->createPayment();
 //		foreach ($statusParams['params'] as $paramKey => $paramValue) {
 //			$payment->setParam($paramKey, $paramValue);
 //		}
