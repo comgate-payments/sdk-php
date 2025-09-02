@@ -99,10 +99,10 @@ class ClientCest
 
 		//create a payment
 		$payment = $I->createPayment();
-//		foreach ($statusParams['params'] as $paramKey => $paramValue) {
-//			$payment->setParam($paramKey, $paramValue);
-//		}
-//		$paymentResponse = $client->createPayment($payment);
+		foreach ($statusParams['params'] as $paramKey => $paramValue) {
+			$payment->setParam($paramKey, $paramValue);
+		}
+		$paymentResponse = $client->createPayment($payment);
 //
 //		// get status
 //		$statusResponse = $client->getStatus($paymentResponse->getTransId());
