@@ -10,7 +10,7 @@ env:
   extensions: "json"
   cache-version: "1"
   composer-version: "v2"
-  composer-install: "composer install --no-interaction --no-progress --prefer-dist --prefer-stable"
+  composer-install: "composer install --no-interaction --no-progress --prefer-dist"
   coverage: "none"
 
 jobs:
