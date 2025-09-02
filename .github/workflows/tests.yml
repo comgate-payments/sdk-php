@@ -80,12 +80,14 @@ jobs:
           echo "API_MERCHANT=${{ secrets.API_MERCHANT }}" >> .env
           echo "API_SECRET=${{ secrets.API_SECRET }}" >> .env
           echo "API_URL=${{ secrets.API_URL }}" >> .env
-          echo "APPLICATION_ENV=sdk-github" >> .env
+          echo "APPLICATION_ENV='sdk-github'" >> .env
+          echo "CF_ACCESS_CLIENT_ID=${{ secrets.CF_ACCESS_ID }}" >> .env
+          echo "CF_ACCESS_CLIENT_SECRET=${{ secrets.CF_ACCESS_SECRET }}" >> .env
 
       - name: "Check access to test enviroment"
         run: |
-          curl -H "CF-Access-Client-Id: ${{ secrets.CF_ACCESS_ID}}" \
-          -H "CF-Access-Client-Secret: ${{ secrets.CF_ACCESS_SECRET}}" \
+          curl -H "CF-Access-Client-Id: ${{ secrets.CF_ACCESS_ID }}" \
+          -H "CF-Access-Client-Secret: ${{ secrets.CF_ACCESS_SECRET }}" \
           -v https://payments.comgate-test.cz/core/index/hello 2>&1 | grep 'HTTP/2 200'
 
       - name: "Build Codeception actors"
