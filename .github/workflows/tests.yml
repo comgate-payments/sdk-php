@@ -78,9 +78,6 @@ jobs:
       - name: "Regenerate autoloader"
         run: "composer dump-autoload --optimize"
 
-      - name: "Build Codeception actors"
-        run: "vendor/bin/codecept build"
-
       - name: "Env variables"
         run: |
           echo "API_MERCHANT=${{ secrets.API_MERCHANT }}" >> .env
@@ -92,6 +89,9 @@ jobs:
           curl -H "CF-Access-Client-Id: ${{ secrets.CF_ACCESS_ID}}" \
           -H "CF-Access-Client-Secret: ${{ secrets.CF_ACCESS_SECRET}}" \
           -v https://payments.comgate-test.cz/core/index/hello 2>&1 | grep 'HTTP/2 200'
+
+      - name: "Build Codeception actors"
+        run: "vendor/bin/codecept build"
 
       - name: "Tests"
         run: "make tests"
