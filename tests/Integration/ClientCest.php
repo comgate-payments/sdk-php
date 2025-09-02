@@ -43,14 +43,14 @@ class ClientCest
 	public function getMethodsTest(IntegrationTester $I)
 	{
 		$client = $this->getClient();
-//
-//		$methodsResponse = $client->getMethods();
-//
-//		$I->assertInstanceOf(MethodsResponse::class, $methodsResponse);
-//		$I->assertNotEmpty($methodsResponse->getMethodsList(), 'Methods list should not be empty');
-//		foreach ($methodsResponse->getMethodsList() as $method) {
-//			$I->assertInstanceOf(Method::class, $method);
-//		}
+
+		$methodsResponse = $client->getMethods();
+
+		$I->assertInstanceOf(MethodsResponse::class, $methodsResponse);
+		$I->assertNotEmpty($methodsResponse->getMethodsList(), 'Methods list should not be empty');
+		foreach ($methodsResponse->getMethodsList() as $method) {
+			$I->assertInstanceOf(Method::class, $method);
+		}
 	}
 
 	#[Group('methods')]
@@ -98,7 +98,16 @@ class ClientCest
 		$client = $this->getClient();
 
 		//create a payment
-		$payment = $I->createPayment();
+		$payment = new Payment();
+		$payment->setLabel('SDK test payment')
+			->setEmail('sdk-test@comgate.cz')
+			->setPrice(Money::ofInt(100))
+			->setCurrency(CurrencyCode::CZK)
+			->setCountry(CountryCode::CZ)
+			->setLang(LangCode::CS)
+			->setTest(false)
+			->setMethods([PaymentMethodCode::ALL])
+			->setReferenceId('order1234');
 		foreach ($statusParams['params'] as $paramKey => $paramValue) {
 			$payment->setParam($paramKey, $paramValue);
 		}
