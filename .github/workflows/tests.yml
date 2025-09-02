@@ -93,10 +93,6 @@ jobs:
       - name: "Build Codeception actors"
         run: "vendor/bin/codecept build -v"
 
-      - name: Update php.ini to include environment variables
-        run: |
-          echo "variables_order = 'EGPCS'" >> /etc/php/8.3/cli/php.ini
-
       - name: Run Codeception Tests
         run: |
           ls -al .
