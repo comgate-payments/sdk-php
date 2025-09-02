@@ -85,7 +85,7 @@ jobs:
         run: |
           curl -H "CF-Access-Client-Id: ${{ secrets.CF_ACCESS_ID}}" \
           -H "CF-Access-Client-Secret: ${{ secrets.CF_ACCESS_SECRET}}" \
-          -v https://payment.comgate-test.cz/core/index/hello 2>&1 | grep '< HTTP/2 200'
+          -v https://payment.comgate-test.cz/core/index/hello 2>&1 | grep 'HTTP/2 200'
 
       - name: "Tests"
         run: "make tests"
