@@ -1,7 +1,11 @@
 name: "tests"
 on:
-  pull_request_review:
-    types: [ submitted ]
+  pull_request:
+  push:
+    branches:
+      - "*"
+#  pull_request_review:
+#    types: [ submitted ]
 env:
   extensions: "json"
   cache-version: "1"
@@ -76,6 +80,12 @@ jobs:
           echo "API_MERCHANT=${{ secrets.API_MERCHANT }}" >> .env
           echo "API_SECRET=${{ secrets.API_SECRET }}" >> .env
           echo "API_URL=${{ secrets.API_URL }}" >> .env
+
+      - name: "Check access to test enviroment"
+        run: |
+          curl -H "CF-Access-Client-Id: ${{ secrets.CF_ACCESS_ID}}" \
+          -H "CF-Access-Client-Secret: ${{ secrets.CF_ACCESS_SECRET}}" \
+          -v https://payment.comgate-test.cz/core/index/hello 2>&1 | grep '< HTTP/2 200'
 
       - name: "Tests"
         run: "make tests"
