@@ -78,6 +78,9 @@ jobs:
       - name: "Regenerate autoloader"
         run: "composer dump-autoload --optimize"
 
+      - name: "Build Codeception actors"
+        run: "vendor/bin/codecept build"
+
       - name: "Env variables"
         run: |
           echo "API_MERCHANT=${{ secrets.API_MERCHANT }}" >> .env
