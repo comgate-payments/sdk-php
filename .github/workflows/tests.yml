@@ -81,19 +81,11 @@ jobs:
           echo "API_SECRET=${{ secrets.API_SECRET }}" >> .env
           echo "API_URL=${{ secrets.API_URL }}" >> .env
 
-      - name: Debug DNS Resolution
-        run: |
-          echo "--- Checking DNS for target domain ---"
-          nslookup payment.comgate-test.cz
-
-          echo "--- Checking DNS for google.com as a control ---"
-          nslookup google.com
-
       - name: "Check access to test enviroment"
         run: |
           curl -H "CF-Access-Client-Id: ${{ secrets.CF_ACCESS_ID}}" \
           -H "CF-Access-Client-Secret: ${{ secrets.CF_ACCESS_SECRET}}" \
-          -v https://payment.comgate-test.cz/core/index/hello
+          -v https://payments.comgate-test.cz/core/index/hello
 
       - name: "Tests"
         run: "make tests"
