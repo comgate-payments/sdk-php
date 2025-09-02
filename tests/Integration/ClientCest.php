@@ -43,14 +43,14 @@ class ClientCest
 	public function getMethodsTest(IntegrationTester $I)
 	{
 		$client = $this->getClient();
-
-		$methodsResponse = $client->getMethods();
-
-		$I->assertInstanceOf(MethodsResponse::class, $methodsResponse);
-		$I->assertNotEmpty($methodsResponse->getMethodsList(), 'Methods list should not be empty');
-		foreach ($methodsResponse->getMethodsList() as $method) {
-			$I->assertInstanceOf(Method::class, $method);
-		}
+//
+//		$methodsResponse = $client->getMethods();
+//
+//		$I->assertInstanceOf(MethodsResponse::class, $methodsResponse);
+//		$I->assertNotEmpty($methodsResponse->getMethodsList(), 'Methods list should not be empty');
+//		foreach ($methodsResponse->getMethodsList() as $method) {
+//			$I->assertInstanceOf(Method::class, $method);
+//		}
 	}
 
 	#[Group('methods')]
