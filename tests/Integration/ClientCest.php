@@ -103,14 +103,14 @@ class ClientCest
 			$payment->setParam($paramKey, $paramValue);
 		}
 		$paymentResponse = $client->createPayment($payment);
-//
-//		// get status
-//		$statusResponse = $client->getStatus($paymentResponse->getTransId());
-//		$I->assertEquals(RequestCode::OK, $statusResponse->getCode());
-//		$I->assertInstanceOf(PaymentStatusResponse::class, $statusResponse);
-//		$I->assertEquals(PaymentStatusCode::PENDING, $statusResponse->getStatus());
-//		$I->assertEquals($statusParams['response']['curr'], $statusResponse->getCurrency());
-//		$I->assertEquals($statusParams['response']['email'], $statusResponse->getEmail());
+
+		// get status
+		$statusResponse = $client->getStatus($paymentResponse->getTransId());
+		$I->assertEquals(RequestCode::OK, $statusResponse->getCode());
+		$I->assertInstanceOf(PaymentStatusResponse::class, $statusResponse);
+		$I->assertEquals(PaymentStatusCode::PENDING, $statusResponse->getStatus());
+		$I->assertEquals($statusParams['response']['curr'], $statusResponse->getCurrency());
+		$I->assertEquals($statusParams['response']['email'], $statusResponse->getEmail());
 	}
 
 	protected function getStatusScenarios()

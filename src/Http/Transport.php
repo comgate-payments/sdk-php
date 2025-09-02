@@ -42,7 +42,7 @@ class Transport implements ITransport
 		curl_setopt($curl, CURLOPT_HTTPHEADER, ["content-type: application/x-www-form-urlencoded",]);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
-		if (getenv('APPLICATION_ENV') === 'sdk-github') {
+		if ($_ENV['APPLICATION_ENV'] === 'sdk-github') {
 			curl_setopt($curl,  CURLOPT_HTTPHEADER, [
 				'CF-Access-Client-Id: ' . getenv('CF_ACCESS_CLIENT_ID'),
 				'CF-Access-Client-Secret: ' . getenv('CF_ACCESS_CLIENT_SECRET'),
