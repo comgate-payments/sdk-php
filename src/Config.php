@@ -15,8 +15,8 @@ class Config
 
 	public function __construct(string $merchant, string $secret, ?string $url = null)
 	{
-		if (!isset($url)) {
-			$url = getenv('API_URL');
+		if ($url === null) {
+			$url = $_ENV['API_URL'];
 		}
 
 		$this->merchant = $merchant;
