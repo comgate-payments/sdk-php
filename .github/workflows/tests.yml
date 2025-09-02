@@ -95,7 +95,7 @@ jobs:
 
       - name: Run Codeception Tests
         run: |
-          ls -al .
+          ls -al /home/runner/work/sdk-php/sdk-php/tests/Support/
           cat ./.env
           vendor/bin/codecept run
 
