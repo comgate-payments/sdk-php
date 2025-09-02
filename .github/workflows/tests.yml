@@ -73,7 +73,7 @@ jobs:
           restore-keys: "${{ runner.os }}-composer-"
 
       - name: "Install dependencies"
-        run: "${{ env.composer-install }} ${{ matrix.composer-args }}"
+        run: "${{ env.composer-install }}"
 
       - name: "Regenerate autoloader"
         run: "composer dump-autoload --optimize"
