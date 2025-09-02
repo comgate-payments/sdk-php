@@ -96,7 +96,7 @@ jobs:
       - name: Run Codeception Tests
         run: |
           ls -al /home/runner/work/sdk-php/sdk-php/tests/Support/
-          cat ./.env
+          cat /home/runner/work/sdk-php/sdk-php/tests/Support/IntegrationTester.php
           vendor/bin/codecept run
 
       - name: "Upload test output"
