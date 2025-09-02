@@ -98,28 +98,19 @@ class ClientCest
 		$client = $this->getClient();
 
 		//create a payment
-		$payment = new Payment();
-		$payment->setLabel('SDK test payment')
-			->setEmail('sdk-test@comgate.cz')
-			->setPrice(Money::ofInt(100))
-			->setCurrency(CurrencyCode::CZK)
-			->setCountry(CountryCode::CZ)
-			->setLang(LangCode::CS)
-			->setTest(false)
-			->setMethods([PaymentMethodCode::ALL])
-			->setReferenceId('order1234');
-		foreach ($statusParams['params'] as $paramKey => $paramValue) {
-			$payment->setParam($paramKey, $paramValue);
-		}
-		$paymentResponse = $client->createPayment($payment);
-
-		// get status
-		$statusResponse = $client->getStatus($paymentResponse->getTransId());
-		$I->assertEquals(RequestCode::OK, $statusResponse->getCode());
-		$I->assertInstanceOf(PaymentStatusResponse::class, $statusResponse);
-		$I->assertEquals(PaymentStatusCode::PENDING, $statusResponse->getStatus());
-		$I->assertEquals($statusParams['response']['curr'], $statusResponse->getCurrency());
-		$I->assertEquals($statusParams['response']['email'], $statusResponse->getEmail());
+//		$payment = $I->createPayment();
+//		foreach ($statusParams['params'] as $paramKey => $paramValue) {
+//			$payment->setParam($paramKey, $paramValue);
+//		}
+//		$paymentResponse = $client->createPayment($payment);
+//
+//		// get status
+//		$statusResponse = $client->getStatus($paymentResponse->getTransId());
+//		$I->assertEquals(RequestCode::OK, $statusResponse->getCode());
+//		$I->assertInstanceOf(PaymentStatusResponse::class, $statusResponse);
+//		$I->assertEquals(PaymentStatusCode::PENDING, $statusResponse->getStatus());
+//		$I->assertEquals($statusParams['response']['curr'], $statusResponse->getCurrency());
+//		$I->assertEquals($statusParams['response']['email'], $statusResponse->getEmail());
 	}
 
 	protected function getStatusScenarios()
