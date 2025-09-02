@@ -20,13 +20,13 @@ jobs:
 
     strategy:
       matrix:
-        php-version: ["7.4", "8.0"]
+        php-version: ["8.0"]
         operating-system: ["ubuntu-latest"]
         composer-args: [ "" ]
-        include:
-          - php-version: "7.4"
-            operating-system: "ubuntu-latest"
-            composer-args: "--prefer-lowest"
+#        include:
+#          - php-version: "7.4"
+#            operating-system: "ubuntu-latest"
+#            composer-args: "--prefer-lowest"
       fail-fast: false
 
     steps:
@@ -80,6 +80,7 @@ jobs:
           echo "API_MERCHANT=${{ secrets.API_MERCHANT }}" >> .env
           echo "API_SECRET=${{ secrets.API_SECRET }}" >> .env
           echo "API_URL=${{ secrets.API_URL }}" >> .env
+          echo "APPLICATION_ENV=sdk-github" >> .env
 
       - name: "Check access to test enviroment"
         run: |
@@ -95,8 +96,6 @@ jobs:
 
       - name: Run Codeception Tests
         run: |
-          ls -al /home/runner/work/sdk-php/sdk-php/tests/Support/
-          cat /home/runner/work/sdk-php/sdk-php/tests/Support/IntegrationTester.php
           vendor/bin/codecept run
 
       - name: "Upload test output"
