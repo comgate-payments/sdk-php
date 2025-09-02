@@ -94,7 +94,7 @@ jobs:
         run: "vendor/bin/codecept build"
 
       - name: "Tests"
-        run: "make tests"
+        run: "vendor/bin/codecept run"
 
       - name: "Upload test output"
         if: ${{ failure() }}
