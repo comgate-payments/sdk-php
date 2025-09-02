@@ -75,6 +75,9 @@ jobs:
       - name: "Install dependencies"
         run: "${{ env.composer-install }} ${{ matrix.composer-args }}"
 
+      - name: "Regenerate autoloader"
+        run: "composer dump-autoload --optimize"
+
       - name: "Env variables"
         run: |
           echo "API_MERCHANT=${{ secrets.API_MERCHANT }}" >> .env
