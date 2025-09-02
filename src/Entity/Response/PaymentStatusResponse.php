@@ -107,7 +107,7 @@ class PaymentStatusResponse
 	 */
 	public function getCode(): int
 	{
-		return $this->code;
+		return $this->code ?? 400;
 	}
 
 	/**

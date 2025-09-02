@@ -25,11 +25,11 @@ class PaymentGenerator extends Module
 		$payment->setLabel('SDK test payment')
 			->setEmail('sdk-test@comgate.cz')
 			->setPrice(Money::ofInt(100))
-			->setCurrency('CZK')
-			->setCountry('CZ')
-			->setLang('CS')
+			->setCurrency(CurrencyCode::CZK)
+			->setCountry(CountryCode::CZ)
+			->setLang(LangCode::CS)
 			->setTest(false)
-			->setMethods(['ALL'])
+			->setMethods([PaymentMethodCode::ALL])
 			->setReferenceId('order1234');
 
 		return $payment;
