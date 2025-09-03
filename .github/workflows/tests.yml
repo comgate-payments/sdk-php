@@ -38,7 +38,7 @@ jobs:
             echo "Error: IP address ($agentIP) does not start with '40.'"
             exit 1
           fi
-          echo "IP check passed.
+          echo "IP check passed."
 
       - name: "Checkout"
         uses: "actions/checkout@v2"
