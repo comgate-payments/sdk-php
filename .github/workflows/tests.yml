@@ -1,7 +1,7 @@
 name: "tests"
 on:
-  pull_request_review:
-    types: [ submitted ]
+  pull_request_target:
+    types: [ opened, reopened, synchronize, ready_for_review ]
 env:
   extensions: "json, xdebug"
   cache-version: "1"
