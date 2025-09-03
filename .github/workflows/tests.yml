@@ -93,7 +93,7 @@ jobs:
       - name: "Check current IP"
         run: |
           agentIP=$(curl -s https://api.ipify.org/)
-          echo agentIP
+          echo $agentIP
 
 #      - name: "Build Codeception actors"
 #        run: "vendor/bin/codecept build -v"
