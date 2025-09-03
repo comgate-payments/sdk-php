@@ -232,6 +232,7 @@ class Method
 	 */
 	public function getClogo(): string
 	{
+
 		return $this->clogo;
 	}
 
