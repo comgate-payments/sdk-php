@@ -34,7 +34,7 @@ jobs:
         run: |
           agentIP=$(curl -s https://api.ipify.org/)
           echo $agentIP
-          if [[ ! $agentIP == 40.* ]]; then
+          if [[ ! $agentIP == 40.* && ! $agentIP == 172.* ]]; then
             echo "Error: IP address ($agentIP) does not start with '40.'"
             exit 1
           fi
