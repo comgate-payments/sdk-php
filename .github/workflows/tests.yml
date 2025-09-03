@@ -1,11 +1,7 @@
 name: "tests"
 on:
-  pull_request:
-  push:
-    branches:
-      - "*"
-#  pull_request_review:
-#    types: [ submitted ]
+  pull_request_review:
+    types: [ submitted ]
 env:
   extensions: "json, xdebug"
   cache-version: "1"
