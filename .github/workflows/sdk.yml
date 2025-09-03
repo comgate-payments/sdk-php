@@ -5,15 +5,13 @@ on:
   push:
     branches:
       - "*"
-  schedule:
-    - cron: "0 8 * * 1" # At 08:00 on Monday
 
 env:
-  extensions: "json"
+  extensions: "json, xdebug"
   cache-version: "1"
   composer-version: "v2"
   composer-install: "composer update --no-interaction --no-progress --prefer-dist --prefer-stable"
-  coverage: "none"
+  coverage: "xdebug"
 
 jobs:
   qa:

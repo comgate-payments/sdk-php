@@ -4,9 +4,6 @@ namespace Comgate\SDK;
 
 class Config
 {
-
-	public const URL = 'https://payments.comgate.cz/v1.0/';
-
 	/** @var string */
 	private $merchant;
 
@@ -16,8 +13,12 @@ class Config
 	/** @var string */
 	private $url;
 
-	public function __construct(string $merchant, string $secret, string $url = self::URL)
+	public function __construct(string $merchant, string $secret, ?string $url = null)
 	{
+		if ($url === null) {
+			$url = $_ENV['API_URL'];
+		}
+
 		$this->merchant = $merchant;
 		$this->secret = $secret;
 		$this->setUrl($url);

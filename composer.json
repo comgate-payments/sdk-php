@@ -35,7 +35,8 @@
         "phpstan/phpstan-deprecation-rules": "^1.1",
         "phpstan/phpstan-strict-rules": "^1.5",
         "squizlabs/php_codesniffer": "^3.7",
-        "vlucas/phpdotenv": "^5.5"
+        "vlucas/phpdotenv": "^5.5",
+        "ext-xdebug": "*"
     },
     "autoload": {
         "psr-4": {
@@ -44,9 +45,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Cases\\": "tests/cases",
-            "Tests\\Toolkit\\": "tests/toolkit",
-            "Tests\\PHPStanRule\\": "tests/PHPStanRule"
+            "Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",
