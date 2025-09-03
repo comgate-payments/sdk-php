@@ -35,7 +35,7 @@
         "phpstan/phpstan-strict-rules": "^1.5",
         "squizlabs/php_codesniffer": "^3.7",
         "vlucas/phpdotenv": "^5.5",
-      "ext-xdebug": "*"
+        "ext-xdebug": "*"
     },
     "autoload": {
         "psr-4": {

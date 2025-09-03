@@ -7,11 +7,11 @@ on:
 #  pull_request_review:
 #    types: [ submitted ]
 env:
-  extensions: "json"
+  extensions: "json, xdebug"
   cache-version: "1"
   composer-version: "v2"
   composer-install: "composer install --no-interaction --no-progress --prefer-dist"
-  coverage: "none"
+  coverage: "xdebug"
 
 jobs:
   tests:
