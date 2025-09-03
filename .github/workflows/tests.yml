@@ -30,15 +30,15 @@ jobs:
       fail-fast: false
 
     steps:
-      - name: "Check current IP"
-        run: |
-          agentIP=$(curl -s https://api.ipify.org/)
-          echo $agentIP
-          if [[ ! $agentIP == 40.* && ! $agentIP == 172.* ]]; then
-            echo "Error: IP address ($agentIP) does not start with '40.'"
-            exit 1
-          fi
-          echo "IP check passed."
+#      - name: "Check current IP"
+#        run: |
+#          agentIP=$(curl -s https://api.ipify.org/)
+#          echo $agentIP
+#          if [[ ! $agentIP == 40.* && ! $agentIP == 172.* ]]; then
+#            echo "Error: IP address ($agentIP) does not start with '40.'"
+#            exit 1
+#          fi
+#          echo "IP check passed."
 
       - name: "Checkout"
         uses: "actions/checkout@v2"
@@ -109,6 +109,14 @@ jobs:
       - name: Run Codeception Tests
         run: |
           vendor/bin/codecept run
+
+      - name: IP check on Failure
+        if: ${{ failure() }}
+        run: |
+          RUNNER_IP=$(curl -s https://api.ipify.org/)
+          echo "::warning::Test execution failed. This might be a network or IP whitelisting issue."
+          echo "::warning::The public IP of the GitHub runner was: ${RUNNER_IP}"
+          echo "::warning::Please ensure this IP is whitelisted."
 
       - name: "Upload test output"
         if: ${{ failure() }}
