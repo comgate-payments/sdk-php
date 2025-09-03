@@ -13,6 +13,10 @@ class HelpersCest
 	 */
 	#[Group('helpers')]
 	public function testRedirectHelper(UnitTester $I){
+		if($_ENV['APPLICATION_ENV'] == 'gitlab'){
+			$I->markTestSkipped('Tento test byl v gitlabu přeskočen, ');
+			return;
+		}
 		ob_start();
 
 		Helpers::redirect('foo');

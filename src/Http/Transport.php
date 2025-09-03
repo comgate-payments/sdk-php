@@ -51,7 +51,6 @@ class Transport implements ITransport
 		}
 
 		$response = curl_exec($curl);
-		echo $response;
 		$httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		$e = curl_error($curl);
 
