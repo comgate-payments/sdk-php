@@ -72,8 +72,9 @@ class PaymentCreateRequest implements IRequest
 		$output['url_paid'] = $this->payment->getUrlPaidRedirect() ?? '';
 		$output['url_cancelled'] = $this->payment->getUrlCancelledRedirect() ?? '';
 		$output['url_pending'] = $this->payment->getUrlPendingRedirect() ?? '';
-		$output['chargeUnregulatedCardFees'] = $this->payment->getChargeUnregulatedCardFees();
-		$output['enableApplePayGooglePay'] = $this->payment->getEnableApplePayGooglePay() ?? '';
+		$output['chargeUnregulatedCardFees'] = $this->payment->getChargeUnregulatedCardFees() ? 'true' : 'false';
+		$output['enableApplePayGooglePay'] = $this->payment->getEnableApplePayGooglePay() ? 'true' : 'false';
+		$output['embedded'] = $this->payment->isEmbedded() ? 'true' : 'false';
 
 		return $output;
 	}
