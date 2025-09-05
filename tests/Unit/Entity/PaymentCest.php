@@ -53,6 +53,26 @@ class PaymentCest
 			'refId' => '123foo',
 			'payerId' => 'aaafoo',
 			'dynamicExpiration' => true,
+			'method' => '',
+			'phone' => '',
+			'fullName' => '',
+			'billingAddrCity' => '',
+			'billingAddrStreet' => '',
+			'billingAddrPostalCode' => '',
+			'billingAddrCountry' => '',
+			'delivery' => '',
+			'homeDeliveryCity' => '',
+			'homeDeliveryStreet' => '',
+			'homeDeliveryPostalCode' => '',
+			'homeDeliveryCountry' => '',
+			'category' => '',
+			'expirationTime' => '',
+			'url_paid' => '',
+			'url_cancelled' => '',
+			'url_pending' => '',
+			'chargeUnregulatedCardFees' => false,
+			'enableApplePayGooglePay' => false,
+
 		], $paymentParams);
     }
 }

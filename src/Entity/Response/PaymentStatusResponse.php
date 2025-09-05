@@ -14,7 +14,6 @@ class PaymentStatusResponse
 {
 	protected int $code;
 	protected string $message;
-	protected string $merchant;
 	protected bool $test;
 	protected Money $price;
 	protected string $curr;
@@ -25,11 +24,21 @@ class PaymentStatusResponse
 	protected string $account;
 	protected string $email;
 	protected string $name;
+	protected string $phone;
+
 	protected string $transId;
-	protected string $secret;
 	protected string $status;
 	protected string $payerName;
+	protected string $payerAcc;
 	protected string $fee;
+	protected string $vs;
+	protected string $cardValid;
+	protected string $cardNumber;
+	protected string $appliedFee;
+	protected string $appliedFeeTyp;
+	protected string $paymentErrorReason;
+	protected string $merchant;
+	protected string $secret;
 
 	/**
 	 * @param Response $paymentStatusResponse
@@ -47,21 +56,29 @@ class PaymentStatusResponse
                         $this->setCode($code)
                             ->setMessage($message)
                             ->setMerchant($parsedResponse['merchant'])
-                            ->setTest($parsedResponse['test'] === 'true')
-                            ->setPrice(Money::ofCents((int) $parsedResponse['price']))
-                            ->setCurrency($parsedResponse['curr'])
-                            ->setLabel($parsedResponse['label'])
-                            ->setRefId($parsedResponse['refId'])
-                            ->setPayerId($parsedResponse['payerId'] ?? '')
-                            ->setMethod($parsedResponse['method'])
-                            ->setAccount($parsedResponse['account'] ?? '')
-                            ->setEmail($parsedResponse['email'] ?? '')
-                            ->setName($parsedResponse['name'])
-                            ->setTransId($parsedResponse['transId'])
-                            ->setSecret($parsedResponse['secret'])
+							->setSecret($parsedResponse['secret'])
+							->setTransId($parsedResponse['transId'])
+							->setTest($parsedResponse['test'] === 'true')
+							->setPrice(Money::ofCents((int) $parsedResponse['price']))
+							->setCurrency($parsedResponse['curr'])
+							->setLabel($parsedResponse['label'])
+							->setRefId($parsedResponse['refId'])
+							->setPayerId($parsedResponse['payerId'] ?? '')
+							->setMethod($parsedResponse['method'])
+							->setAccount($parsedResponse['account'] ?? '')
+							->setEmail($parsedResponse['email'] ?? '')
+							->setName($parsedResponse['name'])
+							->setPhone($parsedResponse['phone'] ?? '')
                             ->setStatus($parsedResponse['status'])
                             ->setPayerName($parsedResponse['payerName'])
-                            ->setFee($parsedResponse['fee']);
+                            ->setPayerAcc($parsedResponse['payerAcc'] ?? '')
+                            ->setFee($parsedResponse['fee'] ?? '')
+                            ->setVs($parsedResponse['vs'] ?? '')
+                            ->setCardValid($parsedResponse['cardValid'] ?? '')
+                            ->setCardNumber($parsedResponse['cardNumber'])
+                            ->setAppliedFee($parsedResponse['appliedFee'] ?? '')
+                            ->setAppliedFeeTyp($parsedResponse['appliedFeeTyp'] ?? '')
+                            ->setPaymentErrorReason($parsedResponse['paymentErrorReason'] ?? '');
 
                         break;
 
@@ -92,11 +109,19 @@ class PaymentStatusResponse
 			'account' => $this->getAccount(),
 			'email' => $this->getEmail(),
 			'name' => $this->getName(),
+			'phone' => $this->getPhone(),
 			'transId' => $this->getTransId(),
 			'secret' => $this->getSecret(),
 			'status' => $this->getStatus(),
 			'payerName' => $this->getPayerName(),
+			'payerAcc' => $this->getPayerAcc(),
 			'fee' => $this->getFee(),
+			'vs' => $this->getVs(),
+			'cardValid' => $this->getCardValid(),
+			'cardNumber' => $this->getCardNumber(),
+			'appliedFee' => $this->getAppliedFee(),
+			'appliedFeeTyp' => $this->getAppliedFeeTyp(),
+			'paymentErrorReason' => $this->getPaymentErrorReason()
 		];
 
 		return $output;
@@ -339,6 +364,25 @@ class PaymentStatusResponse
 	/**
 	 * @return string
 	 */
+	public function getPhone(): string
+	{
+		return $this->phone;
+	}
+
+	/**
+	 * @param string $phone
+	 * @return PaymentStatusResponse
+	 */
+	public function setPhone(string $phone): PaymentStatusResponse
+	{
+		$this->phone = $phone;
+		return $this;
+	}
+
+
+	/**
+	 * @return string
+	 */
 	public function getTransId(): string
 	{
 		return $this->transId;
@@ -411,6 +455,24 @@ class PaymentStatusResponse
 	/**
 	 * @return string
 	 */
+	public function getPayerAcc(): string
+	{
+		return $this->payerAcc;
+	}
+
+	/**
+	 * @param string $payerAcc
+	 * @return PaymentStatusResponse
+	 */
+	public function setPayerAcc(string $payerAcc): PaymentStatusResponse
+	{
+		$this->payerAcc = $payerAcc;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
 	public function getFee(): string
 	{
 		return $this->fee;
@@ -425,4 +487,113 @@ class PaymentStatusResponse
 		$this->fee = $fee;
 		return $this;
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getVs(): string
+	{
+		return $this->vs;
+	}
+
+	/**
+	 * @param string $vs
+	 * @return PaymentStatusResponse
+	 */
+	public function setVs(string $vs): PaymentStatusResponse
+	{
+		$this->vs = $vs;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCardValid(): string
+	{
+		return $this->cardValid;
+	}
+
+	/**
+	 * @param string $cardValid
+	 * @return PaymentStatusResponse
+	 */
+	public function setCardValid(string $cardValid): PaymentStatusResponse
+	{
+		$this->cardValid = $cardValid;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCardNumber(): string
+	{
+		return $this->cardNumber;
+	}
+
+	/**
+	 * @param string $cardNumber
+	 * @return PaymentStatusResponse
+	 */
+	public function setCardNumber(string $cardNumber): PaymentStatusResponse
+	{
+		$this->cardNumber = $cardNumber;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAppliedFee(): string
+	{
+		return $this->appliedFee;
+	}
+
+	/**
+	 * @param string $appliedFee
+	 * @return PaymentStatusResponse
+	 */
+	public function setAppliedFee(string $appliedFee): PaymentStatusResponse
+	{
+		$this->appliedFee = $appliedFee;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAppliedFeeTyp(): string
+	{
+		return $this->appliedFeeTyp;
+	}
+
+	/**
+	 * @param string $appliedFeeTyp
+	 * @return PaymentStatusResponse
+	 */
+	public function setAppliedFeeTyp(string $appliedFeeTyp): PaymentStatusResponse
+	{
+		$this->appliedFeeTyp = $appliedFeeTyp;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPaymentErrorReason(): string
+	{
+		return $this->paymentErrorReason;
+	}
+
+	/**
+	 * @param string $paymentErrorReason
+	 * @return PaymentStatusResponse
+	 */
+	public function setPaymentErrorReason(string $paymentErrorReason): PaymentStatusResponse
+	{
+		$this->paymentErrorReason = $paymentErrorReason;
+		return $this;
+	}
+
 }

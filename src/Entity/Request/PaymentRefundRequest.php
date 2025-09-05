@@ -9,7 +9,7 @@ class PaymentRefundRequest implements IRequest
 {
 
 	/**
-	 * @var Refund 
+	 * @var Refund
 	 */
 	private Refund $refund;
 
@@ -34,7 +34,6 @@ class PaymentRefundRequest implements IRequest
 		return [
 			'transId' => $this->getRefund()->getTransId(),
 			'amount' => $this->getRefund()->getAmount()->get(),
-			'curr' => $this->getRefund()->getCurrency(),
 			'test' => $this->getRefund()->isTest() ? 'true' : 'false',
 			'refId' => $this->getRefund()->getRefId(),
 		];
