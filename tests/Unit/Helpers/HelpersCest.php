@@ -13,7 +13,7 @@ class HelpersCest
 	 */
 	#[Group('helpers')]
 	public function testRedirectHelper(UnitTester $I){
-		if($_ENV['APPLICATION_ENV'] == 'gitlab'){
+		if($_ENV['APPLICATION_ENV'] == 'sdk-github'){
 			$I->markTestSkipped('Tento test byl v gitlabu přeskočen, ');
 			return;
 		}
