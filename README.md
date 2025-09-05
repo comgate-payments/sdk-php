@@ -84,10 +84,14 @@ $payment
     ->setTest(false)
     ->setFullName('Jan Novák')
     ->setCategory(CategoryCode::PHYSICAL_GOODS_ONLY)
-    ->setDelivery(DeliveryCode::HOME_DELIVERY);
+    ->setDelivery(DeliveryCode::HOME_DELIVERY)
+    ->setInitRecurring(true) // Marks as the initial payment in a recurring series
+    ->setInitRecurringId('XXXX-YYYY-ZZZZ'); // For subsequent recurring payments. Do not combine with setInitRecurring
 
 
 try {
+    // Used when creating subsequent recurring payments instead of createPayment
+    // $createPaymentResponse = $client->initRecurringPayment($payment);
     $createPaymentResponse = $client->createPayment($payment);
     if ($createPaymentResponse->getCode() === RequestCode::OK) {
         // Redirect the payer to Comgate payment gateway (use proper method of your framework)
