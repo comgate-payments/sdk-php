@@ -13,18 +13,18 @@ class HelpersCest
 	 */
 	#[Group('helpers')]
 	public function testRedirectHelper(UnitTester $I){
-//		$I->markTestSkipped('Tento test byl v gitlabu přeskočen, ');
-//		if($_ENV['APPLICATION_ENV'] == 'sdk-github'){
-//			return;
-//		}
-//		ob_start();
-//
-//		Helpers::redirect('foo');
-//		$headers_list = xdebug_get_headers();
-//		header_remove();
-//
-//		ob_clean();
-//
-//		$I->assertContains('Location: foo', $headers_list);
+		if($_ENV['APPLICATION_ENV'] === 'sdk-github'){
+			$I->markTestSkipped('Tento test byl v gitlabu přeskočen, ');
+			return;
+		}
+		ob_start();
+
+		Helpers::redirect('foo');
+		$headers_list = xdebug_get_headers();
+		header_remove();
+
+		ob_clean();
+
+		$I->assertContains('Location: foo', $headers_list);
 	}
 }
