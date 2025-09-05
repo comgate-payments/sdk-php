@@ -7,7 +7,10 @@ use Comgate\SDK\Entity\MotoPayment;
 use Comgate\SDK\Entity\Payment;
 use Comgate\SDK\Entity\PaymentCard;
 use Comgate\SDK\Entity\Refund;
+use Comgate\SDK\Entity\Request\AboDownloadRequest;
 use Comgate\SDK\Entity\Request\AboSingleTransferRequest;
+use Comgate\SDK\Entity\Request\AppleDomainAssociationRequest;
+use Comgate\SDK\Entity\Request\CsvDownloadRequest;
 use Comgate\SDK\Entity\Request\CsvSingleTransferRequest;
 use Comgate\SDK\Entity\Request\MotoPaymentCreateRequest;
 use Comgate\SDK\Entity\Request\PaymentCreateRequest;
@@ -22,7 +25,10 @@ use Comgate\SDK\Entity\Request\RecurringPaymentRequest;
 use Comgate\SDK\Entity\Request\SimulationRequest;
 use Comgate\SDK\Entity\Request\SingleTransferRequest;
 use Comgate\SDK\Entity\Request\TransferListRequest;
+use Comgate\SDK\Entity\Response\AboDownloadResponse;
 use Comgate\SDK\Entity\Response\AboSingleTransferResponse;
+use Comgate\SDK\Entity\Response\AppleDomainAssociationResponse;
+use Comgate\SDK\Entity\Response\CsvDownloadResponse;
 use Comgate\SDK\Entity\Response\CsvSingleTransferResponse;
 use Comgate\SDK\Entity\Response\MethodsResponse;
 use Comgate\SDK\Entity\Response\MotoPaymentCreateResponse;
@@ -161,6 +167,28 @@ class Client
 		$aboSingleTransferResponse = $this->transport->post($aboSingleTransferRequest->getUrn(),
 			$aboSingleTransferRequest->toArray());
 		return new AboSingleTransferResponse($aboSingleTransferResponse);
+	}
+
+	public function getAppleDomainAssociation(string $method = ''): AppleDomainAssociationResponse{
+		$appleDomainAssociationRequest = new AppleDomainAssociationRequest($method);
+		$appleDomainAssociationResponse = $this->transport->post($appleDomainAssociationRequest->getUrn(),
+			$appleDomainAssociationRequest->toArray());
+		return new AppleDomainAssociationResponse($appleDomainAssociationResponse);
+	}
+	public function getCsvDownload(string $date, bool $test = false): void{
+		$csvDownloadRequest = new CsvDownloadRequest($date, $test);
+		$csvDownloadResponse = $this->transport->post($csvDownloadRequest->getUrn(),
+			$csvDownloadRequest->toArray());
+
+		new CsvDownloadResponse($csvDownloadResponse);
+	}
+
+	public function getAboDownload(string $date, string $type = '',  bool $test = false, string $encoding = 'utf8'): void{
+		$aboDownloadRequest = new AboDownloadRequest($date, $type, $test, $encoding);
+		$aboDownloadResponse = $this->transport->post($aboDownloadRequest->getUrn(),
+			$aboDownloadRequest->toArray());
+
+		new AboDownloadResponse($aboDownloadResponse);
 	}
 
 	/**
