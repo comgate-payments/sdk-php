@@ -17,6 +17,8 @@ class AboSingleTransferRequest implements IRequest
 	protected string $type;
 
 	protected string $encoding;
+	private bool $download = false; // just for method sync Cest to pass, should be always false
+
 
 	public function __construct(string $transferId, bool $test, string $type, string $encoding)
 	{

@@ -50,6 +50,7 @@ class Payment
 		'embedded' => false,
 		'allowedMethods' => [],
 		'excludedMethods' => [],
+		'initRecurringId' => false, // only for recurring payments
 	];
 
 	/**
