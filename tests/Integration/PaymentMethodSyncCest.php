@@ -11,7 +11,7 @@ use Tests\Support\IntegrationTester;
 
 class PaymentMethodSyncCest
 {
-	private $skippedMethods = ["createMotoPayment", "getTransport", "setTransport", "simulation"];
+	private $skippedMethods = ["createMotoPayment", "getTransport", "setTransport", "simulation", "getAppleDomainAssociation"];
 
 	/**
 	 * @param IntegrationTester $I
