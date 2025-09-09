@@ -11,7 +11,7 @@ use Tests\Support\IntegrationTester;
 
 class PaymentMethodSyncCest
 {
-	private $skippedMethods = ["createMotoPayment", "getTransport", "setTransport", "simulation", "getAppleDomainAssociation"];
+	private $skippedMethods = ["createMotoPayment", "getTransport", "setTransport", "simulation"];
 
 	/**
 	 * @param IntegrationTester $I
@@ -36,6 +36,9 @@ class PaymentMethodSyncCest
 			}
 		}
 
+		if($example['name'] === 'getAppleDomainAssociation'){
+			$currentRemoteMethodParams = ['method', 'currency']; // in documentation they are not available yet, but i want to include this method in test
+		}
 		$I->assertNotEmpty($currentRemoteMethodParams, "No remote params found for method {$example['name']}. Is it intentional?");
 
 		$namespace = $methodProperties['namespace'] ?? "Comgate\SDK\Entity\Request\\" . $methodProperties['class'];
@@ -202,7 +205,7 @@ class PaymentMethodSyncCest
 			"getAppleDomainAssociation" => [
 				"url" => "/v1.0/appleDomainAssociation",
 				"class" => "AppleDomainAssociationRequest",
-				"args" => ['method']
+				"args" => ['method', 'currency']
 			],
 			"getCsvDownload" => [
 				"url" => "/v1.0/csvDownload",

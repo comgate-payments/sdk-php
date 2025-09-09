@@ -5,10 +5,12 @@ namespace Comgate\SDK\Entity\Request;
 class AppleDomainAssociationRequest implements IRequest
 {
 	protected string $method;
+	protected string $currency;
 
-	public function __construct(string $method)
+	public function __construct(string $method, string $currency)
 	{
 		$this->setMethod($method);
+		$this->setCurrency($currency);
 	}
 
 	public function getUrn(): string
@@ -20,6 +22,7 @@ class AppleDomainAssociationRequest implements IRequest
 	{
 		return[
 			'method' => $this->getMethod(),
+			'currency' => $this->getCurrency(),
 		];
 	}
 
@@ -38,6 +41,24 @@ class AppleDomainAssociationRequest implements IRequest
 	public function setMethod(string $method): self
 	{
 		$this->method = $method;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCurrency(): string
+	{
+		return $this->currency;
+	}
+
+	/**
+	 * @param string $currency
+	 * @return $this
+	 */
+	public function setCurrency(string $currency): self
+	{
+		$this->currency = $currency;
 		return $this;
 	}
 }
