@@ -2,6 +2,8 @@ name: "tests"
 on:
   schedule:
     - cron: "*/5 * * * *"
+  workflow_dispatch:
+
 env:
   extensions: "json, xdebug"
   cache-version: "1"
