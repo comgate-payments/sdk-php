@@ -99,7 +99,7 @@ jobs:
 
       - name: Run Codeception Tests
         run: |
-          vendor/bin/codecept run
+          vendor/bin/codecept run -v
 
       - name: IP check on Failure
         if: ${{ failure() }}

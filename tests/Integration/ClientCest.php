@@ -366,11 +366,13 @@ class ClientCest
 			]
 		);
 		$I->assertEquals(RequestCode::OK, $simulationResponse->getCode());
-
 		// create a recurring payment
 		$recurringPayment = $I->createPayment();
+		echo 'recurringPayment';
 		$recurringPayment->setTest(true);
+		echo 'test';
 		$recurringPayment->setInitRecurringId($initTransId);
+		echo 'recurringId';
 		$recurringResponse = $client->initRecurringPayment($recurringPayment);
 
 		$I->assertInstanceOf(RecurringPaymentResponse::class, $recurringResponse);
