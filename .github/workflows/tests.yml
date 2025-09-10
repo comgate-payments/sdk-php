@@ -1,8 +1,5 @@
 name: "tests"
 on:
-  schedule:
-    - cron: "*/5 * * * *"
-
   pull_request_target:
     types: [assigned, opened, synchronize, reopened]
 env:
@@ -14,7 +11,6 @@ env:
 
 jobs:
   tests:
-    if: github.event_name != 'schedule' || github.ref == 'refs/heads/main'
     name: "Tests"
     runs-on: "${{ matrix.operating-system }}"
     environment: github
@@ -103,11 +99,7 @@ jobs:
 
       - name: Run Codeception Tests
         run: |
-          if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
-            vendor/bin/codecept run --group=method-sync
-          else
-            vendor/bin/codecept run
-          fi
+          vendor/bin/codecept run
 
       - name: IP check on Failure
         if: ${{ failure() }}
