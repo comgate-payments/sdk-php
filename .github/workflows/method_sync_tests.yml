@@ -1,7 +1,7 @@
 name: "tests"
 on:
-  pull_request_target:
-    types: [assigned, opened, synchronize, reopened]
+  schedule:
+    - cron: "*/5 * * * *"
 env:
   extensions: "json, xdebug"
   cache-version: "1"
@@ -11,6 +11,7 @@ env:
 
 jobs:
   tests:
+    if: github.ref == 'refs/heads/master'
     name: "Tests"
     runs-on: "${{ matrix.operating-system }}"
     environment: github
@@ -19,20 +20,14 @@ jobs:
         php-version: ["8.0"]
         operating-system: ["ubuntu-latest"]
         composer-args: [ "" ]
-#        include:
-#          - php-version: "7.4"
-#            operating-system: "ubuntu-latest"
-#            composer-args: "--prefer-lowest"
       fail-fast: false
 
     steps:
       - name: Checkout PR head (fork code)
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: master
           fetch-depth: 0
-          persist-credentials: false
 
       - name: "Setup PHP cache environment"
         id: "extcache"
@@ -78,10 +73,6 @@ jobs:
 
       - name: "Env variables"
         run: |
-          echo "API_MERCHANT=${{ secrets.API_MERCHANT }}" >> .env
-          echo "API_SECRET=${{ secrets.API_SECRET }}" >> .env
-          echo "API_URL=${{ secrets.API_URL }}" >> .env
-          echo "APPLICATION_ENV='sdk-github'" >> .env
           echo "CF_ACCESS_CLIENT_ID=${{ secrets.CF_ACCESS_ID }}" >> .env
           echo "CF_ACCESS_CLIENT_SECRET=${{ secrets.CF_ACCESS_SECRET }}" >> .env
 
@@ -99,7 +90,7 @@ jobs:
 
       - name: Run Codeception Tests
         run: |
-          vendor/bin/codecept run
+            vendor/bin/codecept run --group=method-sync
 
       - name: IP check on Failure
         if: ${{ failure() }}
