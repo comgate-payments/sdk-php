@@ -118,7 +118,7 @@ class Client
 		$recurringRequest = new RecurringPaymentRequest($payment);
 		echo $recurringRequest->getUrn();
 		$recurringResponse = $this->transport->post($recurringRequest->getUrn(), $recurringRequest->toArray());
-		echo 'response';
+		echo $recurringResponse->getContent();
 		return new RecurringPaymentResponse($recurringResponse);
 	}
 
