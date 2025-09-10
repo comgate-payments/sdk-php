@@ -9,14 +9,22 @@ use Comgate\SDK\Http\Query;
 
 class PaymentCreateResponse
 {
-
-	protected int $code;
-
-	protected string $message = '';
-
-	protected string $transId = '';
-
-	protected string $redirect = '';
+	/**
+	 * @var int
+	 */
+	protected $code;
+	/**
+	 * @var string
+	 */
+	protected $message = '';
+	/**
+	 * @var string
+	 */
+	protected $transId = '';
+	/**
+	 * @var string
+	 */
+	protected $redirect = '';
 
 	/**
 	 * @param Response $paymentsCreateResponse

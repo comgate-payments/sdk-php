@@ -12,7 +12,7 @@ class MethodsResponse
 	/**
 	 * @var array<int, Method>
 	 */
-	private array $methodsList = [];
+	private $methodsList = [];
 
 	/**
 	 * @param Response $methodsResponse

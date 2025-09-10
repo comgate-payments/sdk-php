@@ -17,7 +17,10 @@ class Response
 	 */
 	protected $origin;
 
-	public function __construct(MessageInterface $origin)
+	/**
+	 * @param MessageInterface $origin
+	 */
+	public function __construct($origin)
 	{
 		$this->origin = $origin;
 	}

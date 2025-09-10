@@ -4,9 +4,15 @@ namespace Comgate\SDK\Entity\Request;
 
 class CsvDownloadRequest implements IRequest
 {
-	protected string $date;
+	/**
+	 * @var string
+	 */
+	protected $date;
 
-	protected bool $test;
+	/**
+	 * @var bool
+	 */
+	protected $test;
 
 	public function __construct(string $date, bool $test)
 	{

@@ -9,12 +9,18 @@ use Comgate\SDK\Http\Query;
 
 class RecurringPaymentResponse
 {
-
-	protected int $code;
-
-	protected string $message;
-
-	protected string $transId;
+	/**
+	 * @var int
+	 */
+	protected $code;
+	/**
+	 * @var string
+	 */
+	protected $message;
+	/**
+	 * @var string
+	 */
+	protected $transId;
 
 	/**
 	 * @param Response $recurringPaymentResponse

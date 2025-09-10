@@ -9,9 +9,18 @@ use Comgate\SDK\Exception\ApiException;
 
 class PublicCryptoKeyResponse
 {
-	protected int $code;
-	protected string $message;
-	protected string $key;
+	/**
+	 * @var int
+	 */
+	protected $code;
+	/**
+	 * @var string
+	 */
+	protected $message;
+	/**
+	 * @var string
+	 */
+	protected $key;
 
 	/**
 	 * @param Response $publicCryptoKeyResponse

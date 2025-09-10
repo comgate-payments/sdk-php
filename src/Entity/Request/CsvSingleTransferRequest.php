@@ -5,9 +5,14 @@ namespace Comgate\SDK\Entity\Request;
 class CsvSingleTransferRequest implements IRequest
 {
 
-	protected string $transferId;
-
-	protected bool $test;
+	/**
+	 * @var string
+	 */
+	protected $transferId;
+	/**
+	 * @var bool
+	 */
+	protected $test;
 	private bool $download = false; // just for method sync Cest to pass, should be always false
 
 	public function __construct(string $transferId, bool $test)

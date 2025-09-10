@@ -14,7 +14,7 @@ class SingleTransferResponse
 	/**
 	 * @var array<int, PaymentInfo>
 	 */
-	protected array $paymentsList = [];
+	protected $paymentsList = [];
 
 	/**
 	 * @param Response $singleTransferResponse

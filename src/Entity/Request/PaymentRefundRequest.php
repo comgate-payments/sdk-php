@@ -11,7 +11,7 @@ class PaymentRefundRequest implements IRequest
 	/**
 	 * @var Refund
 	 */
-	private Refund $refund;
+	private $refund;
 
 	public function __construct(Refund $refund)
 	{

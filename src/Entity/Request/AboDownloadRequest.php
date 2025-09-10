@@ -4,10 +4,22 @@ namespace Comgate\SDK\Entity\Request;
 
 class AboDownloadRequest implements IRequest
 {
-	protected string $date;
-	protected string $type;
-	protected bool $test;
-	protected string $encoding;
+	/**
+	 * @var string
+	 */
+	protected $date;
+	/**
+	 * @var string
+	 */
+	protected $type;
+	/**
+	 * @var bool
+	 */
+	protected $test;
+	/**
+	 * @var string
+	 */
+	protected $encoding;
 
 	public function __construct(string $date, string $type, bool $test, string $encoding)
 	{
