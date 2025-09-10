@@ -26,7 +26,7 @@ class PaymentMethodSyncCest
 		$I->assertNotEmpty($methodProperties, "Properties for method {$example['name']} not found. Add them to getMethodsProperties() method.");
 
 		$remoteMethods = $this->getRemoteMethods();
-		$I->assertNotEmpty($remoteMethods, "Remote methods not found. Check if https://apidoc.comgate.cz/cs_v1.yaml is available.");
+		$I->assertNotEmpty($remoteMethods, "Remote methods not found. Check if http://payments.comgate.cz/openapi.yml is available.");
 
 		$currentRemoteMethodParams = [];
 		foreach ($remoteMethods as $method) {
@@ -67,15 +67,16 @@ class PaymentMethodSyncCest
 		});
 	}
 
-	/** Vrací všechny dostupné metody z https://apidoc.comgate.cz/cs_v1.yaml, které se nakonec namapují do párů `url:params`
+	/** Vrací všechny dostupné metody z http://payments.comgate.cz/openapi.yml, které se nakonec namapují do párů `url:params`
 	 * @return array
 	 */
 	private function getRemoteMethods(): array
 	{
 		// cURL požadavek
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, 'https://apidoc.comgate.cz/cs_v1.yaml');
+		curl_setopt($ch, CURLOPT_URL, 'http://payments.comgate.cz/openapi.yml');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 		$result = curl_exec($ch);
 		curl_close($ch);
 
