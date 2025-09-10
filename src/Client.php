@@ -116,7 +116,9 @@ class Client
 	public function initRecurringPayment(Payment $payment): RecurringPaymentResponse
 	{
 		$recurringRequest = new RecurringPaymentRequest($payment);
+		echo $recurringRequest->getUrn();
 		$recurringResponse = $this->transport->post($recurringRequest->getUrn(), $recurringRequest->toArray());
+		echo 'response';
 		return new RecurringPaymentResponse($recurringResponse);
 	}
 
