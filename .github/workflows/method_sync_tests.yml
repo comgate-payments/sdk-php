@@ -1,0 +1,110 @@
+name: "tests"
+on:
+  schedule:
+    - cron: "0 4 * * *" # kvuli tomu ze GH funguje na UTC, tak se test spousi ve 4 (nas cas 6:00)
+  workflow_dispatch:
+
+env:
+  extensions: "json, xdebug"
+  cache-version: "1"
+  composer-version: "v2"
+  composer-install: "composer install --no-interaction --no-progress --prefer-dist"
+  coverage: "xdebug"
+
+jobs:
+  tests:
+    if: github.ref == 'refs/heads/master'
+    name: "Tests"
+    runs-on: "${{ matrix.operating-system }}"
+    environment: github
+    strategy:
+      matrix:
+        php-version: ["8.0"]
+        operating-system: ["ubuntu-latest"]
+        composer-args: [ "" ]
+      fail-fast: false
+
+    steps:
+      - name: Checkout PR head (fork code)
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: "Setup PHP cache environment"
+        id: "extcache"
+        uses: "shivammathur/cache-extensions@v1"
+        with:
+          php-version: "${{ matrix.php-version }}"
+          extensions: "${{ env.extensions }}"
+          key: "${{ env.cache-version }}"
+
+      - name: "Cache PHP extensions"
+        uses: "actions/cache@v4"
+        with:
+          path: "${{ steps.extcache.outputs.dir }}"
+          key: "${{ steps.extcache.outputs.key }}"
+          restore-keys: "${{ steps.extcache.outputs.key }}"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "${{ matrix.php-version }}"
+          extensions: "${{ env.extensions }}"
+          tools: "composer:${{ env.composer-version }}"
+          coverage: "${{ env.coverage }}"
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "Setup problem matchers for PHP"
+        run: 'echo "::add-matcher::${{ runner.tool_cache }}/php.json"'
+
+      - name: "Get Composer cache directory"
+        id: "composercache"
+        run: 'echo "::set-output name=dir::$(composer config cache-files-dir)"'
+
+      - name: "Cache PHP dependencies"
+        uses: "actions/cache@v4"
+        with:
+          path: "${{ steps.composercache.outputs.dir }}"
+          key: "${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}"
+          restore-keys: "${{ runner.os }}-composer-"
+
+      - name: "Install dependencies"
+        run: "${{ env.composer-install }}"
+
+      - name: "Env variables"
+        run: |
+          echo "CF_ACCESS_CLIENT_ID=${{ secrets.CF_ACCESS_ID }}" >> .env
+          echo "CF_ACCESS_CLIENT_SECRET=${{ secrets.CF_ACCESS_SECRET }}" >> .env
+
+      - name: "Check access to test enviroment"
+        run: |
+          curl -H "CF-Access-Client-Id: ${{ secrets.CF_ACCESS_ID }}" \
+          -H "CF-Access-Client-Secret: ${{ secrets.CF_ACCESS_SECRET }}" \
+          -v https://payments.comgate-test.cz/core/index/hello 2>&1 | grep 'HTTP/2 200'
+
+      - name: "Build Codeception actors"
+        run: "vendor/bin/codecept build -v"
+
+      - name: "Regenerate autoloader"
+        run: "composer dump-autoload --optimize"
+
+      - name: Run Codeception Tests
+        run: |
+            vendor/bin/codecept run --group=method-sync
+
+      - name: IP check on Failure
+        if: ${{ failure() }}
+        run: |
+          RUNNER_IP=$(curl -s https://api.ipify.org/)
+          echo "::warning::Test execution failed. This might be a network or IP whitelisting issue."
+          echo "::warning::The public IP of the GitHub runner was: ${RUNNER_IP}"
+          echo "::warning::Please ensure this IP is whitelisted."
+
+      - name: "Upload test output"
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: output
+          path: tests/**/output
