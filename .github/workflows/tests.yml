@@ -14,7 +14,7 @@ env:
 
 jobs:
   tests:
-    if: github.event_name != 'schedule' || github.ref == 'refs/heads/master'
+    if: github.event_name != 'schedule' || github.ref == 'refs/heads/main'
     name: "Tests"
     runs-on: "${{ matrix.operating-system }}"
     environment: github
@@ -103,7 +103,7 @@ jobs:
 
       - name: Run Codeception Tests
         run: |
-          if [ "${GITHUB_REF}" = "refs/heads/master" ]; then
+          if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
             vendor/bin/codecept run --group=method-sync
           else
             vendor/bin/codecept run
