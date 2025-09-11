@@ -61,7 +61,7 @@ class ClientCest
 		$methodsRequest = new MethodsRequest();
 		$methodsRequest->setType(TypeCode::TYPE_JSON)
 			->setLang(LangCode::CS)
-			->setCurrency(CurrencyCode::CZK)
+			->setCurr(CurrencyCode::CZK)
 			->setCountry(CountryCode::CZ);
 		$methodsResponse = $client->getMethods($methodsRequest);
 
@@ -366,7 +366,6 @@ class ClientCest
 			]
 		);
 		$I->assertEquals(RequestCode::OK, $simulationResponse->getCode());
-
 		// create a recurring payment
 		$recurringPayment = $I->createPayment();
 		$recurringPayment->setTest(true);

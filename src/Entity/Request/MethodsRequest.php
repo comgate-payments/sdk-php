@@ -8,7 +8,7 @@ class MethodsRequest implements IRequest
 {
 	private string $type = TypeCode::TYPE_JSON;
 	private ?string $lang = null;
-	private ?string $currency = null;
+	private ?string $curr = null;
 	private ?string $country = null;
 	private ?string $price = null;
 	private ?bool $initRecurring = null;
@@ -38,8 +38,8 @@ class MethodsRequest implements IRequest
 			$requestArray['lang'] = $this->getLang();
 		}
 
-		if(!is_null($this->getCurrency())){
-			$requestArray['curr'] = $this->getCurrency();
+		if(!is_null($this->getCurr())){
+			$requestArray['curr'] = $this->getCurr();
 		}
 
 		if(!is_null($this->getCountry())){
@@ -117,18 +117,18 @@ class MethodsRequest implements IRequest
 	/**
 	 * @return string|null
 	 */
-	public function getCurrency(): ?string
+	public function getCurr(): ?string
 	{
-		return $this->currency;
+		return $this->curr;
 	}
 
 	/**
-	 * @param string|null $currency
+	 * @param string|null $curr
 	 * @return MethodsRequest
 	 */
-	public function setCurrency(?string $currency): MethodsRequest
+	public function setCurr(?string $curr): MethodsRequest
 	{
-		$this->currency = $currency;
+		$this->curr = $curr;
 		return $this;
 	}
 

@@ -116,7 +116,9 @@ class Client
 	public function initRecurringPayment(Payment $payment): RecurringPaymentResponse
 	{
 		$recurringRequest = new RecurringPaymentRequest($payment);
+		echo $recurringRequest->getUrn();
 		$recurringResponse = $this->transport->post($recurringRequest->getUrn(), $recurringRequest->toArray());
+		echo $recurringResponse->getContent();
 		return new RecurringPaymentResponse($recurringResponse);
 	}
 
@@ -169,8 +171,8 @@ class Client
 		return new AboSingleTransferResponse($aboSingleTransferResponse);
 	}
 
-	public function getAppleDomainAssociation(string $method = ''): AppleDomainAssociationResponse{
-		$appleDomainAssociationRequest = new AppleDomainAssociationRequest($method);
+	public function getAppleDomainAssociation(string $method = '', string $currency = ''): AppleDomainAssociationResponse{
+		$appleDomainAssociationRequest = new AppleDomainAssociationRequest($method, $currency);
 		$appleDomainAssociationResponse = $this->transport->post($appleDomainAssociationRequest->getUrn(),
 			$appleDomainAssociationRequest->toArray());
 		return new AppleDomainAssociationResponse($appleDomainAssociationResponse);
