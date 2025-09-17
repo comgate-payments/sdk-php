@@ -16,7 +16,6 @@ jobs:
     if: github.ref == 'refs/heads/master'
     name: "Tests"
     runs-on: "${{ matrix.operating-system }}"
-    environment: github
     strategy:
       matrix:
         php-version: ["8.0"]

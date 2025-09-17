@@ -31,7 +31,7 @@ class Comgate
 	public static function defaults(): self
 	{
 		$self = new static();
-		$self->url = $_ENV['API_URL'];
+		$self->url = Config::URL;
 
 		return $self;
 	}
