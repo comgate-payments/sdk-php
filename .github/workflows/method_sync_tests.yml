@@ -1,4 +1,4 @@
-name: "tests"
+name: "Method_sync_test"
 on:
   schedule:
     - cron: "0 4 * * *" # kvuli tomu ze GH funguje na UTC, tak se test spousi ve 4 (nas cas 6:00)
@@ -14,7 +14,7 @@ env:
 jobs:
   tests:
     if: github.ref == 'refs/heads/master'
-    name: "Tests"
+    name: "Method_sync_test"
     runs-on: "${{ matrix.operating-system }}"
     strategy:
       matrix:
