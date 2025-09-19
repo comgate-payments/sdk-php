@@ -17,7 +17,7 @@ class MethodsRequest implements IRequest
 	/**
 	 * @var string|null
 	 */
-	private $currency = null;
+	private $curr = null;
 	/**
 	 * @var string|null
 	 */
@@ -158,7 +158,7 @@ class MethodsRequest implements IRequest
 	 */
 	public function getCurr(): ?string
 	{
-		return $this->currency;
+		return $this->curr;
 	}
 
 	/**
@@ -167,7 +167,7 @@ class MethodsRequest implements IRequest
 	 */
 	public function setCurr(?string $curr): MethodsRequest
 	{
-		$this->currency = $curr;
+		$this->curr = $curr;
 		return $this;
 	}
 
