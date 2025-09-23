@@ -1,4 +1,4 @@
-name: "tests"
+name: "Method_sync_test"
 on:
   schedule:
     - cron: "0 4 * * *" # kvuli tomu ze GH funguje na UTC, tak se test spousi ve 4 (nas cas 6:00)
@@ -14,9 +14,8 @@ env:
 jobs:
   tests:
     if: github.ref == 'refs/heads/master'
-    name: "Tests"
+    name: "Method_sync_test"
     runs-on: "${{ matrix.operating-system }}"
-    environment: github
     strategy:
       matrix:
         php-version: ["8.0"]
@@ -73,16 +72,10 @@ jobs:
       - name: "Install dependencies"
         run: "${{ env.composer-install }}"
 
+#      for building codecept i need .env
       - name: "Env variables"
         run: |
-          echo "CF_ACCESS_CLIENT_ID=${{ secrets.CF_ACCESS_ID }}" >> .env
-          echo "CF_ACCESS_CLIENT_SECRET=${{ secrets.CF_ACCESS_SECRET }}" >> .env
-
-      - name: "Check access to test enviroment"
-        run: |
-          curl -H "CF-Access-Client-Id: ${{ secrets.CF_ACCESS_ID }}" \
-          -H "CF-Access-Client-Secret: ${{ secrets.CF_ACCESS_SECRET }}" \
-          -v https://payments.comgate-test.cz/core/index/hello 2>&1 | grep 'HTTP/2 200'
+          touch .env
 
       - name: "Build Codeception actors"
         run: "vendor/bin/codecept build -v"

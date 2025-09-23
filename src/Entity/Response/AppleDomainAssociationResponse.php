@@ -18,18 +18,19 @@ class AppleDomainAssociationResponse
 	{
 		$parsedResponse = Query::parse($appleDomainAssociationResponse->getContent());
 
-		$code = (int) $parsedResponse['code'];
-		$message = $parsedResponse['message'];
+		if (isset($parsedResponse['code']) && isset($parsedResponse['message'])) {
+			$code = (int) $parsedResponse['code'];
+			$message = $parsedResponse['message'];
 
-		switch ($code) {
-			case 0:
-				$this->setFileContent($parsedResponse['fileContent']);
-				break;
-			case 1400:
-				throw new MissingParamException($message, $code);
+			switch ($code) {
+				case 1400:
+					throw new MissingParamException($message, $code);
 
-			default:
-				throw new ApiException($message, $code);
+				default:
+					throw new ApiException($message, $code);
+			}
+		} else if (isset($parsedResponse['fileContent'])) {
+			$this->setFileContent($parsedResponse['fileContent']);
 		}
 	}
 

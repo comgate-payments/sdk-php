@@ -13,16 +13,11 @@ jobs:
   tests:
     name: "Tests"
     runs-on: "${{ matrix.operating-system }}"
-    environment: github
     strategy:
       matrix:
         php-version: ["8.0"]
         operating-system: ["ubuntu-latest"]
         composer-args: [ "" ]
-#        include:
-#          - php-version: "7.4"
-#            operating-system: "ubuntu-latest"
-#            composer-args: "--prefer-lowest"
       fail-fast: false
 
     steps:
