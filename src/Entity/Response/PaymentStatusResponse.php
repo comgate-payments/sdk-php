@@ -12,33 +12,110 @@ use Comgate\SDK\Exception\ApiException;
 
 class PaymentStatusResponse
 {
-	protected int $code;
-	protected string $message;
-	protected bool $test;
-	protected Money $price;
-	protected string $curr;
-	protected string $label;
-	protected string $refId;
-	protected string $payerId;
-	protected string $method;
-	protected string $account;
-	protected string $email;
-	protected string $name;
-	protected string $phone;
-
-	protected string $transId;
-	protected string $status;
-	protected string $payerName;
-	protected string $payerAcc;
-	protected string $fee;
-	protected string $vs;
-	protected string $cardValid;
-	protected string $cardNumber;
-	protected string $appliedFee;
-	protected string $appliedFeeTyp;
-	protected string $paymentErrorReason;
-	protected string $merchant;
-	protected string $secret;
+	/**
+	 * @var int
+	 */
+	protected $code;
+	/**
+	 * @var string
+	 */
+	protected $message;
+	/**
+	 * @var bool
+	 */
+	protected $test;
+	/**
+	 * @var Money
+	 */
+	protected $price;
+	/**
+	 * @var string
+	 */
+	protected $curr;
+	/**
+	 * @var string
+	 */
+	protected $label;
+	/**
+	 * @var string
+	 */
+	protected $refId;
+	/**
+	 * @var string
+	 */
+	protected $payerId;
+	/**
+	 * @var string
+	 */
+	protected $method;
+	/**
+	 * @var string
+	 */
+	protected $account;
+	/**
+	 * @var string
+	 */
+	protected $email;
+	/**
+	 * @var string
+	 */
+	protected $name;
+	/**
+	 * @var string
+	 */
+	protected $phone;
+	/**
+	 * @var string
+	 */
+	protected $transId;
+	/**
+	 * @var string
+	 */
+	protected $status;
+	/**
+	 * @var string
+	 */
+	protected $payerName;
+	/**
+	 * @var string
+	 */
+	protected $payerAcc;
+	/**
+	 * @var string
+	 */
+	protected $fee;
+	/**
+	 * @var string
+	 */
+	protected $vs;
+	/**
+	 * @var string
+	 */
+	protected $cardValid;
+	/**
+	 * @var string
+	 */
+	protected $cardNumber;
+	/**
+	 * @var string
+	 */
+	protected $appliedFee;
+	/**
+	 * @var string
+	 */
+	protected $appliedFeeTyp;
+	/**
+	 * @var string
+	 */
+	protected $paymentErrorReason;
+	/**
+	 * @var string
+	 */
+	protected $merchant;
+	/**
+	 * @var string
+	 */
+	protected $secret;
 
 	/**
 	 * @param Response $paymentStatusResponse

@@ -10,7 +10,7 @@ class SimulationRequest implements IRequest
 	/**
 	 * @var array<string, string> $params
 	 */
-	protected array $params = [];
+	protected $params = [];
 
 	/**
 	 * @param array<string, string> $params

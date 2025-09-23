@@ -10,15 +10,26 @@ class AboSingleTransferRequest implements IRequest
 	const ABO_ENCODING_WINDOWS = 'win1250';
 	const ABO_ENCODING_UTF8 = 'utf8';
 
-	protected string $transferId;
+	/**
+	 * @var string
+	 */
+	protected $transferId;
 
-	protected bool $test;
+	/**
+	 * @var bool
+	 */
+	protected $test;
 
-	protected string $type;
+	/**
+	 * @var string
+	 */
+	protected $type;
 
-	protected string $encoding;
+	/**
+	 * @var string
+	 */
+	protected $encoding;
 	private bool $download = false; // just for method sync Cest to pass, should be always false
-
 
 	public function __construct(string $transferId, bool $test, string $type, string $encoding)
 	{

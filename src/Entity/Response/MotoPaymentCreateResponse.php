@@ -10,13 +10,22 @@ use Comgate\SDK\Http\Query;
 class MotoPaymentCreateResponse
 {
 
-	protected int $code;
-
-	protected string $message = '';
-
-	protected string $transId = '';
-
-	protected string $status = '';
+	/**
+	 * @var int
+	 */
+	protected $code;
+	/**
+	 * @var string
+	 */
+	protected $message = '';
+	/**
+	 * @var string
+	 */
+	protected $transId = '';
+	/**
+	 * @var string
+	 */
+	protected $status = '';
 
 	/**
 	 * @param Response $motoPaymentsCreateResponse

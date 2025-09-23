@@ -4,9 +4,14 @@ namespace Comgate\SDK\Entity\Request;
 
 class SingleTransferRequest implements IRequest
 {
-	protected int $transferId;
-
-	protected bool $test;
+	/**
+	 * @var int
+	 */
+	protected $transferId;
+	/**
+	 * @var bool
+	 */
+	protected $test;
 
 	public function __construct(int $transferId, bool $test = false)
 	{

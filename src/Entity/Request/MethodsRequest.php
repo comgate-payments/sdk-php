@@ -6,19 +6,58 @@ use Comgate\SDK\Entity\Codes\TypeCode;
 
 class MethodsRequest implements IRequest
 {
-	private string $type = TypeCode::TYPE_JSON;
-	private ?string $lang = null;
-	private ?string $curr = null;
-	private ?string $country = null;
-	private ?string $price = null;
-	private ?bool $initRecurring = null;
-	private ?bool $verification = null;
-	private ?bool $preauth = null;
-	private ?string $expirationTime = null;
-	private ?bool $embedded = null;
-	private ?string $userAgent = null;
-	private ?bool $chargeUnregulatedCardFees = null;
-	private ?bool $enableApplePayGooglePay = null;
+	/**
+	 * @var string
+	 */
+	private $type = TypeCode::TYPE_JSON;
+	/**
+	 * @var string|null
+	 */
+	private $lang = null;
+	/**
+	 * @var string|null
+	 */
+	private $curr = null;
+	/**
+	 * @var string|null
+	 */
+	private $country = null;
+	/**
+	 * @var string|null
+	 */
+	private $price = null;
+	/**
+	 * @var bool|null
+	 */
+	private $initRecurring = null;
+	/**
+	 * @var bool|null
+	 */
+	private $verification = null;
+	/**
+	 * @var bool|null
+	 */
+	private $preauth = null;
+	/**
+	 * @var string|null
+	 */
+	private $expirationTime = null;
+	/**
+	 * @var bool|null
+	 */
+	private $embedded = null;
+	/**
+	 * @var string|null
+	 */
+	private $userAgent = null;
+	/**
+	 * @var bool|null
+	 */
+	private $chargeUnregulatedCardFees = null;
+	/**
+	 * @var bool|null
+	 */
+	private $enableApplePayGooglePay = null;
 
 	public function getUrn(): string
 	{

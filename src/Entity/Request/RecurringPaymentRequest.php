@@ -8,7 +8,10 @@ use Comgate\SDK\Exception\LogicalException;
 
 class RecurringPaymentRequest implements IRequest
 {
-	private Payment $payment;
+	/**
+	 * @var Payment
+	 */
+	private $payment;
 
 	public function __construct(Payment $payment){
 		$this->setPayment($payment);

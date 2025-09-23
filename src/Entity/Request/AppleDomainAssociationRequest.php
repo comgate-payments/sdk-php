@@ -4,7 +4,10 @@ namespace Comgate\SDK\Entity\Request;
 
 class AppleDomainAssociationRequest implements IRequest
 {
-	protected string $method;
+	/**
+	 * @var string
+	 */
+	protected $method;
 	protected string $currency;
 
 	public function __construct(string $method, string $currency)

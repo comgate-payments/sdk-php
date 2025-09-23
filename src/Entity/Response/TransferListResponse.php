@@ -13,7 +13,7 @@ class TransferListResponse
 	/**
 	 * @var array<int, Transfer>
 	 */
-	protected array $transferList = [];
+	protected $transferList = [];
 
 	/**
 	 * @param Response $transferListResponse

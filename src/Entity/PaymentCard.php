@@ -6,9 +6,18 @@ use Exception;
 
 class PaymentCard
 {
-	private ?string $cardNumber;
-	private ?string $cardExpiration;
-	private ?string $cardCvv;
+	/**
+	 * @var string|null
+	 */
+	private $cardNumber;
+	/**
+	 * @var string|null
+	 */
+	private $cardExpiration;
+	/**
+	 * @var string|null
+	 */
+	private $cardCvv;
 
 	/**
 	 * @param string|null $cardNumber 16 digit card number

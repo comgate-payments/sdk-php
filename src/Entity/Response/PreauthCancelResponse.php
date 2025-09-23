@@ -10,10 +10,14 @@ use Comgate\SDK\Http\Query;
 
 class PreauthCancelResponse
 {
-
-	protected int $code;
-
-	protected string $message;
+	/**
+	 * @var int
+	 */
+	protected $code;
+	/**
+	 * @var string
+	 */
+	protected $message;
 
 	/**
 	 * @param Response $cancelPreauthResponse

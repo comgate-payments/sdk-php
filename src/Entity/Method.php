@@ -4,23 +4,54 @@ namespace Comgate\SDK\Entity;
 
 class Method
 {
-
-	private string $id;
-
-	private string $group;
-
-	private string $groupLabel;
-
-	private string $name;
-	private string $name_short;
-
-	private string $description;
-	private string $logo;
-	private string $logo_240;
-	private string $cblogo;
-	private string $clogo;
-	private string $sblogo;
-	private string $slogo;
+	/**
+	 * @var string
+	 */
+	private $id;
+	/**
+	 * @var string
+	 */
+	private $group;
+	/**
+	 * @var string
+	 */
+	private $groupLabel;
+	/**
+	 * @var string
+	 */
+	private $name;
+	/**
+	 * @var string
+	 */
+	private $name_short;
+	/**
+	 * @var string
+	 */
+	private $description;
+	/**
+	 * @var string
+	 */
+	private $logo;
+	/**
+	 * @var string
+	 */
+	private $logo_240;
+	/**
+	 * @var string
+	 */
+	private $cblogo;
+	/**
+	 * @var string
+	 */
+	private $clogo;
+	/**
+	 * @var string
+	 */
+	private $sblogo;
+	/**
+	 * @var string
+	 */
+	private $slogo;
 
 	/**
 	 * @param array<string, string> $methodData
