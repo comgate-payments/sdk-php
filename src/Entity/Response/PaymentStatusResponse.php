@@ -152,7 +152,7 @@ class PaymentStatusResponse
                             ->setFee($parsedResponse['fee'] ?? '')
                             ->setVs($parsedResponse['vs'] ?? '')
                             ->setCardValid($parsedResponse['cardValid'] ?? '')
-                            ->setCardNumber($parsedResponse['cardNumber'])
+                            ->setCardNumber($parsedResponse['cardNumber'] ?? '')
                             ->setAppliedFee($parsedResponse['appliedFee'] ?? '')
                             ->setAppliedFeeTyp($parsedResponse['appliedFeeTyp'] ?? '')
                             ->setPaymentErrorReason($parsedResponse['paymentErrorReason'] ?? '');
