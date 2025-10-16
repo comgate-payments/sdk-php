@@ -93,52 +93,119 @@ class PaymentNotification
 		return $this->transactionId;
 	}
 
+	/**
+	 * @deprecated since v1.7.0<br>
+	 * This method is no longer supported<br><br>
+	 * For retrieving payment information, use {@see Client::getStatus()} instead.<br>
+	 * Detailed documentation: https://apidoc.comgate.cz/api/rest/#operation/v2-0-statu
+	 * @return string|null
+	 */
 	public function getMerchant(): ?string
 	{
 		return $this->merchant;
 	}
 
+	/**
+	 * @deprecated since v1.7.0<br>
+	 * This method is no longer supported<br><br>
+	 * For retrieving payment information, use {@see Client::getStatus()} instead.<br>
+	 * Detailed documentation: https://apidoc.comgate.cz/api/rest/#operation/v2-0-statu
+	 * @return bool|null
+	 */
 	public function isTest(): ?bool
 	{
 		return $this->test;
 	}
 
+	/**
+	 * @deprecated since v1.7.0<br>
+	 * This method is no longer supported<br><br>
+	 * For retrieving payment information, use {@see Client::getStatus()} instead.<br>
+	 * Detailed documentation: https://apidoc.comgate.cz/api/rest/#operation/v2-0-statu
+	 * @return Money|null
+	 */
 	public function getPrice(): ?Money
 	{
 		return $this->price;
 	}
 
+	/**
+	 * @deprecated since v1.7.0<br>
+	 * This method is no longer supported<br><br>
+	 * For retrieving payment information, use {@see Client::getStatus()} instead.<br>
+	 * Detailed documentation: https://apidoc.comgate.cz/api/rest/#operation/v2-0-statu
+	 * @return string|null
+	 */
 	public function getCurrency(): ?string
 	{
 		return $this->currency;
 	}
 
+	/**
+	 * @deprecated since v1.7.0<br>
+	 * This method is no longer supported<br><br>
+	 * For retrieving payment information, use {@see Client::getStatus()} instead.<br>
+	 * Detailed documentation: https://apidoc.comgate.cz/api/rest/#operation/v2-0-statu
+	 * @return string|null
+	 */
 	public function getLabel(): ?string
 	{
 		return $this->label;
 	}
 
+	/**
+	 * @deprecated since v1.7.0<br>
+	 * This method is no longer supported<br><br>
+	 * For retrieving payment information, use {@see Client::getStatus()} instead.<br>
+	 * Detailed documentation: https://apidoc.comgate.cz/api/rest/#operation/v2-0-statu
+	 * @return string|null
+	 */
 	public function getReferenceId(): ?string
 	{
 		return $this->referenceId;
 	}
 
+	/**
+	 * @deprecated since v1.7.0<br>
+	 * This method is no longer supported<br><br>
+	 * For retrieving payment information, use {@see Client::getStatus()} instead.<br>
+	 * Detailed documentation: https://apidoc.comgate.cz/api/rest/#operation/v2-0-statu
+	 * @return string|null
+	 */
 	public function getEmail(): ?string
 	{
 		return $this->email;
 	}
 
+	/**
+	 * @deprecated since v1.7.0<br>
+	 * This method is no longer supported<br><br>
+	 * For retrieving payment information, use {@see Client::getStatus()} instead.<br>
+	 * Detailed documentation: https://apidoc.comgate.cz/api/rest/#operation/v2-0-statu
+	 * @return string|null
+	 */
 	public function getStatus(): ?string
 	{
 		return $this->status;
 	}
 
+	/**
+	 * @deprecated since v1.7.0<br>
+	 * This method is no longer supported<br><br>
+	 * For retrieving payment information, use {@see Client::getStatus()} instead.<br>
+	 * Detailed documentation: https://apidoc.comgate.cz/api/rest/#operation/v2-0-statu
+	 * @return string|null
+	 */
 	public function getFee(): ?string
 	{
 		return $this->fee;
 	}
 
 	/**
+	 * @deprecated since v1.7.0<br>
+	 * This method is no longer supported<br><br>
+	 * For retrieving payment information, use {@see Client::getStatus()} instead.<br>
+	 * Detailed documentation: https://apidoc.comgate.cz/api/rest/#operation/v2-0-statu
 	 * @return string|null
 	 */
 	public function getVs(): ?string
@@ -155,6 +222,10 @@ class PaymentNotification
 	}
 
 	/**
+	 * @deprecated since v1.7.0<br>
+	 * This method is no longer supported<br><br>
+	 * For retrieving payment information, use {@see Client::getStatus()} instead.<br>
+	 * Detailed documentation: https://apidoc.comgate.cz/api/rest/#operation/v2-0-statu
 	 * @return string|null
 	 */
 	public function getMethod(): ?string
@@ -171,6 +242,10 @@ class PaymentNotification
 	}
 
 	/**
+	 * @deprecated since v1.7.0<br>
+	 * This method is no longer supported<br><br>
+	 * For retrieving payment information, use {@see Client::getStatus()} instead.<br>
+	 * Detailed documentation: https://apidoc.comgate.cz/api/rest/#operation/v2-0-statu
 	 * @return string|null
 	 */
 	public function getSecret(): ?string
