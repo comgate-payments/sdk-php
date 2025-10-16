@@ -198,8 +198,11 @@ use Comgate\SDK\Exception\ApiException;
 
 // Create from your framework
 $data = $framework->getHttpRequest()->getPostData();
+
+// Use PaymentNotification only for getting transactionId
+// For other details about payment please use $client->getStatus with appropriate getter
 $notification = PaymentNotification::createFrom($data);
-$transactionId = $notification->getTransactionId();
+$transactionId = $notification->getEmail();
 
 try {
     // it's important to check the status from API
@@ -224,7 +227,18 @@ try {
     echo "OK"; // important response with HTTP code 200
 
 } catch (ApiException $e) {
-    var_dump($e->getMessage());
+    if ($e->getCode() >= 500 && $e->getCode() < 600) { // map error codes to something sensible
+		    $status = 502;
+	  } else {
+    		$status = 400;
+	  }
+
+	  http_response_code($status); // set the response code to server and print the error to the screen
+	  print_r([
+		    'error' => true,
+    		'code' => $status,
+		    'message' => $e->getMessage()
+	  ]);
 }
 ```
 
