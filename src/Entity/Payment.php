@@ -45,7 +45,7 @@ class Payment
 		'url_cancelled' => '',
 		'url_pending' => '',
 		'chargeUnregulatedCardFees' => false,
-		'enableApplePayGooglePay' => false,
+		'enableApplePayGooglePay' => true,
 		'prepareOnly' => true,
 		'embedded' => false,
 		'allowedMethods' => [],
