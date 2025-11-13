@@ -71,7 +71,7 @@ class PaymentCest
 			'url_cancelled' => '',
 			'url_pending' => '',
 			'chargeUnregulatedCardFees' => false,
-			'enableApplePayGooglePay' => false,
+			'enableApplePayGooglePay' => true,
 			'initRecurringId' => '',
 
 		], $paymentParams);

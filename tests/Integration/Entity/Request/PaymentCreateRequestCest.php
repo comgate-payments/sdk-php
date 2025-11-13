@@ -61,7 +61,7 @@ class PaymentCreateRequestCest
 					'url_cancelled' => '',
 					'url_pending' => '',
 					'chargeUnregulatedCardFees' => 'false',
-					'enableApplePayGooglePay' => 'false',
+					'enableApplePayGooglePay' => 'true',
 					'initRecurringId' => '',
 
 				],
@@ -114,7 +114,7 @@ class PaymentCreateRequestCest
 					'url_cancelled' => '',
 					'url_pending' => '',
 					'chargeUnregulatedCardFees' => 'false',
-					'enableApplePayGooglePay' => 'false',
+					'enableApplePayGooglePay' => 'true',
 					'country' => '',
 					'curr' => '',
 					'label' => '',
