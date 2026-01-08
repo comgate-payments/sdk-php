@@ -78,7 +78,11 @@ class PaymentMethodSyncCest
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 		$result = curl_exec($ch);
-		curl_close($ch);
+		// PHP 8.5+ automatically closes the handle
+		// for lower versions we need to close it manually
+		if(PHP_VERSION_ID < 80500){
+			curl_close($ch);
+		};
 
 		$parsed = yaml_parse($result);
 		$availableMethods = array_keys($parsed['paths']);
