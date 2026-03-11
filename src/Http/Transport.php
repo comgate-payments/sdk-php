@@ -138,7 +138,7 @@ class Transport implements ITransport
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_HEADER, true);
 
-		if ($method === 'POST' && !empty($data)) {
+		if ($method === 'POST' && count($data) != 0) {
 			curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
 		}
 

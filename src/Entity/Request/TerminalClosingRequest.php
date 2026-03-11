@@ -10,7 +10,7 @@ class TerminalClosingRequest implements IRequest
 	}
 
 	/**
-	 * @return array<string, mixed>
+	 * @return array<string, bool|int|string|null>
 	 */
 	public function toArray(): array
 	{
