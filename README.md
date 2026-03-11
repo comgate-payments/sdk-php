@@ -265,6 +265,44 @@ try{
 ```
 
 
+### Create terminal CloudPOS payment
+#### API Documentation
+https://apidoc.comgate.cz/api/rest-terminal
+```php
+use Comgate\SDK\Comgate;
+use Comgate\SDK\Entity\Codes\CurrencyCode;
+use Comgate\SDK\Entity\Codes\RequestCode;
+use Comgate\SDK\Entity\Money;
+use Comgate\SDK\Entity\TerminalPayment;
+use Comgate\SDK\Entity\TerminalRefund;
+use Comgate\SDK\Exception\ApiException;
+
+$clientTerminal = Comgate::defaultsRest()
+    ->setMerchant('123456') // get on portal.comgate.cz
+    ->setSecret('foobarbaz') // get on portal.comgate.cz
+    ->createTerminalClient();
+
+$terminalPayment = new TerminalPayment();
+$terminalPayment
+    ->setPrice(Money::ofInt(4))
+    ->setCurr(CurrencyCode::CZK)
+    ->setRefId('123456');
+
+try {
+    $createTerminalPaymentResponse = $clientTerminal->createPayment($terminalPayment);
+    if ($createTerminalPaymentResponse->getCode() === RequestCode::OK) {
+
+        // save ID of terminal payment in your system
+        echo 'created terminal payment: ' . $createTerminalPaymentResponse->getTransId();
+
+    } else {
+        var_dump($createTerminalPaymentResponse->getMessage());
+    }
+} catch (ApiException $e) {
+    var_dump($e->getMessage());
+}
+```
+
 ### Debugging
 
 #### Logging

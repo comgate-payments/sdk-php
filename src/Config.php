@@ -5,6 +5,7 @@ namespace Comgate\SDK;
 class Config
 {
 	public const URL = 'https://payments.comgate.cz/v1.0/';
+	public const URL_REST = 'https://payments.comgate.cz/v2.0/';
 	/** @var string */
 	private $merchant;
 
