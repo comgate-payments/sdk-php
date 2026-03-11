@@ -87,7 +87,105 @@ class Transport implements ITransport
 			throw new ComgateException("Request failed: {$e}", 0);
 		}
 
-		return new Response(self::createResponse($response));
+		return new Response($this->createResponse($response));
+	}
+
+	/**
+	 * @param mixed[] $options
+	 */
+	public function get(string $urn, array $options = []): Response
+	{
+		return $this->makeRestRequest('GET', $urn, [], $options);
+	}
+
+	/**
+	 * @param mixed[] $data
+	 * @param mixed[] $options
+	 */
+	public function postJson(string $urn, array $data, array $options = []): Response
+	{
+		return $this->makeRestRequest('POST', $urn, $data, $options);
+	}
+
+	/**
+	 * @param mixed[] $options
+	 */
+	public function delete(string $urn, array $options = []): Response
+	{
+		return $this->makeRestRequest('DELETE', $urn, [], $options);
+	}
+
+	/**
+	 * @param mixed[] $data
+	 * @param mixed[] $options
+	 */
+	private function makeRestRequest(string $method, string $urn, array $data = [], array $options = []): Response
+	{
+		$curl = curl_init();
+
+		// Příprava URL s Basic Auth
+		$url = $this->config->getUrl() . $urn;
+		$auth = base64_encode($this->config->getMerchant() . ':' . $this->config->getSecret());
+
+		$headers = [
+			'Authorization: Basic ' . $auth,
+			'Content-Type: application/json',
+		];
+
+		curl_setopt($curl, CURLOPT_URL, $url);
+		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_HEADER, true);
+
+		if ($method === 'POST' && count($data) != 0) {
+			curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+		}
+
+		if (isset($_ENV['APPLICATION_ENV']) && $_ENV['APPLICATION_ENV'] === 'sdk-github') {
+			curl_setopt($curl, CURLOPT_HTTPHEADER, array_merge($headers, [
+				'CF-Access-Client-Id: ' . $_ENV['CF_ACCESS_CLIENT_ID'],
+				'CF-Access-Client-Secret: ' . $_ENV['CF_ACCESS_CLIENT_SECRET'],
+			]));
+		}
+
+		$response = curl_exec($curl);
+		$httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+		$e = curl_error($curl);
+
+		if ($this->logger !== null) {
+			$this->logger->log(LogLevel::INFO, 'REST Request to "' . $url . '" sent');
+			$this->logger->log(LogLevel::DEBUG, 'Response: ' . $response);
+			$this->logger->log(LogLevel::DEBUG, 'cURL info: ' . json_encode(curl_getinfo($curl)));
+
+			switch (true){
+				case ($response === false):
+					$log = [LogLevel::ERROR, 'cURL request failed: ' . $e];
+					break;
+				case ($httpCode >= 500):
+					$log = [LogLevel::CRITICAL, 'Server error: HTTP code ' . $httpCode];
+					break;
+				case ($httpCode >= 400):
+					$log = [LogLevel::ERROR, 'Client error: HTTP code ' . $httpCode];
+					break;
+				default:
+					$log = [LogLevel::INFO, 'cURL request completed successfully.'];
+					break;
+			}
+			$this->logger->log(...$log);
+		}
+
+		// PHP 8.5+ automatically closes the handle
+		// for lower versions we need to close it manually
+		if(PHP_VERSION_ID < 80500){
+			curl_close($curl);
+		};
+
+		if ($e != '') {
+			throw new ComgateException("Request failed: {$e}", 0);
+		}
+
+		return new Response($this->createResponse($response));
 	}
 
 	/**

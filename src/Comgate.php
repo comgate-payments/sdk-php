@@ -39,6 +39,17 @@ class Comgate
 	/**
 	 * @return static
 	 */
+	public static function defaultsRest(): self
+	{
+		$self = new static();
+		$self->url = Config::URL_REST;
+
+		return $self;
+	}
+
+	/**
+	 * @return static
+	 */
 	public function setUrl(string $url): self
 	{
 		$this->url = $url;
@@ -79,6 +90,11 @@ class Comgate
 	public function createClient(): Client
 	{
 		return new Client($this->createTransport());
+	}
+
+	public function createTerminalClient(): ClientTerminal
+	{
+		return new ClientTerminal($this->createTransport());
 	}
 
 	protected function createConfig(): Config
