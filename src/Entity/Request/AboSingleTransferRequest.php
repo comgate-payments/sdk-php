@@ -44,7 +44,13 @@ class AboSingleTransferRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'aboSingleTransfer';
+		$urn = 'aboSingleTransfer/transferId/' . urlencode($this->getTransferId()) . '.json';
+		$params = [
+			'type' => $this->getType(),
+			'encoding' => $this->getEncoding(),
+			'test' => $this->isTest() ? 'true' : 'false',
+		];
+		return $urn . '?' . http_build_query($params);
 	}
 
 	/**

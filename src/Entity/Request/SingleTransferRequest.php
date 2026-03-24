@@ -24,7 +24,9 @@ class SingleTransferRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'singleTransfer';
+		$urn = 'singleTransfer/transferId/' . $this->getTransferId() . '.json';
+		$params = ['test' => $this->isTest() ? 'true' : 'false'];
+		return $urn . '?' . http_build_query($params);
 	}
 
 	/**

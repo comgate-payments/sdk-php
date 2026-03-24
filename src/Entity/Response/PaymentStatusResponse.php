@@ -6,7 +6,6 @@ namespace Comgate\SDK\Entity\Response;
 use Comgate\SDK\Entity\Method;
 use Comgate\SDK\Entity\Money;
 use Comgate\SDK\Http\Response;
-use Comgate\SDK\Http\Query;
 use Comgate\SDK\Exception\Api\PaymentNotFoundException;
 use Comgate\SDK\Exception\ApiException;
 
@@ -123,7 +122,7 @@ class PaymentStatusResponse
 	 */
 	public function __construct(Response $paymentStatusResponse)
 	{
-		$parsedResponse = Query::parse($paymentStatusResponse->getContent());
+		$parsedResponse = json_decode($paymentStatusResponse->getContent(), true);
 
 		$code = (int) $parsedResponse['code'];
 		$message = $parsedResponse['message'];
@@ -132,22 +131,22 @@ class PaymentStatusResponse
                     case 0:
                         $this->setCode($code)
                             ->setMessage($message)
-                            ->setMerchant($parsedResponse['merchant'])
-							->setSecret($parsedResponse['secret'])
+                            ->setMerchant($parsedResponse['merchant'] ?? '')
+							->setSecret($parsedResponse['secret'] ?? '')
 							->setTransId($parsedResponse['transId'])
-							->setTest($parsedResponse['test'] === 'true')
-							->setPrice(Money::ofCents((int) $parsedResponse['price']))
-							->setCurrency($parsedResponse['curr'])
-							->setLabel($parsedResponse['label'])
-							->setRefId($parsedResponse['refId'])
+							->setTest(($parsedResponse['test'] ?? 'false') === 'true')
+							->setPrice(Money::ofCents((int) ($parsedResponse['price'] ?? 0)))
+							->setCurrency($parsedResponse['curr'] ?? '')
+							->setLabel($parsedResponse['label'] ?? '')
+							->setRefId($parsedResponse['refId'] ?? '')
 							->setPayerId($parsedResponse['payerId'] ?? '')
-							->setMethod($parsedResponse['method'])
+							->setMethod($parsedResponse['method'] ?? '')
 							->setAccount($parsedResponse['account'] ?? '')
 							->setEmail($parsedResponse['email'] ?? '')
-							->setName($parsedResponse['name'])
+							->setName($parsedResponse['name'] ?? '')
 							->setPhone($parsedResponse['phone'] ?? '')
-                            ->setStatus($parsedResponse['status'])
-                            ->setPayerName($parsedResponse['payerName'])
+                            ->setStatus($parsedResponse['status'] ?? '')
+                            ->setPayerName($parsedResponse['payerName'] ?? '')
                             ->setPayerAcc($parsedResponse['payerAcc'] ?? '')
                             ->setFee($parsedResponse['fee'] ?? '')
                             ->setVs($parsedResponse['vs'] ?? '')

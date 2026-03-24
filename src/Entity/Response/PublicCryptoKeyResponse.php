@@ -4,7 +4,6 @@ declare(strict_types = 1);
 namespace Comgate\SDK\Entity\Response;
 
 use Comgate\SDK\Http\Response;
-use Comgate\SDK\Http\Query;
 use Comgate\SDK\Exception\ApiException;
 
 class PublicCryptoKeyResponse
@@ -27,7 +26,7 @@ class PublicCryptoKeyResponse
 	 */
 	public function __construct(Response $publicCryptoKeyResponse)
 	{
-		$parsedResponse = Query::parse($publicCryptoKeyResponse->getContent());
+		$parsedResponse = json_decode($publicCryptoKeyResponse->getContent(), true);
 
 		$code = (int) $parsedResponse['code'];
 		$message = $parsedResponse['message'] ?? '';

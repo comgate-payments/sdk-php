@@ -5,7 +5,6 @@ namespace Comgate\SDK\Entity\Response;
 use Comgate\SDK\Exception\Api\MissingParamException;
 use Comgate\SDK\Exception\ApiException;
 use Comgate\SDK\Http\Response;
-use Comgate\SDK\Http\Query;
 
 class RecurringPaymentResponse
 {
@@ -29,7 +28,7 @@ class RecurringPaymentResponse
 	 */
 	public function __construct(Response $recurringPaymentResponse)
 	{
-		$parsedResponse = Query::parse($recurringPaymentResponse->getContent());
+		$parsedResponse = json_decode($recurringPaymentResponse->getContent(), true);
 
 		$code = (int) $parsedResponse['code'];
 		$message = $parsedResponse['message'];

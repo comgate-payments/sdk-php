@@ -18,7 +18,15 @@ class AppleDomainAssociationRequest implements IRequest
 
 	public function getUrn(): string
 	{
-		return 'appleDomainAssociation';
+		$params = [];
+		if ($this->getCurrency() !== '') {
+			$params['currency'] = $this->getCurrency();
+		}
+		$urn = 'appleDomainAssociation.json';
+		if (!empty($params)) {
+			$urn .= '?' . http_build_query($params);
+		}
+		return $urn;
 	}
 
 	public function toArray(): array

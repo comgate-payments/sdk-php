@@ -34,7 +34,15 @@ class AboDownloadRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'aboDownload';
+		$urn = 'aboDownload/date/' . urlencode($this->getDate());
+		$params = [
+			'test' => $this->isTest() ? 'true' : 'false',
+			'encoding' => $this->getEncoding(),
+		];
+		if ($this->getType() !== '') {
+			$params['type'] = $this->getType();
+		}
+		return $urn . '?' . http_build_query($params);
 	}
 
 	/**

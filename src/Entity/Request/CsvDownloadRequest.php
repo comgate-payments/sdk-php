@@ -25,7 +25,9 @@ class CsvDownloadRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'csvDownload';
+		$urn = 'csvDownload/date/' . urlencode($this->getDate());
+		$params = ['test' => $this->isTest() ? 'true' : 'false'];
+		return $urn . '?' . http_build_query($params);
 	}
 
 	/**

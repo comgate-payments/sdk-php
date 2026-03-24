@@ -20,7 +20,7 @@ class PaymentCreateRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'create';
+		return 'payment.json';
 	}
 
 	/**

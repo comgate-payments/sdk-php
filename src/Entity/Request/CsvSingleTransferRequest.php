@@ -26,7 +26,9 @@ class CsvSingleTransferRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'csvSingleTransfer';
+		$urn = 'csvSingleTransfer/transferId/' . urlencode($this->getTransferId()) . '.json';
+		$params = ['test' => $this->isTest() ? 'true' : 'false'];
+		return $urn . '?' . http_build_query($params);
 	}
 
 	/**

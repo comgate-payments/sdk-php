@@ -22,7 +22,7 @@ class PreauthCancelRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'cancelPreauth';
+		return 'preauth/transId/' . urlencode($this->getTransId()) . '.json';
 	}
 
 	/**

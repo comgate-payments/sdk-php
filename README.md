@@ -277,7 +277,7 @@ use Comgate\SDK\Entity\TerminalPayment;
 use Comgate\SDK\Entity\TerminalRefund;
 use Comgate\SDK\Exception\ApiException;
 
-$clientTerminal = Comgate::defaultsRest()
+$clientTerminal = Comgate::defaults()
     ->setMerchant('123456') // get on portal.comgate.cz
     ->setSecret('foobarbaz') // get on portal.comgate.cz
     ->createTerminalClient();

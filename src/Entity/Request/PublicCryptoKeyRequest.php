@@ -11,7 +11,7 @@ class PublicCryptoKeyRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'pubCryptoKey';
+		return 'pubCryptoKey.json';
 	}
 
 	/**

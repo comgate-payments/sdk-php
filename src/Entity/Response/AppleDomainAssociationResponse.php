@@ -4,7 +4,6 @@ namespace Comgate\SDK\Entity\Response;
 
 use Comgate\SDK\Exception\Api\MissingParamException;
 use Comgate\SDK\Exception\ApiException;
-use Comgate\SDK\Http\Query;
 use Comgate\SDK\Http\Response;
 
 class AppleDomainAssociationResponse
@@ -16,7 +15,7 @@ class AppleDomainAssociationResponse
 	 */
 	public function __construct(Response $appleDomainAssociationResponse)
 	{
-		$parsedResponse = Query::parse($appleDomainAssociationResponse->getContent());
+		$parsedResponse = json_decode($appleDomainAssociationResponse->getContent(), true);
 
 		if (isset($parsedResponse['code']) && isset($parsedResponse['message'])) {
 			$code = (int) $parsedResponse['code'];
