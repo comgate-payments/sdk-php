@@ -23,7 +23,7 @@ class AppleDomainAssociationRequest implements IRequest
 			$params['currency'] = $this->getCurrency();
 		}
 		$urn = 'appleDomainAssociation.json';
-		if (!empty($params)) {
+		if (count($params) > 0) {
 			$urn .= '?' . http_build_query($params);
 		}
 		return $urn;

@@ -65,7 +65,7 @@ class MethodsRequest implements IRequest
 		unset($params['type']);
 
 		$urn = 'method.json';
-		if (!empty($params)) {
+		if (count($params) > 0) {
 			$urn .= '?' . http_build_query($params);
 		}
 		return $urn;
