@@ -61,7 +61,14 @@ class MethodsRequest implements IRequest
 
 	public function getUrn(): string
 	{
-		return 'methods';
+		$params = $this->toArray();
+		unset($params['type']);
+
+		$urn = 'method.json';
+		if (count($params) > 0) {
+			$urn .= '?' . http_build_query($params);
+		}
+		return $urn;
 	}
 
 	/**
@@ -198,12 +205,16 @@ class MethodsRequest implements IRequest
 	}
 
 	/**
-	 * @param string|null $price
+	 * @param string|int|float|null $price
 	 * @return void
 	 */
-	public function setPrice(?string $price): void
+	public function setPrice($price): void
 	{
-		$this->price = $price;
+		if ($price === null) {
+			$this->price = null;
+		} else {
+			$this->price = (string) $price;
+		}
 	}
 
 	/**

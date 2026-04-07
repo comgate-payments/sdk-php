@@ -39,17 +39,6 @@ class Comgate
 	/**
 	 * @return static
 	 */
-	public static function defaultsRest(): self
-	{
-		$self = new static();
-		$self->url = Config::URL_REST;
-
-		return $self;
-	}
-
-	/**
-	 * @return static
-	 */
 	public function setUrl(string $url): self
 	{
 		$this->url = $url;

@@ -8,7 +8,8 @@ class AppleDomainAssociationRequest implements IRequest
 	 * @var string
 	 */
 	protected $method;
-	protected string $currency;
+	/** @var string */
+	protected $currency;
 
 	public function __construct(string $method, string $currency)
 	{
@@ -18,7 +19,15 @@ class AppleDomainAssociationRequest implements IRequest
 
 	public function getUrn(): string
 	{
-		return 'appleDomainAssociation';
+		$params = [];
+		if ($this->getCurrency() !== '') {
+			$params['currency'] = $this->getCurrency();
+		}
+		$urn = 'appleDomainAssociation.json';
+		if (count($params) > 0) {
+			$urn .= '?' . http_build_query($params);
+		}
+		return $urn;
 	}
 
 	public function toArray(): array

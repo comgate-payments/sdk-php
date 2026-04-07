@@ -27,7 +27,7 @@ class PreauthCaptureRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'capturePreauth';
+		return 'preauth/transId/' . urlencode($this->getTransId()) . '.json';
 	}
 
 	/**
@@ -35,13 +35,9 @@ class PreauthCaptureRequest implements IRequest
 	 */
 	public function toArray(): array
 	{
-		// Required
-		$output = [
-			'transId' => $this->getTransId(),
+		return [
 			'amount' => $this->getAmount()->get(),
 		];
-
-		return $output;
 	}
 
 	/**

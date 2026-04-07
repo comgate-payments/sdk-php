@@ -22,7 +22,7 @@ class SimulationRequest implements IRequest
 
 	public function getUrn(): string
 	{
-		return 'simulation';
+		return 'simulation.json';
 	}
 
 	/**

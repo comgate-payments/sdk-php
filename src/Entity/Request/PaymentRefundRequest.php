@@ -23,7 +23,7 @@ class PaymentRefundRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'refund';
+		return 'refund.json';
 	}
 
 	/**

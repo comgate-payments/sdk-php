@@ -22,7 +22,7 @@ class RecurringPaymentRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'recurring';
+		return 'recurring.json';
 	}
 
 	/**

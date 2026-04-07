@@ -29,7 +29,8 @@ class AboSingleTransferRequest implements IRequest
 	 * @var string
 	 */
 	protected $encoding;
-	private bool $download = false; // just for method sync Cest to pass, should be always false
+	/** @var bool */
+	private $download = false; // just for method sync Cest to pass, should be always false
 
 	public function __construct(string $transferId, bool $test, string $type, string $encoding)
 	{
@@ -44,7 +45,13 @@ class AboSingleTransferRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'aboSingleTransfer';
+		$urn = 'aboSingleTransfer/transferId/' . urlencode($this->getTransferId()) . '.json';
+		$params = [
+			'type' => $this->getType(),
+			'encoding' => $this->getEncoding(),
+			'test' => $this->isTest() ? 'true' : 'false',
+		];
+		return $urn . '?' . http_build_query($params);
 	}
 
 	/**

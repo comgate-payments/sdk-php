@@ -119,6 +119,15 @@ class Transport implements ITransport
 	 * @param mixed[] $data
 	 * @param mixed[] $options
 	 */
+	public function putJson(string $urn, array $data, array $options = []): Response
+	{
+		return $this->makeRestRequest('PUT', $urn, $data, $options);
+	}
+
+	/**
+	 * @param mixed[] $data
+	 * @param mixed[] $options
+	 */
 	private function makeRestRequest(string $method, string $urn, array $data = [], array $options = []): Response
 	{
 		$curl = curl_init();
@@ -138,7 +147,7 @@ class Transport implements ITransport
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_HEADER, true);
 
-		if ($method === 'POST' && count($data) != 0) {
+		if (in_array($method, ['POST', 'PUT'], true) && count($data) != 0) {
 			curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
 		}
 

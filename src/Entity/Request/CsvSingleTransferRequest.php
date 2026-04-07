@@ -13,7 +13,8 @@ class CsvSingleTransferRequest implements IRequest
 	 * @var bool
 	 */
 	protected $test;
-	private bool $download = false; // just for method sync Cest to pass, should be always false
+	/** @var bool */
+	private $download = false; // just for method sync Cest to pass, should be always false
 
 	public function __construct(string $transferId, bool $test)
 	{
@@ -26,7 +27,9 @@ class CsvSingleTransferRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'csvSingleTransfer';
+		$urn = 'csvSingleTransfer/transferId/' . urlencode($this->getTransferId()) . '.json';
+		$params = ['test' => $this->isTest() ? 'true' : 'false'];
+		return $urn . '?' . http_build_query($params);
 	}
 
 	/**

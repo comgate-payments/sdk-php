@@ -20,7 +20,7 @@ class PaymentStatusRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'status';
+		return 'payment/transId/' . urlencode($this->getTransId()) . '.json';
 	}
 
 	/**

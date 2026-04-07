@@ -62,7 +62,7 @@ class Client
 	public function createPayment(Payment $payment): PaymentCreateResponse
 	{
 		$paymentCreateRequest = new PaymentCreateRequest($payment);
-		$paymentCreateResponse = $this->transport->post($paymentCreateRequest->getUrn(),
+		$paymentCreateResponse = $this->transport->postJson($paymentCreateRequest->getUrn(),
 			$paymentCreateRequest->toArray());
 		return new PaymentCreateResponse($paymentCreateResponse);
 	}
@@ -70,7 +70,7 @@ class Client
 	public function getStatus(string $transId): PaymentStatusResponse
 	{
 		$paymentStatusRequest = new PaymentStatusRequest($transId);
-		$statusResponse = $this->transport->post($paymentStatusRequest->getUrn(), $paymentStatusRequest->toArray());
+		$statusResponse = $this->transport->get($paymentStatusRequest->getUrn());
 		return new PaymentStatusResponse($statusResponse);
 	}
 
@@ -80,7 +80,7 @@ class Client
 			$methodsRequest = new MethodsRequest();
 		}
 
-		$methodsResponse = $this->transport->post($methodsRequest->getUrn(), $methodsRequest->toArray());
+		$methodsResponse = $this->transport->get($methodsRequest->getUrn());
 
 		return new MethodsResponse($methodsResponse);
 	}
@@ -88,37 +88,35 @@ class Client
 	public function cancelPayment(string $transId): PaymentCancelResponse
 	{
 		$cancelPaymentRequest = new PaymentCancelRequest($transId);
-		$cancelResponse = $this->transport->post($cancelPaymentRequest->getUrn(), $cancelPaymentRequest->toArray());
+		$cancelResponse = $this->transport->delete($cancelPaymentRequest->getUrn());
 		return new PaymentCancelResponse($cancelResponse);
 	}
 
 	public function capturePreauth(string $transId, Money $amount): PreauthCaptureResponse
 	{
 		$capturePreauthRequest = new PreauthCaptureRequest($transId, $amount);
-		$captureResponse = $this->transport->post($capturePreauthRequest->getUrn(), $capturePreauthRequest->toArray());
+		$captureResponse = $this->transport->putJson($capturePreauthRequest->getUrn(), $capturePreauthRequest->toArray());
 		return new PreauthCaptureResponse($captureResponse);
 	}
 
 	public function cancelPreauth(string $transId): PreauthCancelResponse
 	{
 		$cancelPreauthRequest = new PreauthCancelRequest($transId);
-		$cancelResponse = $this->transport->post($cancelPreauthRequest->getUrn(), $cancelPreauthRequest->toArray());
+		$cancelResponse = $this->transport->delete($cancelPreauthRequest->getUrn());
 		return new PreauthCancelResponse($cancelResponse);
 	}
 
 	public function refundPayment(Refund $refund): RefundResponse
 	{
 		$refundRequest = new PaymentRefundRequest($refund);
-		$refundResponse = $this->transport->post($refundRequest->getUrn(), $refundRequest->toArray());
+		$refundResponse = $this->transport->postJson($refundRequest->getUrn(), $refundRequest->toArray());
 		return new RefundResponse($refundResponse);
 	}
 
 	public function initRecurringPayment(Payment $payment): RecurringPaymentResponse
 	{
 		$recurringRequest = new RecurringPaymentRequest($payment);
-		echo $recurringRequest->getUrn();
-		$recurringResponse = $this->transport->post($recurringRequest->getUrn(), $recurringRequest->toArray());
-		echo $recurringResponse->getContent();
+		$recurringResponse = $this->transport->postJson($recurringRequest->getUrn(), $recurringRequest->toArray());
 		return new RecurringPaymentResponse($recurringResponse);
 	}
 
@@ -130,7 +128,7 @@ class Client
 	public function simulation(array $params): SimulationResponse
 	{
 		$simulationRequest = new SimulationRequest($params);
-		$simulationResponse = $this->transport->post($simulationRequest->getUrn(), $simulationRequest->toArray());
+		$simulationResponse = $this->transport->postJson($simulationRequest->getUrn(), $simulationRequest->toArray());
 		return new SimulationResponse($simulationResponse);
 	}
 
@@ -143,52 +141,46 @@ class Client
 	public function transferList(DateTimeInterface $date, bool $test): TransferListResponse
 	{
 		$transferListRequest = new TransferListRequest($date, $test);
-		$transferListResponse = $this->transport->post($transferListRequest->getUrn(), $transferListRequest->toArray());
+		$transferListResponse = $this->transport->get($transferListRequest->getUrn());
 		return new TransferListResponse($transferListResponse);
 	}
 
 	public function singleTransfer(int $transferId, bool $test): SingleTransferResponse
 	{
 		$singleTransferRequest = new SingleTransferRequest($transferId, $test);
-		$singleTransferResponse = $this->transport->post($singleTransferRequest->getUrn(),
-			$singleTransferRequest->toArray());
+		$singleTransferResponse = $this->transport->get($singleTransferRequest->getUrn());
 		return new SingleTransferResponse($singleTransferResponse);
 	}
 
 	public function csvSingleTransfer(string $transferId, bool $test): CsvSingleTransferResponse
 	{
 		$csvSingleTransferRequest = new CsvSingleTransferRequest($transferId, $test);
-		$csvSingleTransferResponse = $this->transport->post($csvSingleTransferRequest->getUrn(),
-			$csvSingleTransferRequest->toArray());
+		$csvSingleTransferResponse = $this->transport->get($csvSingleTransferRequest->getUrn());
 		return new CsvSingleTransferResponse($csvSingleTransferResponse);
 	}
 
 	public function aboSingleTransfer(string $transferId, bool $test, string $type, string $encoding): AboSingleTransferResponse
 	{
 		$aboSingleTransferRequest = new AboSingleTransferRequest($transferId, $test, $type, $encoding);
-		$aboSingleTransferResponse = $this->transport->post($aboSingleTransferRequest->getUrn(),
-			$aboSingleTransferRequest->toArray());
+		$aboSingleTransferResponse = $this->transport->get($aboSingleTransferRequest->getUrn());
 		return new AboSingleTransferResponse($aboSingleTransferResponse);
 	}
 
 	public function getAppleDomainAssociation(string $method = '', string $currency = ''): AppleDomainAssociationResponse{
 		$appleDomainAssociationRequest = new AppleDomainAssociationRequest($method, $currency);
-		$appleDomainAssociationResponse = $this->transport->post($appleDomainAssociationRequest->getUrn(),
-			$appleDomainAssociationRequest->toArray());
+		$appleDomainAssociationResponse = $this->transport->get($appleDomainAssociationRequest->getUrn());
 		return new AppleDomainAssociationResponse($appleDomainAssociationResponse);
 	}
 	public function getCsvDownload(string $date, bool $test = false): void{
 		$csvDownloadRequest = new CsvDownloadRequest($date, $test);
-		$csvDownloadResponse = $this->transport->post($csvDownloadRequest->getUrn(),
-			$csvDownloadRequest->toArray());
+		$csvDownloadResponse = $this->transport->get($csvDownloadRequest->getUrn());
 
 		new CsvDownloadResponse($csvDownloadResponse);
 	}
 
 	public function getAboDownload(string $date, string $type = '',  bool $test = false, string $encoding = 'utf8'): void{
 		$aboDownloadRequest = new AboDownloadRequest($date, $type, $test, $encoding);
-		$aboDownloadResponse = $this->transport->post($aboDownloadRequest->getUrn(),
-			$aboDownloadRequest->toArray());
+		$aboDownloadResponse = $this->transport->get($aboDownloadRequest->getUrn());
 
 		new AboDownloadResponse($aboDownloadResponse);
 	}
@@ -203,7 +195,7 @@ class Client
 	public function createMotoPayment(Payment $payment, PaymentCard $paymentCard): ?MotoPaymentCreateResponse
 	{
 		$publicCryptoKeyRequest = new PublicCryptoKeyRequest();
-		$publicCryptoKeyResponse = new PublicCryptoKeyResponse($this->transport->post($publicCryptoKeyRequest->getUrn(), $publicCryptoKeyRequest->toArray()));
+		$publicCryptoKeyResponse = new PublicCryptoKeyResponse($this->transport->get($publicCryptoKeyRequest->getUrn()));
 
 		$publicJkwKey = null;
 		$jwkData = json_decode(base64_decode($publicCryptoKeyResponse->getKey(), true), true);
@@ -237,7 +229,7 @@ class Client
 		}
 
 		$motoPaymentCreateRequest = new MotoPaymentCreateRequest($motoPayment);
-		$motoPaymentCreateResponse = $this->transport->post($motoPaymentCreateRequest->getUrn(), $motoPaymentCreateRequest->toArray());
+		$motoPaymentCreateResponse = $this->transport->postJson($motoPaymentCreateRequest->getUrn(), $motoPaymentCreateRequest->toArray());
 		return new MotoPaymentCreateResponse($motoPaymentCreateResponse);
 	}
 

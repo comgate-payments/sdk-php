@@ -19,7 +19,7 @@ class MotoPaymentCreateRequest extends PaymentCreateRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'moto';
+		return 'moto.json';
 	}
 
 	/**

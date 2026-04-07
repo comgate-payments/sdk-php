@@ -25,4 +25,10 @@ interface ITransport
 	 * @param mixed[] $options
 	 */
 	public function delete(string $uri, array $options = []): Response;
+
+	/**
+	 * @param mixed[] $data
+	 * @param mixed[] $options
+	 */
+	public function putJson(string $uri, array $data, array $options = []): Response;
 }

@@ -28,7 +28,9 @@ class TransferListRequest implements IRequest
 	 */
 	public function getUrn(): string
 	{
-		return 'transferList';
+		$urn = 'transferList/date/' . urlencode($this->getDate()->format(self::DATE_FORMAT)) . '.json';
+		$params = ['test' => $this->isTest() ? 'true' : 'false'];
+		return $urn . '?' . http_build_query($params);
 	}
 
 	/**

@@ -16,7 +16,7 @@ class TransportCest
 		$client = Comgate::defaults()
 			->setMerchant($_ENV['API_MERCHANT'])
 			->setSecret($_ENV['API_SECRET'])
-			->setUrl($_ENV['API_URL'])
+			->setUrl($_ENV['API_URL_REST'])
 			->createClient();
 		$config = new Config('merchant', 'secret');
 
