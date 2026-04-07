@@ -8,7 +8,8 @@ class AppleDomainAssociationRequest implements IRequest
 	 * @var string
 	 */
 	protected $method;
-	protected string $currency;
+	/** @var string */
+	protected $currency;
 
 	public function __construct(string $method, string $currency)
 	{

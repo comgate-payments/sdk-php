@@ -13,7 +13,8 @@ class CsvSingleTransferRequest implements IRequest
 	 * @var bool
 	 */
 	protected $test;
-	private bool $download = false; // just for method sync Cest to pass, should be always false
+	/** @var bool */
+	private $download = false; // just for method sync Cest to pass, should be always false
 
 	public function __construct(string $transferId, bool $test)
 	{
