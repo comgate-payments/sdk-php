@@ -60,8 +60,6 @@ class PaymentCreateRequestCest
 					'url_paid' => '',
 					'url_cancelled' => '',
 					'url_pending' => '',
-					'chargeUnregulatedCardFees' => null,
-					'enableApplePayGooglePay' => null,
 					'initRecurringId' => '',
 
 				],
@@ -81,6 +79,8 @@ class PaymentCreateRequestCest
 					->setUrlPaid('https://example.com/paid')
 					->setUrlPending('https://example.com/pending')
 					->setUrlCancelled('https://example.com/cancelled')
+				    ->setEnableApplePayGooglePay(true)
+					->setChargeUnregulatedCardFees(true)
 				,
 				'result' => [
 					'initRecurring' => 'true',
@@ -113,8 +113,8 @@ class PaymentCreateRequestCest
 					'url_paid' => '',
 					'url_cancelled' => '',
 					'url_pending' => '',
-					'chargeUnregulatedCardFees' => null,
-					'enableApplePayGooglePay' => null,
+					'chargeUnregulatedCardFees' => true,
+					'enableApplePayGooglePay' => true,
 					'country' => '',
 					'curr' => '',
 					'label' => '',
