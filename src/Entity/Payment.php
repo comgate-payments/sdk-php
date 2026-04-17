@@ -44,8 +44,8 @@ class Payment
 		'url_paid' => '',
 		'url_cancelled' => '',
 		'url_pending' => '',
-		'chargeUnregulatedCardFees' => false,
-		'enableApplePayGooglePay' => true,
+		'chargeUnregulatedCardFees' => null,
+		'enableApplePayGooglePay' => null,
 		'prepareOnly' => true,
 		'embedded' => false,
 		'allowedMethods' => [],
@@ -634,9 +634,9 @@ class Payment
 		return $this;
 	}
 
-	public function getChargeUnregulatedCardFees(): bool
+	public function getChargeUnregulatedCardFees(): ?bool
 	{
-		return $this->getParam('chargeUnregulatedCardFees');
+		return $this->params['chargeUnregulatedCardFees'] ?? null;
 	}
 
 	public function setChargeUnregulatedCardFees(bool $chargeUnregulatedCardFees): self
@@ -650,9 +650,9 @@ class Payment
 	 * Vrací true/false/null hodnotu zapnutého Google/Apple pay.
 	 * @return null|bool
 	 */
-	public function getEnableApplePayGooglePay()
+	public function getEnableApplePayGooglePay(): ?bool
 	{
-		return $this->getParam('enableApplePayGooglePay');
+		return $this->params['enableApplePayGooglePay'] ?? null;
 	}
 
 	/**
