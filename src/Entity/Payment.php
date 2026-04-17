@@ -636,10 +636,15 @@ class Payment
 
 	public function getChargeUnregulatedCardFees(): ?bool
 	{
-		return $this->params['chargeUnregulatedCardFees'] ?? null;
+		if ($this->params['chargeUnregulatedCardFees'] === '' || $this->params['chargeUnregulatedCardFees'] === null) {
+			return null;
+		}
+
+		// aby se mi vracelo true a false jako boolean
+		return filter_var($this->params['chargeUnregulatedCardFees'],FILTER_VALIDATE_BOOLEAN);
 	}
 
-	public function setChargeUnregulatedCardFees(bool $chargeUnregulatedCardFees): self
+	public function setChargeUnregulatedCardFees($chargeUnregulatedCardFees): self
 	{
 		$this->setParam('chargeUnregulatedCardFees', $chargeUnregulatedCardFees);
 
@@ -652,13 +657,18 @@ class Payment
 	 */
 	public function getEnableApplePayGooglePay(): ?bool
 	{
-		return $this->params['enableApplePayGooglePay'] ?? null;
+		if ($this->params['enableApplePayGooglePay'] === '' || $this->params['enableApplePayGooglePay'] === null) {
+			return null;
+		}
+
+		// aby se mi vracelo true a false jako boolean
+		return filter_var($this->params['enableApplePayGooglePay'],FILTER_VALIDATE_BOOLEAN);
 	}
 
 	/**
 	 * Explicitně umožňuje povolení Apple Pay a Google Pay na platbách s přirážkami za neregulovanou kartu. Případně pro přímé zakázání pro konkrétní platbu
 	 *
-	 * @param null|bool $enableApplePayGooglePay
+	 * @param null|bool|string $enableApplePayGooglePay
 	 * @return Payment
 	 */
 	// Použit komentář místo parametrového typu kvůli nekompatibilitě s null hodnotou.
