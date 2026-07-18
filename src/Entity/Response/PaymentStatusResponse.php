@@ -125,7 +125,7 @@ class PaymentStatusResponse
 		$parsedResponse = json_decode($paymentStatusResponse->getContent(), true);
 
 		$code = (int) $parsedResponse['code'];
-		$message = $parsedResponse['message'];
+		$message = (string) ($parsedResponse['message'] ?? '');
 
                 switch ($code) {
                     case 0:
