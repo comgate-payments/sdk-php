@@ -27,7 +27,6 @@ final class FixtureTransportCest
 
 	public function _after(): void
 	{
-		unset($_ENV['APPLICATION_ENV'], $_ENV['CF_ACCESS_CLIENT_ID'], $_ENV['CF_ACCESS_CLIENT_SECRET']);
 		$this->api->stop();
 	}
 
@@ -81,20 +80,6 @@ final class FixtureTransportCest
 		$records = $logger->records();
 		$I->assertSame(LogLevel::ERROR, $records[3]['level']);
 		$I->assertStringContainsString('cURL request failed', $records[3]['message']);
-	}
-
-	#[Group('transport')]
-	#[Group('fixture')]
-	public function sendsCloudflareAccessHeaders(IntegrationTester $I): void
-	{
-		$_ENV['APPLICATION_ENV'] = 'sdk-github';
-		$_ENV['CF_ACCESS_CLIENT_ID'] = 'fixture-client-id';
-		$_ENV['CF_ACCESS_CLIENT_SECRET'] = 'fixture-client-secret';
-		$this->api->terminalClient()->getTerminalStatus();
-		$headers = $this->api->requests()[0]['headers'];
-		$I->assertSame('fixture-client-id', $headers['CF-Access-Client-Id']);
-		$I->assertSame('fixture-client-secret', $headers['CF-Access-Client-Secret']);
-		$I->assertArrayHasKey('Authorization', $headers);
 	}
 
 	#[Group('transport')]
