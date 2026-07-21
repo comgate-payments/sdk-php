@@ -72,6 +72,7 @@ class PaymentCest
 			'url_pending' => '',
 			'chargeUnregulatedCardFees' => null,
 			'enableApplePayGooglePay' => null,
+			'threeDSPreference' => null,
 			'initRecurringId' => '',
 
 		], $paymentParams);

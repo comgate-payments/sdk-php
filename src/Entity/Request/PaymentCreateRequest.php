@@ -85,6 +85,12 @@ class PaymentCreateRequest implements IRequest
 			unset($output['enableApplePayGooglePay']);
 		}
 
+		if($this->payment->getThreeDSPreference() !== null) {
+			$output['threeDSPreference'] = $this->payment->getThreeDSPreference();
+		} else {
+			unset($output['threeDSPreference']);
+		}
+
 		$output['embedded'] = $this->payment->isEmbedded() ? 'true' : 'false';
 
 		return $output;
