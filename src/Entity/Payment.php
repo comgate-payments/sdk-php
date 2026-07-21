@@ -46,6 +46,7 @@ class Payment
 		'url_pending' => '',
 		'chargeUnregulatedCardFees' => null,
 		'enableApplePayGooglePay' => null,
+		'threeDSPreference' => null,
 		'prepareOnly' => true,
 		'embedded' => false,
 		'allowedMethods' => [],
@@ -681,6 +682,29 @@ class Payment
 	public function setEnableApplePayGooglePay($enableApplePayGooglePay): self
 	{
 		$this->setParam('enableApplePayGooglePay', $enableApplePayGooglePay);
+
+		return $this;
+	}
+
+	/**
+	 * Vrací preferenci 3D Secure ověření karetních plateb.
+	 * @return null|string
+	 */
+	public function getThreeDSPreference(): ?string
+	{
+		return $this->params['threeDSPreference'] ?? null;
+	}
+
+	/**
+	 * Preference 3D Secure ověření karetních plateb. Povolené hodnoty jsou 'AUTO' nebo 'FAST'.
+	 * Pokud parametr není zaslán, použije se nastavení Dynamické řízení 3DS v Klientském portálu.
+	 *
+	 * @param string $threeDSPreference
+	 * @return Payment
+	 */
+	public function setThreeDSPreference(string $threeDSPreference): self
+	{
+		$this->setParam('threeDSPreference', $threeDSPreference);
 
 		return $this;
 	}
