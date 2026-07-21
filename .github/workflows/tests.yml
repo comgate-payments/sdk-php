@@ -2,6 +2,9 @@ name: "tests"
 on:
   pull_request_target:
     types: [assigned, opened, synchronize, reopened]
+  push:
+    branches:
+      - master
 env:
   extensions: "json, xdebug"
   cache-version: "1"
@@ -24,8 +27,8 @@ jobs:
       - name: Checkout PR head (fork code)
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
           persist-credentials: false
 
@@ -94,8 +97,26 @@ jobs:
         run: "composer dump-autoload --optimize"
 
       - name: Run Codeception Tests
+        env:
+          XDEBUG_MODE: coverage
         run: |
-          vendor/bin/codecept run -v
+          vendor/bin/codecept run -v --coverage --coverage-xml coverage.xml --coverage-html
+
+      - name: Upload coverage report
+        if: ${{ success() || failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: |
+            tests/_output/coverage.xml
+            tests/_output/coverage/
+
+      - name: "Upload coverage to Coveralls"
+        if: ${{ success() }}
+        uses: coverallsapp/github-action@v2
+        with:
+          file: tests/_output/coverage.xml
+          format: clover
 
       - name: IP check on Failure
         if: ${{ failure() }}

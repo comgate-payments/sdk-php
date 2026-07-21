@@ -10,7 +10,7 @@ class Payment
 	/**
 	 * Payment parameters.
 	 *
-	 * @var array<string, bool|int|string|Money|array<int, string>>
+	 * @var array<string, bool|int|string|Money|array<int, string>|null>
 	 */
 	protected $params = [
 		'test' => false,
@@ -46,6 +46,7 @@ class Payment
 		'url_pending' => '',
 		'chargeUnregulatedCardFees' => null,
 		'enableApplePayGooglePay' => null,
+		'threeDSPreference' => null,
 		'prepareOnly' => true,
 		'embedded' => false,
 		'allowedMethods' => [],
@@ -636,10 +637,21 @@ class Payment
 
 	public function getChargeUnregulatedCardFees(): ?bool
 	{
-		return $this->params['chargeUnregulatedCardFees'] ?? null;
+		if ($this->params['chargeUnregulatedCardFees'] === null || $this->params['chargeUnregulatedCardFees'] === '') {
+			return null;
+		}
+
+		// aby se mi vracelo true a false jako boolean
+		return filter_var($this->params['chargeUnregulatedCardFees'],FILTER_VALIDATE_BOOLEAN);
 	}
 
-	public function setChargeUnregulatedCardFees(bool $chargeUnregulatedCardFees): self
+	/**
+	 * Explicitně umožňuje přidat přirážku za neregulovanou kartu na platby s Apple Pay a Google Pay. Případně pro přímé zakázání pro konkrétní platbu
+	 *
+	 * @param null|bool|string $chargeUnregulatedCardFees
+	 * @return Payment
+	 */
+	public function setChargeUnregulatedCardFees($chargeUnregulatedCardFees): self
 	{
 		$this->setParam('chargeUnregulatedCardFees', $chargeUnregulatedCardFees);
 
@@ -652,19 +664,47 @@ class Payment
 	 */
 	public function getEnableApplePayGooglePay(): ?bool
 	{
-		return $this->params['enableApplePayGooglePay'] ?? null;
+		if ($this->params['enableApplePayGooglePay'] === null || $this->params['enableApplePayGooglePay'] === '') {
+			return null;
+		}
+
+		// aby se mi vracelo true a false jako boolean
+		return filter_var($this->params['enableApplePayGooglePay'],FILTER_VALIDATE_BOOLEAN);
 	}
 
 	/**
 	 * Explicitně umožňuje povolení Apple Pay a Google Pay na platbách s přirážkami za neregulovanou kartu. Případně pro přímé zakázání pro konkrétní platbu
 	 *
-	 * @param null|bool $enableApplePayGooglePay
+	 * @param null|bool|string $enableApplePayGooglePay
 	 * @return Payment
 	 */
 	// Použit komentář místo parametrového typu kvůli nekompatibilitě s null hodnotou.
 	public function setEnableApplePayGooglePay($enableApplePayGooglePay): self
 	{
 		$this->setParam('enableApplePayGooglePay', $enableApplePayGooglePay);
+
+		return $this;
+	}
+
+	/**
+	 * Vrací preferenci 3D Secure ověření karetních plateb.
+	 * @return null|string
+	 */
+	public function getThreeDSPreference(): ?string
+	{
+		return $this->params['threeDSPreference'] ?? null;
+	}
+
+	/**
+	 * Preference 3D Secure ověření karetních plateb. Povolené hodnoty jsou 'AUTO' nebo 'FAST'.
+	 * Pokud parametr není zaslán, použije se nastavení Dynamické řízení 3DS v Klientském portálu.
+	 *
+	 * @param string $threeDSPreference
+	 * @return Payment
+	 */
+	public function setThreeDSPreference(string $threeDSPreference): self
+	{
+		$this->setParam('threeDSPreference', $threeDSPreference);
 
 		return $this;
 	}
