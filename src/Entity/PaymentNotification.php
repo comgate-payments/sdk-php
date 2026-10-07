@@ -2,6 +2,8 @@
 
 namespace Comgate\SDK\Entity;
 
+use Symfony\Component\BrowserKit\Request;
+
 class PaymentNotification
 {
 
@@ -61,7 +63,24 @@ class PaymentNotification
 	 */
 	public static function createFromGlobals(): self
 	{
-		return self::createFrom($_POST);
+		if ($_POST !== []) {
+			return self::createFrom($_POST);
+		}
+
+		return self::createFromJson((string) file_get_contents('php://input'));
+	}
+
+	/**
+	 * @return static
+	 */
+	public static function createFromJson(string $json): self
+	{
+		$data = json_decode($json, true);
+		if (!is_array($data)) {
+			$data = [];
+		}
+
+		return self::createFrom($data);
 	}
 
 	/**
