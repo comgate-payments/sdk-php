@@ -96,6 +96,42 @@ class PaymentNotificationCest
 	}
 
 	#[Group('notification')]
+	public function createFromGlobalsJsonPushTest(IntegrationTester $I): void
+	{
+		$server = proc_open(
+			[PHP_BINARY, '-S', '127.0.0.1:8098', __FILE__],
+			[1 => ['file', '/dev/null', 'w'], 2 => ['file', '/dev/null', 'w']],
+			$pipes
+		);
+		for ($i = 0; $i < 50 && @fsockopen('127.0.0.1', 8098) === false; $i++) {
+			usleep(100000);
+		}
+
+		$ch = curl_init('http://127.0.0.1:8098/');
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
+			'merchant' => '123456',
+			'test' => 'false',
+			'price' => '10000',
+			'curr' => 'CZK',
+			'label' => 'Beatles - Help',
+			'refId' => '2010102600',
+			'method' => 'CARD',
+			'email' => 'info@customer.com',
+			'transId' => 'AB12-EF34-IJ56',
+			'secret' => 'ZXhhbXBsZS5jb206QUJDeHl6',
+			'status' => 'PAID',
+		]));
+		$response = json_decode((string) curl_exec($ch), true);
+		proc_terminate($server);
+
+		$I->assertNotNull($response['transId']);
+		$I->assertSame('AB12-EF34-IJ56', $response['transId']);
+		$I->assertSame('PAID', $response['status']);
+	}
+
+	#[Group('notification')]
 	public function settersWorkCorrectlyTest(IntegrationTester $I): void
 	{
 		$notification = PaymentNotification::createFrom(['vs' => '111', 'method' => 'BANK_ALL']);
@@ -108,4 +144,19 @@ class PaymentNotificationCest
 		$I->assertEquals('CARD_ALL', $notification->getMethod());
 		$I->assertEquals('new-secret', $notification->getSecret());
 	}
+
+	public static function pushEndpoint(): void
+	{
+		$notification = PaymentNotification::createFromGlobals();
+
+		echo json_encode([
+			'transId' => $notification->getTransactionId(),
+			'status' => $notification->getStatus(),
+		]);
+	}
+}
+
+if (PHP_SAPI === 'cli-server') {
+	require_once __DIR__ . '/../../../vendor/autoload.php';
+	PaymentNotificationCest::pushEndpoint();
 }
